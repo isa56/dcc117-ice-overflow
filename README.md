@@ -15,7 +15,7 @@
 
 - [Daniel Freitas - ]();
 - [Gabriel Frasson - 202035001](https://github.com/GFrasson);
-- [Gabriel Gomes Bahia - ]();
+- [Gabriel Gomes Bahia - 202035028](https://github.com/GabrielBahia);
 - [Isadora Gonçalves Ferreira - 202035017](https://github.com/isa56/);
 - [João Pedro Ferreira - 202076009](https://github.com/Jo1oPedro).
 
