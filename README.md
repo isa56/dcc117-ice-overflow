@@ -17,7 +17,7 @@
 - [Gabriel Frasson - 202035001](https://github.com/GFrasson);
 - [Gabriel Gomes Bahia - ]();
 - [Isadora Gonçalves Ferreira - 202035017](https://github.com/isa56/);
-- [João Pedro Ferreira - ]().
+- [João Pedro Ferreira - 202076009](https://github.com/Jo1oPedro).
 
 ## Especificação do Trabalho
 
