@@ -13,7 +13,7 @@
 
 - Professor da Disciplina: [Fabrício Mendonça](http://professorfabriciomendonca.com.br/);
 
-- [Daniel Freitas - ]();
+- [Daniel Freitas - 202065118](https://github.com/dfreita4s);
 - [Gabriel Frasson - 202035001](https://github.com/GFrasson);
 - [Gabriel Gomes Bahia - 202035028](https://github.com/GabrielBahia);
 - [Isadora Gonçalves Ferreira - 202035017](https://github.com/isa56/);
