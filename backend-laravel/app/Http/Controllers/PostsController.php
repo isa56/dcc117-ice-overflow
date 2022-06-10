@@ -21,7 +21,7 @@ class PostsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\PostsFormRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(PostsFormRequest $request)
@@ -52,10 +52,12 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /*
     public function update(Request $request, $id)
     {
         //
     }
+    */
 
     /**
      * Remove the specified resource from storage.
