@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostsFormRequest;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -13,7 +15,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+        return Post::all();
     }
 
     /**
@@ -22,9 +24,10 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostsFormRequest $request)
     {
-        //
+        $data = $request->all();
+        return response()->json(Post::create($data), 202);
     }
 
     /**
@@ -33,9 +36,13 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
-        //
+        $post = Post::find($id);
+        if($post) {
+            return response()->json($post, 202);
+        }
+        return response()->json(['message' => 'Post não encontrado'], 404);
     }
 
     /**
@@ -58,6 +65,9 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Post::destroy($id)) {
+            return response()->json(['message' => 'Post deletado com sucesso'], 202);
+        }
+        return response()->json(['message' => 'Não foi possível encontrar o post'], 404);
     }
 }
