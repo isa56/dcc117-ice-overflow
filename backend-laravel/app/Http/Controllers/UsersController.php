@@ -31,7 +31,7 @@ class UsersController extends Controller
         $data = $request->all();
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
-        return response()->json($user, 200);
+        return response()->json($user, 200); // Não é necessario retornar um json pois o laravel já sabe transformar o retorno em um, porém para tornar mais claro isso é interessante usar essa função
     }
 
     /**
@@ -40,9 +40,13 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show(int $id)
+    {   
+        $user = User::find($id);
+        if($user) {
+            return response()->json($user, 201);
+        }
+        return response()->json(['Não foi possivel encontrar o usuario', 404]);
     }
 
     /**
@@ -63,8 +67,12 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        $user = User::destroy($id);
+        if($user) {
+            return response()->json(['Usuário deletado com sucesso'], 201);
+        }
+        return response()->json(['Não foi possivel encontrar o usuario', 404]);
     }
 }
