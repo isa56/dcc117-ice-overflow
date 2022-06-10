@@ -46,7 +46,7 @@ class UsersController extends Controller
         if($user) {
             return response()->json($user, 201);
         }
-        return response()->json(['Não foi possivel encontrar o usuario', 404]);
+        return response()->json(['message' => 'Não foi possivel encontrar o usuario'], 404);
     }
 
     /**
@@ -69,10 +69,9 @@ class UsersController extends Controller
      */
     public function destroy(int $id)
     {
-        $user = User::destroy($id);
-        if($user) {
-            return response()->json(['Usuário deletado com sucesso'], 201);
+        if(User::destroy($id)) {
+            return response()->json(['message' => 'Usuário deletado com sucesso'], 201);
         }
-        return response()->json(['Não foi possivel encontrar o usuario', 404]);
+        return response()->json(['message' => 'Não foi possivel encontrar o usuario'], 404);
     }
 }
