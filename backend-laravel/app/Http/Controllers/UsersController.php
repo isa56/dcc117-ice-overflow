@@ -16,7 +16,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return User::all();
+        return User::all(); // Não é necessario retornar um json pois o laravel já sabe transformar o retorno em um, porém para tornar mais claro isso é interessante usar essa função
     }
 
     /**
@@ -46,19 +46,25 @@ class UsersController extends Controller
         if($user) {
             return response()->json($user, 201);
         }
-        return response()->json(['message' => 'Não foi possivel encontrar o usuario'], 404);
+        return response()->json(['message' => 'Não foi possível encontrar o usuário'], 404);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\UsersFormRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsersFormRequest $request, int $id)
     {
-        //
+        $user = User::find($id);
+        if($user) {
+            $user->update($request->all());
+            $user->save();
+            return response()->json($user);
+        }
+        return response()->json(['message' => 'Não foi possível encontrar o usuário'], 404);
     }
 
     /**
@@ -72,6 +78,6 @@ class UsersController extends Controller
         if(User::destroy($id)) {
             return response()->json(['message' => 'Usuário deletado com sucesso'], 201);
         }
-        return response()->json(['message' => 'Não foi possivel encontrar o usuario'], 404);
+        return response()->json(['message' => 'Não foi possível encontrar o usuário'], 404);
     }
 }
