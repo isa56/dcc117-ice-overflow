@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('profile_picture'); // caminho default ainda precisa ser implementado aqui;
+            $table->string('profile_picture')->default('caminhoPadrao'); // caminho default ainda precisa ser implementado aqui;
             $table->rememberToken();
             $table->timestamps();
         });
