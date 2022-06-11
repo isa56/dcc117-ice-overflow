@@ -10,13 +10,15 @@ use App\Models\PostsComment;
 class Post extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'title',
         'body',
         'vote',
         'finished',
         'user_id',
+    ];
+    protected $casts = [
+        'finished' => 'boolean',
     ];
 
     public function comments() 
