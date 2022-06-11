@@ -8,14 +8,31 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
+
+    public function __construct(private array $arrayDeMaterias = [])
+    {
+        $this->arrayDeMaterias = [
+            'Modelagem de sistemas', 
+            'Calculo 2', 
+            'OO'
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Post::all();
+        $query = Post::query();
+        if($request->has('materia') && !empty($request->materia)) {
+            if(!in_array($request->materia, $this->arrayDeMaterias)) {
+                return response()->json(['message' => 'Materia invalida'], 401);
+            }
+            $query->whereMateria($request->materia);
+        }  
+        return $query->paginate(2);
+        //return Post::all();
     }
 
     /**
@@ -71,5 +88,10 @@ class PostsController extends Controller
             return response()->json(['message' => 'Post deletado com sucesso'], 202);
         }
         return response()->json(['message' => 'Não foi possível encontrar o post'], 404);
+    }
+
+    public function vote(Request $request) 
+    {
+
     }
 }

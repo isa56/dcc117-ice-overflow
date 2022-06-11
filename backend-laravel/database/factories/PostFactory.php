@@ -9,6 +9,12 @@ use App\Models\User;
  */
 class PostFactory extends Factory
 {
+
+    private $arrayDeMaterias = [
+        'Modelagem de sistemas',
+        'Calculo 2',
+        'OO',
+    ];
     /**
      * Define the model's default state.
      *
@@ -19,6 +25,7 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->text(10),
             'body' => $this->faker->text(),
+            'materia' => $this->arrayDeMaterias[array_rand($this->arrayDeMaterias)],
             'vote' => rand(0, 1),
             'user_id' => User::inRandomOrder()->first()->id,
         ];

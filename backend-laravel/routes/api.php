@@ -23,8 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('posts', PostsController::class);
     
+    Route::apiResource('posts', PostsController::class);
+    Route::patch('posts/{id}', [PostController::class, 'vote']);
+
     Route::apiResource('users', UsersController::class);
     
     Route::apiResource('comments', CommentsController::class);
@@ -34,7 +36,9 @@ Route::middleware('auth:sanctum')->group(function () {
 Rotas que estão dentro do middleware mas que você não quer que seja verificadas
 podem ser colocadas após ele
 */
+
 Route::post('/users', [UsersController::class, 'store']);
 
 Route::post('/login', [LoginController::class, 'login']);
+
 
