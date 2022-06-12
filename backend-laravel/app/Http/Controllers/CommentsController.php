@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostsCommentFormRequest;
 use App\Models\PostsComment;
 use Illuminate\Http\Request;
 
@@ -21,10 +22,10 @@ class CommentsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\PostsCommentFormRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostsCommentFormRequest $request)
     {
         $data = $request->all();
         return response()->json(PostsComment::create($data), 202);
