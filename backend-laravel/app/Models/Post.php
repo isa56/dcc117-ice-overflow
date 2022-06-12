@@ -14,6 +14,7 @@ class Post extends Model
         'title',
         'body',
         'materia',
+        'comentarios',
         'vote',
         'finished',
         'user_id',

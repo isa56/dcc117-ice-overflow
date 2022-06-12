@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('body');
             $table->string('materia');
+            $table->integer('comentarios')
+                ->default(0);
             $table->integer('vote')
                 ->default(0);
             $table->boolean('finished')
