@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostsFormRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\UserPostsReaction;
 class PostsController extends Controller
 {
 
@@ -90,8 +91,32 @@ class PostsController extends Controller
         return response()->json(['message' => 'Não foi possível encontrar o post'], 404);
     }
 
-    public function vote(Request $request) 
+    /**
+     * like a post.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function vote(int $id) 
     {
-
+        $post = Post::find($id);
+        if(!$post) {
+            return response()->json(['message' => 'Não foi possível encontrar o post'], 404);
+        }
+        $user = Auth::user();
+        if(!UserPostsReaction::whereUser_id($user->id)->wherePost_id($post->id)->first()) {
+            UserPostsReaction::create([
+                'user_id' => $user->id,
+                'post_id' => $post->id,
+            ]);
+            $post->vote++;
+            $post->save();
+            return response()->json($post, 202);
+        };
+        UserPostsReaction::whereUser_id($user->id)->wherePost_id($post->id)->delete();
+        $post->vote--;
+        $post->save();
+        //dd($post->vote);
+        return response()->json($post, 202);
     }
 }

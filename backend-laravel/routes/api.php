@@ -24,8 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function () {
     
+    Route::patch('posts/{id}', [PostsController::class, 'vote']);
     Route::apiResource('posts', PostsController::class);
-    Route::patch('posts/{id}', [PostController::class, 'vote']);
 
     Route::apiResource('users', UsersController::class);
     
