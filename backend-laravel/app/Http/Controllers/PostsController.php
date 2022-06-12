@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostsFormRequest;
 use App\Models\Post;
+use App\Models\PostsComment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserPostsReaction;
@@ -58,7 +59,8 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         if($post) {
-            return response()->json($post, 202);
+            $postComment = PostsComment::wherePost_id($post->id)->get();
+            return response()->json(['post' => $post, 'postComments' => $postComment], 202);
         }
         return response()->json(['message' => 'Post não encontrado'], 404);
     }
