@@ -28,6 +28,7 @@ class PostsFormRequest extends FormRequest
         return [
             'title' => 'required|string|min:2',
             'body' => 'required|string|min:2',
+            'materia' => 'required|string|min:2',
             'vote' => 'nullable|integer',
             'finished' => 'nullable|integer',
             'user_id' => 'exists:users,id',
@@ -43,6 +44,9 @@ class PostsFormRequest extends FormRequest
             'body.required' => "O campo body é obrigatorio",
             'body.string' => "O campo body precisa ser um texto",
             'body.min' => "O campo body precisa ter pelo menos :value caracteres",
+            'materia.required' => "O campo materia é obrigatorio",
+            'materia.string' => "O campo materia precisa ser um texto",
+            'materi.min' => "O campo materia precisa ter pelo menos :value caracteres",
             'vote.integeer' => "O campo voto precisa ser um inteiro",
             'finished.min' => "O campo finalizado precisa ser um inteiro",
             'user_id.exists' => "O campo de usuario precisa ser um usuario valido ", 
