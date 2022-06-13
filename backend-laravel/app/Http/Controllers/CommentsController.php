@@ -73,7 +73,9 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-        if(PostsComment::destroy($id)) {
+        $comment = PostsComment::find($id);
+        if($comment && Auth::user()->id == $comment->user_id) {
+            $comment->destroy($id);
             return response()->json(['message' => 'Comentario deletado com sucesso'], 202);
         }
         return response()->json(['message' => 'Erro ao deletar o comentario'], 404);
