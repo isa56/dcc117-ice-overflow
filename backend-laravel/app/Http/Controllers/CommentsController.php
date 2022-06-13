@@ -123,7 +123,7 @@ class CommentsController extends Controller
             return response()->json(["message" => "Erro ao marcar a resposta"], 404);
         }
         if(Auth::user()->id != $post->user_id) {
-            return response()->json(["message" => "Erro ao marcar a resposta 1"], 404);
+            return response()->json(["message" => "Erro ao marcar a resposta"], 404);
         }
         $comment->best_answer++;
         if($comment->best_answer > 1) {
