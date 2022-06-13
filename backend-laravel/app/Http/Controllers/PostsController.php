@@ -88,10 +88,12 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        if(Post::destroy($id)) {
+        $post = Post::find($id);
+        if($post && Auth::user()->id == $post->user_id) {
+            Post::destroy($id);
             return response()->json(['message' => 'Post deletado com sucesso'], 202);
         }
-        return response()->json(['message' => 'Não foi possível encontrar o post'], 404);
+        return response()->json(['message' => 'Não foi possível deletar o post'], 404);
     }
 
     /**
