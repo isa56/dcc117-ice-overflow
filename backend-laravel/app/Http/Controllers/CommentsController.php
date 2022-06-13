@@ -31,6 +31,7 @@ class CommentsController extends Controller
     public function store(PostsCommentFormRequest $request)
     {
         $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
         return response()->json(PostsComment::create($data), 202);
     }
 
