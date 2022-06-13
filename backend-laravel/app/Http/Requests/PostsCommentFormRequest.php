@@ -27,7 +27,6 @@ class PostsCommentFormRequest extends FormRequest
     {
         return [
             'body' => 'required',
-            'user_id' => 'required|exists:users,id',
             'post_id' => 'required|exists:posts,id',
         ];
     }
@@ -36,6 +35,7 @@ class PostsCommentFormRequest extends FormRequest
     {
         return [
             'body.required' => 'O campo de texto é obrigatorio',
+            'post_id.exists' => 'Post invalido',
         ];
     }
 
