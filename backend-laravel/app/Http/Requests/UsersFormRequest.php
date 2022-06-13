@@ -26,7 +26,7 @@ class UsersFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2',
+            'name' => 'required|string|min:2',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
             'profile_picture' => 'nullable|image|mimes:png,jpg,jpeg',

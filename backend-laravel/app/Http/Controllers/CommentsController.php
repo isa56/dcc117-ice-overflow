@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostsCommentFormRequest;
+use App\Models\Post;
 use App\Models\PostsComment;
+use App\Models\UserCommentsReaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentsController extends Controller
 {
@@ -73,5 +76,60 @@ class CommentsController extends Controller
             return response()->json(['message' => 'Comentario deletado com sucesso'], 202);
         }
         return response()->json(['message' => 'Erro ao deletar o comentario'], 404);
+    }
+
+    /**
+     * "Like" a comment.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function vote(int $id) 
+    {
+        $comment = PostsComment::find($id);
+        if(!$comment) {
+            return response()->json(['message' => 'Ocorreu um erro ao votar'], 404);
+        }
+        $user = Auth::user();
+        if(!UserCommentsReaction::whereUser_id($user->id)->whereComment_id($comment->id)->first()) {
+            UserCommentsReaction::create([
+                'user_id' => $user->id,
+                'comment_id' => $comment->id,
+            ]);
+            $comment->vote++;
+            $comment->save();
+            return response()->json($comment, 202);
+        };
+        UserCommentsReaction::whereUser_id($user->id)->whereComment_id($comment->id)->delete();
+        $comment->vote--;
+        $comment->save();
+        return response()->json($comment, 202);
+    }
+
+    /**
+     * Define the best answer.
+     * @param int id
+     * @param  \Illuminate\Http\Request
+     * @return \Illuminate\Http\Response
+     */
+    public function bestAnswer(int $id, Request $request) 
+    {
+        if(!$request->has('post_id') && !empty($request->post_id)) {
+            return response()->json(["message" => "Erro ao marcar a resposta"], 404);
+        }
+        $post = Post::find($request->post_id);
+        $comment = PostsComment::whereId($id)->wherePost_id($request->post_id)->first();
+        if(!$post || !$comment) {
+            return response()->json(["message" => "Erro ao marcar a resposta"], 404);
+        }
+        if(Auth::user()->id != $post->user_id) {
+            return response()->json(["message" => "Erro ao marcar a resposta 1"], 404);
+        }
+        $comment->best_answer++;
+        if($comment->best_answer > 1) {
+            $comment->best_answer = 0;
+        }
+        $comment->save();
+        return response()->json(["message" => "Resposta marcada com sucesso"], 202);
     }
 }

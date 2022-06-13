@@ -29,6 +29,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('users', UsersController::class);
     
+    Route::patch('comments/{id}', [CommentsController::class, 'vote']);
+    Route::patch('comments/{id}/bestAnswer', [CommentsController::class, 'bestAnswer']);
     Route::apiResource('comments', CommentsController::class);
 });
 

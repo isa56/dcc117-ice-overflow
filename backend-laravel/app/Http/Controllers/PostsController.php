@@ -46,6 +46,7 @@ class PostsController extends Controller
     public function store(PostsFormRequest $request)
     {
         $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
         return response()->json(Post::create($data), 202);
     }
 
