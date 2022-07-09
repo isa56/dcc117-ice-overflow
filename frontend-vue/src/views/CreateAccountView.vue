@@ -1,15 +1,21 @@
 <template>
-  <div>Home</div>
+  <div>
+    Criar conta
+  </div>
 </template>
 
+
 <script>
+
 export default {
-  name: "HomeView",
+  name: 'CreateAccountView',
+  components: {},
   data () {
     return {
-
+      
     }
-  }
+  },
+
 }
 </script>
 
