@@ -14,7 +14,9 @@
         <br>
         <input class="input send-button px-3 py-2 w-full mb-6 text-bold text-background-dark rounded bg-primary text-lg mt-1 px-1.8 py-0.8" type="submit" text="Entrar" />
         <br>
-        Não possui uma conta? <router-link class="text-primary" to="/criar-conta">Cadastre-se!</router-link>
+        <p class="text-center">
+          Não possui uma conta? <router-link class="text-primary" to="/criar-conta">Cadastre-se!</router-link>
+        </p>
       </form>
 
     </div>
