@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <navbar/>
-    <router-view/>
+    <router-view class="min-w-full"/>
     <footer-view/>
   </div>
 </template>
