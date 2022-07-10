@@ -1,10 +1,8 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  purge: [
-    './src/**/*.html',
-    './src/**/*.vue',
-    './src/**/*.jsx'
-  ],
+  content: ['./public/**/*.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
+    extend: {},
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
@@ -22,5 +20,6 @@ module.exports = {
       bold: ['RobotoBold'],
       black: ['RobotoBlack']
     }
-  }
+  },
+  plugins: [],
 }
