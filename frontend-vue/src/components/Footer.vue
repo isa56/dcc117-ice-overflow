@@ -5,7 +5,7 @@
       Desenvolvido por Daniel Freitas, Gabriel Bahia, Gabriel Frasson, Isadora
       Gonçalves e João Pedro Ferreira.
     </div>
-    <a target="_blank" href="https://github.com/isa56/DCC117-2022.1-Trabalho-Mod-Sistemas" alt="Link para GitHub" class="no-underline">
+    <a target="_blank" rel="noopener noreferrer" href="https://github.com/isa56/DCC117-2022.1-Trabalho-Mod-Sistemas" alt="Link para GitHub" class="no-underline">
       <v-icon>github</v-icon>
     </a>
   </footer>
