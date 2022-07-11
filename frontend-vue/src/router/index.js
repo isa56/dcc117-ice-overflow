@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import CreateAccountView from '../views/CreateAccountView.vue'
+import CreatePostView from '../views/CreatePostView.vue'
+
 
 Vue.use(VueRouter)
 
@@ -21,6 +23,11 @@ const routes = [
     path: '/criar-conta',
     name: 'create-account',
     component: CreateAccountView
+  },
+  {
+    path: '/criar-post',
+    name: 'create-post',
+    component: CreatePostView
   }
 ]
 
