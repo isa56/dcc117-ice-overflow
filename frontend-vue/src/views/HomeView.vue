@@ -18,8 +18,8 @@
             </small>
           </div>
         </div>
-        <div class="bg-no-repeat bg-right-bottom">
-          <img src="../assets/img/iceImagem.jpg" class="object-cover h-full w-auto max-w-[35rem] rounded-r-lg">
+        <div id= "img-home" class="bg-no-repeat bg-right-bottom">
+          <img src="../assets/img/iceImagem.jpg" class="object-contain h-full w-full hover:object-scale-down">
         </div>
       </div>
     </div>
@@ -43,4 +43,9 @@ export default {
 </script>
 
 <style scoped>
+@media only screen and (max-width: 768px) {
+    #img-home {
+        display: none;
+    }
+}
 </style>
