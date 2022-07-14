@@ -6,40 +6,53 @@
       </h1>
 
       <form class="w-96" @submit.prevent="validateLogin">
-
         <h5 class="my-2">E-Mail</h5>
-        <input class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark" type="email" placeholder="nome@email.com" />
+        <input
+          class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
+          type="email"
+          placeholder="nome@email.com" v-model="email"
+        />
         <h5 class="my-2">Senha</h5>
-        <input class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark" type="password" placeholder="*******" />
-        <br>
-        <input class="input send-button px-3 py-2 w-full mb-6 text-bold text-background-dark rounded bg-primary text-lg mt-1 px-1.8 py-0.8" type="submit" text="Entrar" />
-        <br>
+        <input
+          class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
+          type="password"
+          placeholder="*******" v-model="password"
+        />
+        <br />
+        <input
+          class="input send-button px-3 py-2 w-full mb-6 text-bold text-background-dark rounded bg-primary text-lg mt-1 px-1.8 py-0.8"
+          type="submit"
+          value="Entrar"
+        />
+        <br />
         <p class="text-center">
-          Não possui uma conta? <router-link class="text-primary" to="/criar-conta">Cadastre-se!</router-link>
+          Não possui uma conta?
+          <router-link class="text-primary" to="/criar-conta"
+            >Cadastre-se!</router-link
+          >
         </p>
       </form>
-
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "HomeView",
+  name: "LoginView",
   data() {
-    return {};
+    return {
+      email: '',
+      password: ''
+    };
   },
   methods: {
-    validateLogin() {
-    },
+    validateLogin() {},
   },
 };
 </script>
 
 <style scoped>
-
 .form-container {
   padding: 4em 18em;
 }
-
 </style>

@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import LoginView from '../views/LoginView.vue'
-import CreateAccountView from '../views/CreateAccountView.vue'
-import CreatePostView from '../views/CreatePostView.vue'
+import HomeView from '@/views/HomeView.vue'
+import LoginView from '@/views/LoginView.vue'
+import CreateAccountView from '@/views/CreateAccountView.vue'
+import CreatePostView from '@/views/CreatePostView.vue'
+import PostDetailsView from '@/views/PostDetailsView.vue'
 
 
 Vue.use(VueRouter)
@@ -28,7 +29,12 @@ const routes = [
     path: '/criar-post',
     name: 'create-post',
     component: CreatePostView
-  }
+  },
+  {
+    path: '/post',
+    name: 'ver-post',
+    component: PostDetailsView
+  },
 ]
 
 const router = new VueRouter({

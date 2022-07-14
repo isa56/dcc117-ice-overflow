@@ -1,5 +1,5 @@
 <template>
-  <nav class="items-center flex justify-between p-5 top-0 left-0 bg-primary text-white text-lg">
+  <nav class="items-center flex justify-between p-5 top-0 left-0 bg-secondary text-white text-lg">
     <div class="items-center flex cursor-pointer" @click="redirectToHome">
       <h3>ICE Overflow</h3>
     </div>
