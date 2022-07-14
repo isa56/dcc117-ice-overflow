@@ -10,10 +10,10 @@
 
         <form method="POST" class="w-100" @submit.prevent="checkForm">
 
-          <input class="rounded mb-3 px-2 py-3 w-full bg-white text-background-dark" type="text" placeholder="Título"
-            v-model="title" />
-          <textarea class="rounded mb-3 px-2 py-3 w-full bg-white text-background-dark" rows="5" cols="30" type="text"
-            placeholder="Descrição" v-model="text" />
+          <input class="title-style rounded mb-3 px-2 py-3 w-full bg-white text-background-dark" type="text"
+            placeholder="Título" v-model="title" />
+          <textarea class="desc-style rounded mb-3 px-2 py-3 w-full bg-white text-background-dark" rows="5" cols="30"
+            type="text" placeholder="Descrição" v-model="text" />
           <br>
 
           <label
@@ -28,12 +28,11 @@
             <br>
           </div>
 
-          <p v-if="errors.length">
-            <b class="erro-style">Por favor, corrija o(s) seguinte(s) erro(s):</b>
-          <ul>
-            <li class="li-style" v-for="error in errors" :key="error" >{{ error }}</li>
-          </ul>
-          </p>
+          <v-alert class="alert-style alert-erro-style" type="error">
+            {{ errors[0] }}
+            <br>
+            {{ errors[1] }}
+          </v-alert>
 
         </form>
       </div>
@@ -55,27 +54,37 @@ export default {
       title: null,
       text: null,
       archive: null,
-      file: '',
-      successAlert: false,
-      errorAlert: false,
-      uploadedImage: '',
     }
   },
 
   methods: {
 
     checkForm: function (e) {
-      if (this.name && this.age) {
+      var titleStyle = document.querySelector(".title-style");
+      var descStyle = document.querySelector(".desc-style");
+      var alertStyle = document.querySelector(".alert-style");
+      titleStyle.classList.remove("error-style");
+      descStyle.classList.remove("error-style");
+      alertStyle.classList.add("alert-erro-style");
+      this.errors = [];
+
+      if (this.title && this.text) {
         return true;
       }
 
-      this.errors = [];
-
       if (!this.title) {
         this.errors.push('O Título é obrigatório.');
+        titleStyle.classList.add("error-style");
+        alertStyle.classList.remove("alert-erro-style");
+        alertStyle.classList.add("error-style");
+        this.snackbar = true;
       }
       if (!this.text) {
         this.errors.push('A Descrição é obrigatória.');
+        descStyle.classList.add("error-style");
+        alertStyle.classList.remove("alert-erro-style");
+        alertStyle.classList.add("error-style");
+        this.snackbar = true;
       }
 
       e.preventDefault();
@@ -92,8 +101,16 @@ export default {
   display: none;
 }
 
+.error-style {
+  background-color: rgb(185, 67, 67);
+}
+
 .li-style {
-  color: rgb(224, 63, 63);
+  color: rgb(185, 67, 67);
+}
+
+.alert-erro-style {
+  display: none;
 }
 
 </style>
