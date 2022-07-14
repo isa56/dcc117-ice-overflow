@@ -1,7 +1,7 @@
 <template>
   <div class="items-center bg-background flex h-full justify-center">
     <div class="bg-background-dark text-white rounded-lg px-60 py-16">
-      <h1 class="text-primary text-2xl mb-8 text-center">
+      <h1 class="text-primary text-4xl mb-8 text-center">
         ICE <span class="text-secondary">Overflow</span>
       </h1>
 
@@ -10,13 +10,17 @@
         <input
           class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
           type="email"
-          placeholder="nome@email.com" v-model="email"
+          required
+          placeholder="nome@email.com"
+          v-model="email"
         />
         <h5 class="my-2">Senha</h5>
         <input
           class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
           type="password"
-          placeholder="*******" v-model="password"
+          required
+          placeholder="*******"
+          v-model="password"
         />
         <br />
         <input
@@ -31,22 +35,47 @@
             >Cadastre-se!</router-link
           >
         </p>
+        <v-alert v-if="errorMessage" type="error"
+          >Por favor, preencha {{ errorMessage }}</v-alert
+        >
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import UserService from "@/services/UserService";
+
 export default {
   name: "LoginView",
   data() {
     return {
-      email: '',
-      password: ''
+      email: "",
+      password: "",
+      errorMessage: "",
     };
   },
   methods: {
-    validateLogin() {},
+    validateLogin() {
+      let emailError;
+      let passwordError;
+      if (!this.email) emailError = "o campo de E-Mail";
+      if (!this.password) passwordError = "o campo de Senha";
+
+      if (emailError) {
+        this.errorMessage = emailError;
+        if (passwordError) this.errorMessage += " e " + passwordError;
+        return;
+      } else {
+        this.errorMessage = "";
+
+        UserService.login(this.email, this.password);
+        // .then()
+        // .catch(() => {
+        //   this.errorMessage = "Este usuário não existe. Por favor, crie uma senha!";
+        // })
+      }
+    },
   },
 };
 </script>
