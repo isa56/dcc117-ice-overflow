@@ -1,6 +1,6 @@
   <template>
 
-    <v-chip :color="color" label>{{theme}}</v-chip>
+    <v-chip class="drop-shadow-md" :color="color" label>{{theme}}</v-chip>
   
   </template>
 
@@ -8,7 +8,7 @@
 
 export default {
   name: "ThemeSpan",
-  post: ['theme', 'color']
+  props: ['theme', 'color']
 
 }
 </script>
