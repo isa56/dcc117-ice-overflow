@@ -58,8 +58,8 @@ export default {
       var titleStyle = document.querySelector(".title-style");
       var descStyle = document.querySelector(".desc-style");
       var alertStyle = document.querySelector(".alert-style");
-      titleStyle.classList.remove("error-style");
-      descStyle.classList.remove("error-style");
+      titleStyle.classList.remove("erro-form-style");
+      descStyle.classList.remove("erro-form-style");
       alertStyle.classList.add("alert-erro-style");
       this.errors = [];
 
@@ -69,14 +69,14 @@ export default {
 
       if (!this.title) {
         this.errors.push('O Título é obrigatório.');
-        titleStyle.classList.add("error-style");
+        titleStyle.classList.add("erro-form-style");
         alertStyle.classList.remove("alert-erro-style");
         alertStyle.classList.add("error-style");
         this.snackbar = true;
       }
       if (!this.text) {
         this.errors.push('A Descrição é obrigatória.');
-        descStyle.classList.add("error-style");
+        descStyle.classList.add("erro-form-style");
         alertStyle.classList.remove("alert-erro-style");
         alertStyle.classList.add("error-style");
         this.snackbar = true;
@@ -98,6 +98,10 @@ export default {
 
 .error-style {
   background-color: rgb(185, 67, 67);
+}
+
+.erro-form-style {
+  border: 2px solid red;
 }
 
 .li-style {
