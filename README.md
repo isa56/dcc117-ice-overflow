@@ -32,15 +32,22 @@ O Front End está disponível para acesso em [ice-overflow.netlify.app](ice-over
 ## Instruções para Rodar o Projeto
 
 ### Front End em Vue:
+\* É necessário ter o _node_ e o _npm_ instalados.
+
 1. Abra o Terminal na Pasta do Projeto;
 2. Entre na pasta _frontend-vue_: `cd frontend-vue`;
-3. Rode o comando: `npm run serve`;
-4. Carregue o Link: [http://localhost:8080/](http://localhost:8080/);
-5. Utilize o sistema conforme indicado em [Como Utilizar o Sistema](#como-utilizar-o-sistema).
+3. Instale as dependências necessárias: `npm install`;
+4. Rode o comando: `npm run serve`;
+5. Carregue o Link: [http://localhost:8080/](http://localhost:8080/);
+6. Utilize o sistema conforme indicado em [Como Utilizar o Sistema](#como-utilizar-o-sistema).
 
 ### Back End em Laravel:
+\* É necessário ter o _PHP 8+_ e o _Laravel 9_ instalados.
 1. Abra o Terminal na Pasta do Projeto;
 2. Entre na pasta _backend-laravel_: `cd backend-laravel`;
+3. Atualize as dependências: `composer update`;
+4. Instale as dependências necessárias: `composer install`;
+5. Rode o comando: `php artisan serve`;
 
 ## Como Utilizar o Sistema
 
