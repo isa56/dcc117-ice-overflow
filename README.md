@@ -25,7 +25,9 @@
 - Back End feito em [Laravel](https://laravel.com/);
 
 ## Deploy
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8cceed40-c377-48c0-b8b6-a7a57de7e152/deploy-status)](https://app.netlify.com/sites/ice-overflow/deploys)
 
+O Front End está disponível para acesso em [ice-overflow.netlify.app](ice-overflow.netlify.app).
 
 ## Instruções para Rodar o Projeto
 
