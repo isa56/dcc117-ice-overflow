@@ -6,7 +6,13 @@
         <h2 class="text-2xl text-primary font-bold">{{ post.title }}</h2>
       </div>
       <div class="flex">
-        <theme-span class="mr-2" v-for="theme in post.themes" :key="theme.id" :theme="theme.name" :color="theme.color" />
+        <theme-span
+          class="mr-2"
+          v-for="theme in post.themes"
+          :key="theme.id"
+          :theme="theme.name"
+          :color="theme.color"
+        />
       </div>
     </div>
 
@@ -26,7 +32,12 @@
         </span>
       </div>
       <div>
-        <button @click="openCommentModal" class="bg-primary text-background-dark font-extrabold p-2 rounded drop-shadow-md">Comentar</button>
+        <button
+          @click="openCommentModal"
+          class="bg-primary text-background-dark font-extrabold p-2 rounded drop-shadow-md"
+        >
+          Comentar
+        </button>
       </div>
     </div>
   </div>
@@ -43,9 +54,9 @@ export default {
     return {};
   },
   methods: {
-    votePost () {},
-    openCommentModal () {}
-  }
+    votePost() {},
+    openCommentModal() {},
+  },
 };
 </script>
 
