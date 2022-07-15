@@ -1,16 +1,43 @@
 <template>
     <div>
-        <main class="container w-[80%] py-8 mx-auto flex flex-col items-center">
-            <div class="w-full flex justify-end">
-                <router-link to="/criar-post">
-                    <primary-button class="uppercase w-[15rem]" content="Enviar uma pergunta" />
-                </router-link>
+        <div class="relative flex min-h-screen">
+            <div class="bg-secondary text-background w-70">
+                <h1 class="text-center text-xl my-10">FILTRO</h1>
+                <div class="mx-5">
+                    <form>
+                        <input class="rounded my-3 w-full px-3 py-2 bg-white text-background-dark text-center"
+                            type="search" placeholder="DCC117" v-model="filter" />
+                        <div class="my-6 grid grid-cols-2 gap-1">
+
+                            <input class="input send-button px-3 py-2 w-full text-gray bg-white " type="submit"
+                                value="DESTAQUES" />
+                            <input class="input send-button px-3 py-2 w-full text-gray bg-white " type="submit"
+                                value="NOVIDADES" />
+                        </div>
+                        <div class="place-items-end">
+                        <input
+                            class="input send-button px-3 py-2 w-full mb-6 text-bold text-background-dark rounded bg-primary text-lg mt-1 px-1.8 py-0.8"
+                            type="submit" value="Filtrar" />
+                    
+                        </div>
+                    </form>
+
+                </div>
+
             </div>
 
-            <post-details-summary :post="post" />
-            <post-details-summary :post="post" />
-            <post-details-summary :post="post" />
-        </main>
+            <main class="container w-[80%] py-8 mx-20 flex flex-col items-center">
+                <div class="w-full flex justify-end">
+                    <router-link to="/criar-post">
+                        <primary-button class="uppercase w-[15rem]" content="Enviar uma pergunta" />
+                    </router-link>
+                </div>
+
+                <post-details-summary :post="post" />
+                <post-details-summary :post="post" />
+                <post-details-summary :post="post" />
+            </main>
+        </div>
     </div>
 </template>
 
@@ -38,11 +65,10 @@ export default {
         };
     },
     methods: {
-        
+
     }
 }
 </script>
 
 <style scoped>
-    
 </style>
