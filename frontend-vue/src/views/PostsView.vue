@@ -7,18 +7,21 @@
                     <form>
                         <input class="rounded my-3 w-full px-3 py-2 bg-white text-background-dark text-center"
                             type="search" placeholder="DCC117" v-model="filter" />
-                        <div class="my-6 grid grid-cols-2 gap-1">
 
-                            <input class="input send-button px-3 py-2 w-full text-gray bg-white " type="submit"
-                                value="DESTAQUES" />
-                            <input class="input send-button px-3 py-2 w-full text-gray bg-white " type="submit"
+                        <v-select :items="items" label="Tema" solo>dasdsa</v-select>
+                        <div class="grid grid-cols-2 gap-1">
+                            <input class="input send-button py-2 text-gray text-xs text-center bg-white "
+                                type="submit" value="DESTAQUES" />
+                            <input class="input send-button py-2 text-gray text-xs bg-white " type="submit"
                                 value="NOVIDADES" />
+
                         </div>
-                        <div class="place-items-end">
-                        <input
-                            class="input send-button px-3 py-2 w-full mb-6 text-bold text-background-dark rounded bg-primary text-lg mt-1 px-1.8 py-0.8"
-                            type="submit" value="Filtrar" />
-                    
+                        <br><br><br><br> 
+                        <div>
+                            <input
+                                class="input send-button px-3 py-2 w-full mb-6 text-bold text-background-dark rounded bg-primary text-lg mt-1 px-1.8 py-0.8"
+                                type="submit" value="Filtrar" />
+
                         </div>
                     </form>
 
@@ -47,9 +50,10 @@ import PostDetailsSummary from "@/components/PostDetailsSummary"
 
 export default {
     name: "PostsView",
-    components: {PrimaryButton, PostDetailsSummary},
+    components: { PrimaryButton, PostDetailsSummary },
     data() {
         return {
+            items: ['DCC', 'MAT', 'EST', 'FIS', 'QUI'],
             post: {
                 title: "Lorem Ipsum",
                 authorName: "GatinhoFeliz123",
