@@ -1,39 +1,36 @@
 <template>
-  <div class="items-center bg-background flex h-full justify-center">
-    <div class="bg-background-dark text-white rounded-lg px-36 py-12">
-      <div class="w-max">
-        <h1 class="text-white font-bold text-4xl mb-8 text-center">
-          CRIAR UM NOVO POST
-        </h1>
+  <div class="teste1 items-center bg-background flex justify-center">
+    <div class="bloco-central bg-background-dark text-white rounded-lg px-36 py-12">
 
-        <form method="POST" class="w-100" @submit.prevent="checkForm">
+      <h1 class="text-style text-white font-bold text-4xl mb-8 text-center">
+        CRIAR UM NOVO POST
+      </h1>
 
-          <input class="title-style rounded mb-3 px-2 py-3 w-full bg-white text-background-dark" type="text"
-            placeholder="Título" v-model="title" />
-          <textarea class="desc-style rounded mb-3 px-2 py-3 w-full bg-white text-background-dark" rows="5" cols="30"
-            type="text" placeholder="Descrição" v-model="text" />
+      <form method="POST" class="form-style w-100" @submit.prevent="checkForm">
+
+        <input class="title-style rounded mb-3 px-2 py-3 w-full bg-white text-background-dark" type="text"
+          placeholder="Título" v-model="title" />
+        <textarea class="desc-style rounded mb-3 px-2 py-3 w-full bg-white text-background-dark" rows="5" cols="30"
+          type="text" placeholder="Descrição" v-model="text" />
+        <br>
+
+        <v-autocomplete class="w-60" auto-select-first clearable rounded solo placeholder="Disciplina" v-model="subject" @input="filterSubjects" ></v-autocomplete>
+
+        <div class="flex justify-center">
+          <input
+            class=" input font-medium send-button px-12 py-2 w-50 h-18 mb-3 text-background-dark rounded bg-primary text-2xl mt-2"
+            type="submit" value="ENVIAR" @click="checkForm" />
           <br>
+        </div>
 
-          <label
-            class="label-file px-8 py-2 w-full mb-8 text-bold text-background-dark rounded bg-primary text-lg mt-1 px-1.8 py-0.8"
-            for="arquivo">Enviar arquivos</label>
-          <input class="input-file" type="file" name="arquivo" id="arquivo" ref="file" />
 
-          <div class="flex justify-center">
-            <input
-              class=" input font-medium send-button px-12 py-2 w-50 h-18 mb-6 text-background-dark rounded bg-primary text-2xl mt-8"
-              type="submit" value="ENVIAR" @click="checkForm" />
-            <br>
-          </div>
+        <v-alert class="alert-style alert-erro-style" type="error">
+          {{ errors[0] }}
+          <br>
+          {{ errors[1] }}
+        </v-alert>
 
-          <v-alert class="alert-style alert-erro-style" type="error">
-            {{ errors[0] }}
-            <br>
-            {{ errors[1] }}
-          </v-alert>
-
-        </form>
-      </div>
+      </form>
     </div>
   </div>
 </template>
@@ -49,6 +46,11 @@ export default {
       title: null,
       text: null,
       archive: null,
+      subject: '',
+      subjects: [
+        'Cálculo 1', 'Física 1', 'Algoritmos', 'Estrutura de Dados 1'
+      ],
+      filterSubjects: [],
     }
   },
 
@@ -87,12 +89,18 @@ export default {
 
   },
 
+  filterSubjects(){
+    this.filterSubjects = this.subjects.filter(subject => {
+      return subject.toLowerCase().startsWith(this.subject.toLowerCase());
+    });
+  },
+
 }
 
 </script>
 
 <style scoped>
-.input-file[type="file"] {
+.alert-erro-style {
   display: none;
 }
 
@@ -104,11 +112,34 @@ export default {
   border: 2px solid red;
 }
 
+.input-file[type="file"] {
+  display: none;
+}
+
 .li-style {
   color: rgb(185, 67, 67);
 }
 
-.alert-erro-style {
-  display: none;
+.bloco-central {
+  max-height: 38rem;
+  margin: 2.5rem 2.5rem 2.5rem 2.5rem;
+}
+
+
+@media (max-width: 530px) {
+  .bloco-central {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-width: 15rem;
+    margin-bottom: 5rem;
+  }
+  .form-style {
+    min-width: 15rem;
+  }
+  .text-style {
+    min-width: 15rem;
+  }
+
 }
 </style>
