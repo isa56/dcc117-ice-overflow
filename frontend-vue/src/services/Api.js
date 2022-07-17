@@ -37,6 +37,7 @@ export default () => {
     },
     (error) => {
       if (error.response.status) {
+        console.table(error.response.status);
         switch (error.response.status) {
           case 400:
             this.$root.vtoast.show({
@@ -69,7 +70,7 @@ export default () => {
           case 500:
             this.$root.vtoast.show({
               color: "danger",
-              message: "Existe um erro em nosso servidor.",
+              message: "Existe um erro em nosso servidor",
               timeout: 5000,
             });
             break;

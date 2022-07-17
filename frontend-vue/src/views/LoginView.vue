@@ -68,12 +68,7 @@ export default {
         return;
       } else {
         this.errorMessage = "";
-
         UserService.login(this.email, this.password);
-        // .then()
-        // .catch(() => {
-        //   this.errorMessage = "Este usuário não existe. Por favor, crie uma senha!";
-        // })
       }
     },
   },
