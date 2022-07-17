@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="containerPost">
         <div class="relative flex min-h-screen">
             <div class="bg-secondary text-background w-70">
                 <h1 class="text-center text-xl my-10">FILTRO</h1>
@@ -8,7 +8,7 @@
                         <input class="rounded my-3 w-full px-3 py-2 bg-white text-background-dark text-center"
                             type="search" placeholder="DCC117" v-model="filter" />
 
-                        <v-select :items="items" label="Tema" solo>dasdsa</v-select>
+                        <v-select attach="#containerPost" :items="items" label="Tema" solo></v-select>
                         <div class="grid grid-cols-2 gap-1">
                             <input class="input send-button py-2 text-gray text-xs text-center bg-white "
                                 type="submit" value="DESTAQUES" />
@@ -53,6 +53,7 @@ export default {
     components: { PrimaryButton, PostDetailsSummary },
     data() {
         return {
+            filter: "",
             items: ['DCC', 'MAT', 'EST', 'FIS', 'QUI'],
             post: {
                 title: "Lorem Ipsum",
