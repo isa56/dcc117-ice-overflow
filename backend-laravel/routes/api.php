@@ -17,9 +17,9 @@ use App\http\Controllers\LoginController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
 
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -32,6 +32,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('comments/{id}', [CommentsController::class, 'vote']);
     Route::patch('comments/{id}/bestAnswer', [CommentsController::class, 'bestAnswer']);
     Route::apiResource('comments', CommentsController::class);
+
+    Route::post('/logout', [LoginController::class, 'logout']);
 });
 
 /*

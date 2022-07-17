@@ -32,4 +32,10 @@ class LoginController extends Controller
         return response()->json($token->plainTextToken);
     }   
 
+    public function logout()
+    {
+        Auth::user()->tokens()->delete();
+        return response()->json('Deslogado', 202);
+    }
+
 }
