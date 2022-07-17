@@ -19,7 +19,7 @@ export default {
     "vtoast": ToastMessage,
   },
   mounted() {
-    this.$root.vtoast = this.$refs.vtoast;
+    this.$root["vtoast"] = this.$refs.vtoast;
   },
 };
 </script>

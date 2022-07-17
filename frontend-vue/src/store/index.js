@@ -94,6 +94,7 @@ export default new Vuex.Store({
     getUserEmail: (state) => state.user_email,
     getUserType: (state) => state.user_type,
 
+    isAuthenticated: (state) => !!state.auth_token,
     isModerator: (state) => state.user_type === "MODERATOR",
   },
 });
