@@ -31,8 +31,14 @@ class PostsController extends Controller
             if(!in_array($request->materia, $this->arrayDeMaterias)) {
                 return response()->json(['message' => 'Materia invalida'], 401);
             }
+            if($request->has('titulo') && !empty($request->titulo)) {
+                $query->where('title', 'LIKE', "%{$request->titulo}%");
+            }
             $query->whereMateria($request->materia);
         }  
+        // Para que ele possa fazer o ->get() na model de post é necessario que aqui a gente utilize o numberOfComments como um metodo e não como uma propriedade, pois sendo
+        // chamado como um metodo ele ira retornar uma relation e não uma collection, logo permitindo o ->get()
+        //dd($query->get()[0]->numberOfComments()); // exemplo
         return $query->paginate(2);
         //return Post::all();
     }

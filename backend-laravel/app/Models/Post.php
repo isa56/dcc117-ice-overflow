@@ -27,4 +27,12 @@ class Post extends Model
     {
         return $this->hasMany(PostsComment::class);
     }
+
+    /*
+    public function numberOfComments()
+    {
+        return count($this->hasMany(PostsComment::class)?->get());
+    }
+    */
+
 }
