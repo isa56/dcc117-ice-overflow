@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\PostsComment::factory(10)->create();
         \App\Models\UserPostsReaction::factory(10)->create();
         \App\Models\UserCommentsReaction::factory(10)->create();
-
+        \App\Models\Subject::factory(10)->create();
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
