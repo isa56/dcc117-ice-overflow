@@ -24,7 +24,7 @@ class PostsController extends Controller
     {
         $query = Post::query();
         if($request->has('materia') && !empty($request->materia)) {
-            if(!Subject::find($request->materia)) {
+            if(!Subject::whereSubject($request->materia)) {
                 return response()->json(['message' => 'Materia invalida'], 401);
             }
             if($request->has('titulo') && !empty($request->titulo)) {

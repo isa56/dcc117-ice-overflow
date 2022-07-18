@@ -17,7 +17,7 @@ class SubjectFactory extends Factory
     public function definition()
     {
         return [
-            'subject' => $this->faker->unique->name(),
+            'subject' => $this->faker->unique->firstName,
         ];
     }
 }
