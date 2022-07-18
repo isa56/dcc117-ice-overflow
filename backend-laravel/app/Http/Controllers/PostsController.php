@@ -35,7 +35,13 @@ class PostsController extends Controller
                 $query->where('title', 'LIKE', "%{$request->titulo}%");
             }
             $query->whereMateria($request->materia);
-        }  
+        } 
+        if($request->has('reactions') && !empty($request->reactions)) {
+            $query->orderBy('vote', 'desc');
+        }
+        if($request->has('recent') && !empty($request->recent)) {
+            $query->orderBy('created_at', 'desc');
+        }
         // Para que ele possa fazer o ->get() na model de post é necessario que aqui a gente utilize o numberOfComments como um metodo e não como uma propriedade, pois sendo
         // chamado como um metodo ele ira retornar uma relation e não uma collection, logo permitindo o ->get()
         //dd($query->get()[0]->numberOfComments()); // exemplo
