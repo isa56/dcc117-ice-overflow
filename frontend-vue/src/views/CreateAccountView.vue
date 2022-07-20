@@ -1,64 +1,68 @@
 <template>
-  <div class="items-center bg-background flex h-full justify-center">
-    <div class="bg-background-dark text-white rounded-lg px-60 py-16">
-      <h1 class="text-primary text-4xl mb-8 text-center">
-        ICE <span class="text-secondary">Overflow</span>
-      </h1>
+  <div class="teste1 items-center bg-background flex h-full justify-center">
+    <div class=" bloco-central bg-background-dark text-white rounded-lg px-36 py-12">
 
-      <form class="w-96" @submit.prevent="validateLogin">
-        <h5 class="my-2">Nome</h5>
-        <input
-          class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
-          type="text"
-          required
-          placeholder="nome"
-          v-model="name"
-        />
-        <h5 class="my-2">Nome de usuário</h5>
-        <input
-          class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
-          type="password"
-          required
-          placeholder="usuário"
-          v-model="user"
-        />
-        <h5 class="my-2">E-Mail</h5>
-        <input
-          class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
-          type="email"
-          required
-          placeholder="nome@email.com"
-          v-model="email"
-        />
-        <h5 class="my-2">Senha</h5>
-        <input
-          class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
-          type="password"
-          required
-          placeholder="*******"
-          v-model="password"
-        />
-        <h5 class="my-2">Confirmar senha</h5>
-        <input
-          class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
-          type="password"
-          required
-          placeholder="*******"
-          v-model="password"
-        />
+        <h1 class="text-primary text-4xl mb-8 text-center">
+          ICE <span class="text-secondary">Overflow</span>
+        </h1>
 
-        <br />
-        <input
-          class="input send-button px-3 py-2 w-full mb-6 text-bold text-background-dark rounded bg-primary text-lg mt-1 px-1.8 py-0.8"
-          type="submit"
-          value="Criar conta"
-        />
-        <br />
+        <form class="form-style w-96" @submit.prevent="validateRegistration">
+          <h5 class="my-2">Nome</h5>
+          <input
+            class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
+            type="text"
+            required
+            placeholder="nome"
+            v-model="name"
+          />
+          <h5 class="my-2">Nome de usuário</h5>
+          <input
+            class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
+            type="text"
+            required
+            placeholder="usuário"
+            v-model="user"
+          />
+          <h5 class="my-2">E-Mail</h5>
+          <input
+            class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
+            type="email"
+            required
+            placeholder="nome@email.com"
+            v-model="email"
+          />
+          <h5 class="my-2">Senha</h5>
+          <input
+            class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
+            type="password"
+            required
+            placeholder="*******"
+            v-model="password"
+          />
+          <h5 class="my-2">Confirmar senha</h5>
+          <input
+            class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
+            type="password"
+            required
+            placeholder="*******"
+            v-model="cPassword"
+          />
+          <div class="flex justify-center"> 
+            <br />
+          
+              <input
+                class="input send-button px-3 py-2 w-full mb-5 text-bold  rounded text-white bg-primary text-lg w-56 h-12 mt-8"
+                type="submit"
+                value="Criar conta"
+              />
+            
+            <br />
+          </div>
+          <v-alert v-if="errorMessage" type="error"
+            >Por favor, preencha {{ errorMessage }}</v-alert
+          >
+        </form>
 
-        <v-alert v-if="errorMessage" type="error"
-          >Por favor, preencha {{ errorMessage }}</v-alert
-        >
-      </form>
     </div>
   </div>
 </template>
@@ -71,17 +75,46 @@ export default {
   components: {},
   data () {
     return {
-      errors: [],
+      errorMessage: "",
       name: "",
       user: "",
       email: "",
       password: "",
+      cPassword: "",
     }
   },
+
+  methods: {
+  
+  },
+
 
 }
 </script>
 
 <style scoped>
+
+.teste1 {
+  height: auto;
+}
+
+.bloco-central{
+  margin: 2.5rem 2.5rem 2.5rem 2.5rem;
+}
+
+@media (max-width: 530px) {
+  .bloco-central {
+    max-width: 12rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 5rem;
+    padding-left: 9rem; 
+    padding-right: 9rem; 
+  }
+  .form-style {
+    min-width: 12rem;
+  }
+}
 
 </style>
