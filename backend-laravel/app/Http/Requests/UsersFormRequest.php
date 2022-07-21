@@ -29,7 +29,7 @@ class UsersFormRequest extends FormRequest
             'name' => 'required|string|min:2',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
-            'profile_picture' => 'nullable|image|mimes:png,jpg,jpeg',
+            'profile_picture' => 'sometimes|image|mimes:png,jpg,jpeg',
         ];
     }
 

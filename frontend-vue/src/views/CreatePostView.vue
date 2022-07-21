@@ -1,39 +1,37 @@
 <template>
-  <div class="items-center bg-background flex h-full justify-center">
-    <div class="bg-background-dark text-white rounded-lg px-36 py-12">
-      <div class="w-max">
-        <h1 class="text-white font-bold text-4xl mb-8 text-center">
-          CRIAR UM NOVO POST
-        </h1>
+  <div class="items-center bg-background flex justify-center">
+    <div class="bloco-central bg-background-dark text-white rounded-lg px-36 py-12">
+      <h1 class="text-style text-white font-bold text-4xl mb-8 text-center">
+        CRIAR UM NOVO POST
+      </h1>
 
-        <form method="POST" class="w-100" @submit.prevent="checkForm">
+      <form class="form-style w-100" @submit.prevent="checkForm">
 
-          <input class="title-style rounded mb-3 px-2 py-3 w-full bg-white text-background-dark" type="text"
-            placeholder="Título" v-model="title" />
-          <textarea class="desc-style rounded mb-3 px-2 py-3 w-full bg-white text-background-dark" rows="5" cols="30"
-            type="text" placeholder="Descrição" v-model="text" />
+        <input class="title-style rounded mb-3 px-2 py-3 w-full bg-white text-background-dark" type="text"
+          placeholder="Título" v-model="title" />
+        <textarea class="desc-style rounded mb-3 px-2 py-3 w-full bg-white text-background-dark" rows="5" cols="30"
+          type="text" placeholder="Descrição" v-model="text"></textarea>
+        <br>
+
+        <div class="relative" id="selectContainer">
+          <v-autocomplete class="w-56" solo attach="#selectContainer" :items="subjects" v-model="subject" label="Disciplina"> </v-autocomplete>
+        </div>
+
+        <div class="flex justify-center">
+          <input
+            class=" input font-medium send-button px-12 py-2 w-50 h-18 mb-3 text-background-dark rounded bg-primary text-2xl mt-2"
+            type="submit" value="ENVIAR" @click="checkForm" />
           <br>
+        </div>
 
-          <label
-            class="label-file px-8 py-2 w-full mb-8 text-bold text-background-dark rounded bg-primary text-lg mt-1 px-1.8 py-0.8"
-            for="arquivo">Enviar arquivos</label>
-          <input class="input-file" type="file" name="arquivo" id="arquivo" ref="file" />
 
-          <div class="flex justify-center">
-            <input
-              class=" input font-medium send-button px-12 py-2 w-50 h-18 mb-6 text-background-dark rounded bg-primary text-2xl mt-8"
-              type="submit" value="ENVIAR" @click="checkForm" />
-            <br>
-          </div>
+        <v-alert class="alert-style alert-erro-style" type="error">
+          {{ errors[0] }}
+          <br>
+          {{ errors[1] }}
+        </v-alert>
 
-          <v-alert class="alert-style alert-erro-style" type="error">
-            {{ errors[0] }}
-            <br>
-            {{ errors[1] }}
-          </v-alert>
-
-        </form>
-      </div>
+      </form>
     </div>
   </div>
 </template>
@@ -48,7 +46,10 @@ export default {
       errors: [],
       title: null,
       text: null,
-      archive: null,
+      subject: '',
+      subjects: [
+        ' ','Cálculo 1', 'Física 1', 'Algoritmos', 'Estrutura de Dados 1', 'Algoritmos' , 'Algoritmos', 'Algoritmos', 'Algoritmos', 'Algoritmos', 'Algoritmos', 'Algoritmos', 'Algoritmos', 'Algoritmos' 
+      ],
     }
   },
 
@@ -58,8 +59,8 @@ export default {
       var titleStyle = document.querySelector(".title-style");
       var descStyle = document.querySelector(".desc-style");
       var alertStyle = document.querySelector(".alert-style");
-      titleStyle.classList.remove("error-style");
-      descStyle.classList.remove("error-style");
+      titleStyle.classList.remove("erro-form-style");
+      descStyle.classList.remove("erro-form-style");
       alertStyle.classList.add("alert-erro-style");
       this.errors = [];
 
@@ -69,30 +70,30 @@ export default {
 
       if (!this.title) {
         this.errors.push('O Título é obrigatório.');
-        titleStyle.classList.add("error-style");
+        titleStyle.classList.add("erro-form-style");
         alertStyle.classList.remove("alert-erro-style");
         alertStyle.classList.add("error-style");
-        this.snackbar = true;
       }
       if (!this.text) {
         this.errors.push('A Descrição é obrigatória.');
-        descStyle.classList.add("error-style");
+        descStyle.classList.add("erro-form-style");
         alertStyle.classList.remove("alert-erro-style");
         alertStyle.classList.add("error-style");
-        this.snackbar = true;
       }
-
+      
       e.preventDefault();
-    }
+    },
 
   },
+
 
 }
 
 </script>
 
 <style scoped>
-.input-file[type="file"] {
+
+.alert-erro-style {
   display: none;
 }
 
@@ -100,11 +101,34 @@ export default {
   background-color: rgb(185, 67, 67);
 }
 
-.li-style {
-  color: rgb(185, 67, 67);
+.erro-form-style {
+  border: 2px solid red;
 }
 
-.alert-erro-style {
+.input-file[type="file"] {
   display: none;
+}
+
+.bloco-central {
+  max-height: 38rem;
+  margin: 2.5rem 2.5rem 2.5rem 2.5rem;
+}
+
+
+@media (max-width: 530px) {
+  .bloco-central {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-width: 15rem;
+    margin-bottom: 5rem;
+  }
+  .form-style {
+    min-width: 15rem;
+  }
+  .text-style {
+    min-width: 15rem;
+  }
+
 }
 </style>
