@@ -10,6 +10,7 @@ use App\Models\PostsComment;
 class Post extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'title',
         'body',
@@ -19,6 +20,7 @@ class Post extends Model
         'finished',
         'user_id',
     ];
+    
     protected $casts = [
         'finished' => 'boolean',
     ];
@@ -27,4 +29,12 @@ class Post extends Model
     {
         return $this->hasMany(PostsComment::class);
     }
+
+    /*
+    public function numberOfComments()
+    {
+        return count($this->hasMany(PostsComment::class)?->get());
+    }
+    */
+
 }

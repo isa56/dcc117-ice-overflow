@@ -31,10 +31,12 @@ class UsersController extends Controller
         //$request = json_decode($request);
         $data = $request->all();
         $data['password'] = Hash::make($data['password']);
+        $data['profile_picture'] = $request->hasFile('profile_picture')?
+                            $request->file('profile_picture')->store('users_profile_picture', 'public') :
+                            'users_profile_picture/defaultUser.jpg';                          
         $user = User::create($data);
         Auth::login($user);
-        $user = Auth::user();
-        $token = $user->createToken('token');
+        $token = Auth::user()->createToken('token');
         return response()->json(/*$user*/$token->plainTextToken, 200); // Não é necessario retornar um json pois o laravel já sabe transformar o retorno em um, porém para tornar mais claro isso é interessante usar essa função
     }
 

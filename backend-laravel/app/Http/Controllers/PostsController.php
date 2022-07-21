@@ -5,19 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostsFormRequest;
 use App\Models\Post;
 use App\Models\PostsComment;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserPostsReaction;
 class PostsController extends Controller
 {
 
-    public function __construct(private array $arrayDeMaterias = [])
+    public function __construct()
     {
-        $this->arrayDeMaterias = [
-            'Modelagem de sistemas', 
-            'Calculo 2', 
-            'OO'
-        ];
     }
     /**
      * Display a listing of the resource.
@@ -27,14 +23,16 @@ class PostsController extends Controller
     public function index(Request $request)
     {
         $query = Post::query();
-        if($request->has('materia') && !empty($request->materia)) {
-            if(!in_array($request->materia, $this->arrayDeMaterias)) {
+        if($request->materia) {
+            if(!Subject::whereSubject($request->materia)->get()) {
                 return response()->json(['message' => 'Materia invalida'], 401);
             }
             $query->whereMateria($request->materia);
-        }  
+        }
+        $request->titulo ? $query->where('title', 'LIKE', "%{$request->titulo}%") : '';
+        $request->reactions ? $query->orderBy('vote', 'desc') : '';
+        $request->recent ? $query->orderBy('created_at', 'desc') : '';
         return $query->paginate(2);
-        //return Post::all();
     }
 
     /**
