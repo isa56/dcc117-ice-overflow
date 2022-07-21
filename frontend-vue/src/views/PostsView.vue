@@ -2,7 +2,7 @@
     <div id="containerPost">
         <div class="relative flex min-h-screen">
             <aside id="sidebar" class="bg-secondary text-background fixed z-50 rounded-br-md collapsed">
-                <button id="toggle-sidebar" @click="toggleSidebar" class="group absolute top-0 -right-12 bg-secondary text-white h-12 py-1 px-4 rounded-r-md flex items-center hover:text-opacity-80 transition-opacity">
+                <button id="toggle-sidebar" @click="toggleSidebar" class="absolute top-0 -right-12 bg-secondary text-white h-12 py-1 px-4 rounded-r-md flex items-center hover:text-opacity-80 transition-opacity">
                     <span id="menu-icon" class="text-3xl">
                         &#8801;
                     </span>
