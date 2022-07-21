@@ -1,6 +1,44 @@
 <template>
-  <div class="bg-background-dark my-10 pt-8 p-12 rounded-md">
-    <div class="mb-8">
+  <div
+    id="postDetailsContainer"
+    overlay-opacity="1"
+    class="bg-background-dark my-10 pt-8 p-12 rounded-md"
+  >
+    <v-dialog
+      v-model="shouldOpenModal"
+      @click:outside="shouldOpenModal=false"
+      attach="#postDetailsContainer"
+      max-width="800"
+      overlay-color="bg-background-dark"
+    >
+      <form class="bg-background-dark p-8" @submit.prevent="submitComment">
+        <h1 class="font-bold text-xl pb-1">Comentar:</h1>
+        <v-textarea
+          solo
+          name="input-7-4"
+          label="Comentário"
+          v-model="commentText"
+        ></v-textarea>
+        <span></span>
+        <div class="flex justify-center">
+          <input
+            class="input font-medium send-button px-12 py-2 w-50 h-18 mb-3 text-background-dark rounded bg-primary text-2xl mt-2"
+            type="submit"
+            value="Enviar"
+            @click="submitComment"
+          />
+          <br />
+        </div>
+      </form>
+    </v-dialog>
+    <div
+      class="mb-8"
+      :class="
+        shouldOpenModal
+          ? 'bg-background-dark backdrop-blur-md backdrop-opacity-75'
+          : ''
+      "
+    >
       <div class="flex mb-2 items-center justify-start">
         <h4 class="text-base text-white mr-4">Autor {{ post.authorName }}:</h4>
         <h2 class="text-2xl text-primary font-bold">{{ post.title }}</h2>
@@ -33,7 +71,7 @@
       </div>
       <div>
         <button
-          @click="openCommentModal"
+          @click="showModal"
           class="bg-primary text-background-dark font-extrabold p-2 rounded drop-shadow-md"
         >
           Comentar
@@ -45,17 +83,32 @@
 
 <script>
 import ThemeSpan from "@/components/ThemeSpan";
+// import ModalComment from "@/components/ModalComment";
+import PostService from "@/services/PostService";
 
 export default {
   name: "PostDetails",
   props: ["post"],
   components: { ThemeSpan },
   data() {
-    return {};
+    return {
+      commentText: "",
+      shouldOpenModal: false,
+    };
   },
   methods: {
     votePost() {},
-    openCommentModal() {},
+    showModal() {
+      this.shouldOpenModal = true;
+    },
+    closeModal() {
+      this.shouldOpenModal = false;
+    },
+    submitComment() {
+      PostService.submitComment(this.post.id, this.commentText);
+      this.commentText = "";
+      this.closeModal();
+    },
   },
 };
 </script>

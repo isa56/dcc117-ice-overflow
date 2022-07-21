@@ -110,4 +110,9 @@ export default {
   delete() {},
 
   search() {},
+
+  submitComment(postId, comment) {
+    console.log(postId);
+    console.log(comment);
+  },
 };
