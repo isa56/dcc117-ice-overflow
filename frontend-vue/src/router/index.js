@@ -32,7 +32,7 @@ const routes = [
     component: CreatePostView
   },
   {
-    path: '/post',
+    path: '/post/:id',
     name: 'ver-post',
     component: PostDetailsView
   },
