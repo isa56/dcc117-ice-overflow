@@ -1,33 +1,27 @@
 <template>
-    <div class="flex flex-col px-36 py-8">
-        <div class="flex flex-row bg-background-dark my-10 pt-8 p-12 rounded-md">
-            <div class="flex flex-row mb-2 space-x-36">
-                <h4 class="text-base text-white">Foto</h4>
-                <h2 class="text-2xl text-primary font-bold">Nome</h2>
-            </div>
-            <div class="flex mb-2 space-x-36">
-                <h3 class="text-2xl font-light">Usuário</h3>  
-            </div>
-        </div>
-    </div>
+  <div class="flex flex-col px-36 py-8">
+
+    <PostProfile :post="post" />
+
+  </div>
 </template>
 
-
 <script>
+import PostProfile from "@/components/PostProfile.vue";
 
 export default {
-  name: 'ProfileView',
-  components: {},
-  data () {
+  components: { PostProfile },
+  name: "ProfileView",
+  data() {
     return {
-        name: "",
-      
-    }
+      post: {
+        title: "Lorem Ipsum",
+        authorName: "GatinhoFeliz123",
+        text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      },
+    };
   },
-
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
