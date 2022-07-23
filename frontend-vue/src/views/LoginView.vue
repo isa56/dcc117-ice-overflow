@@ -56,7 +56,7 @@ export default {
     };
   },
   methods: {
-    validateLogin() {
+    async validateLogin() {
       let emailError;
       let passwordError;
       if (!this.email) emailError = "o campo de E-Mail";
@@ -69,11 +69,15 @@ export default {
       } else {
         this.errorMessage = "";
 
-        UserService.login(this.email, this.password);
-        // .then()
-        // .catch(() => {
-        //   this.errorMessage = "Este usuário não existe. Por favor, crie uma senha!";
-        // })
+        const response = await UserService.login(this.email, this.password)
+
+        console.log(response);
+          // .then((response) => {
+          //   console.log(response);
+          // })
+          // .catch(() => {
+          //   this.errorMessage = "Este usuário não existe. Por favor, crie uma senha!";
+          // })
       }
     },
   },

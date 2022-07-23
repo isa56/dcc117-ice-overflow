@@ -55,6 +55,7 @@
 <script>
 import PrimaryButton from "@/components/PrimaryButton";
 import PostDetailsSummary from "@/components/PostDetailsSummary";
+import PostService from "@/services/PostService";
 
 export default {
     name: "PostsView",
@@ -75,6 +76,7 @@ export default {
                     { id: 3, name: "Tema 3", color: "white" },
                 ],
             },
+            posts: []
         };
     },
     methods: {
@@ -86,7 +88,15 @@ export default {
             menuIcon.classList.toggle("hidden");
             closeIcon.classList.toggle("hidden");
         }
-    }
+    },
+    async created() {
+        const posts = await PostService.fetchAll();
+
+        console.log(posts);
+
+        this.data.posts = posts;
+    },
+    
 }
 </script>
 

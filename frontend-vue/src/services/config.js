@@ -1,6 +1,6 @@
 export const configApi = {
   // baseURL: "https://.heroku.com", // -> Backend Deploy//
-  baseURL: "http://127.0.0.1:8080", // -> Backend Local
+  baseURL: "http://127.0.0.1:8000", // -> Backend Local
   withCredentials: false,
   headers: {
     Accept: "application/json",
