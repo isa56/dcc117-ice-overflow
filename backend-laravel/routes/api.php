@@ -25,7 +25,7 @@ use App\Http\Controllers\LoginController;
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::patch('posts/{id}', [PostsController::class, 'vote']);
-    Route::apiResource('posts', PostsController::class);
+    Route::apiResource('posts', PostsController::class)->except('index');
 
     Route::apiResource('users', UsersController::class);
 
@@ -40,6 +40,8 @@ Route::middleware('auth:sanctum')->group(function () {
 Rotas que estão dentro do middleware mas que você não quer que seja verificadas
 podem ser colocadas após ele
 */
+
+Route::get('posts', [PostsController::class, 'index']);
 
 Route::post('/users', [UsersController::class, 'store']);
 
