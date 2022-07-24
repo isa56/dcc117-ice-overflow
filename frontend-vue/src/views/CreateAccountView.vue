@@ -26,6 +26,7 @@
           <h5 class="my-2">E-Mail</h5>
           <input
             class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
+            for="email"
             type="email"
             required
             placeholder="nome@email.com"
@@ -43,7 +44,6 @@
           <input
             class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
             type="password"
-            required
             placeholder="*******"
             v-model="cPassword"
           />
