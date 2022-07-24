@@ -3,10 +3,10 @@
   <div class="items-center flex h-auto w-auto justify-center flex-col px-36 py-8">
     <div class="bg-background-dark my-10 pt-8 p-12 rounded-md">
         <div class="flex mb-2 items-center flex-wrap">
-              <div class="flex mb-7" >
-                  <img class="rounded-full w-20" src="https://img.freepik.com/vetores-premium/perfil-de-avatar-de-homem-no-icone-redondo_24640-14044.jpg" alt="fotoPerfil">
-                  <h1 class="ml-14 text-4xl text-primary font-bold"> {{ name }} </h1>
-                  <h3 class="ml-96 text-2xl text-primary font-normal"> {{ user }} </h3>                  
+              <div class="user-desc-style flex mb-7" >
+                  <img class="img-style rounded-full w-20" src="https://img.freepik.com/vetores-premium/perfil-de-avatar-de-homem-no-icone-redondo_24640-14044.jpg" alt="fotoPerfil">
+                  <h1 class="name-style ml-14 text-4xl text-primary font-bold"> {{ name }} </h1>
+                  <h3 class="user-style ml-96 text-2xl text-primary font-normal"> {{ user }} </h3>                  
               </div>
             <span class="text-base text-white">{{ description }}</span>
         </div>
@@ -53,4 +53,31 @@ export default {
 };
 </script>
 
-<style scoped></style>
+
+<style scoped>
+
+@media (max-width: 1344px) {
+  .user-style{
+    margin-left: 5rem;
+  }
+}
+
+@media (max-width: 906px) {
+  .user-desc-style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .img-style {
+    margin: 1rem;
+  }
+  .name-style {
+    margin: 1rem;
+  }
+  .user-style{
+    margin: 1rem;
+  }
+}
+
+</style>
