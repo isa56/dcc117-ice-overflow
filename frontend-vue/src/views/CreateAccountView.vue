@@ -1,5 +1,5 @@
 <template>
-  <div class="teste1 items-center bg-background flex h-full justify-center">
+  <div class="bloco1 items-center bg-background flex h-full justify-center">
     <div class=" bloco-central bg-background-dark text-white rounded-lg px-36 py-12">
 
         <h1 class="text-primary text-4xl mb-8 text-center">
@@ -44,6 +44,7 @@
           <input
             class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
             type="password"
+            required
             placeholder="*******"
             v-model="cPassword"
           />
@@ -94,7 +95,7 @@ export default {
 
 <style scoped>
 
-.teste1 {
+.bloco1 {
   height: auto;
 }
 
