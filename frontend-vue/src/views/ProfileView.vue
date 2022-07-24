@@ -6,8 +6,8 @@
         <div class="flex mb-2 items-center flex-wrap">
             <div class="flex space-x-3.5 mb-7">
                 <img class="" src="" alt="fotoPerfil">
-                <h2> {{ name }} </h2>
-                <h3> {{ user }} </h3>
+                <h2 class="text-2xl text-primary font-bold">{{ name }}</h2>
+                <h2 class="text-2x1 text-primary">{{ user }}</h2>
             </div>
             <span class="text-base text-white">{{ post.text }}</span>
         </div>
