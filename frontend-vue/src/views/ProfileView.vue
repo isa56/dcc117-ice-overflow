@@ -12,6 +12,8 @@
         </div>
     </div>
 
+    <h1 class="h-style bg-background-dark mt-20 text-2xl text-primary font-bold p-1">Meus Posts:</h1>
+
     <PostProfile 
     v-for="post in posts"
     :post="post"
@@ -55,6 +57,10 @@ export default {
 
 
 <style scoped>
+
+.h-style {
+  white-space: nowrap;
+}
 
 @media (max-width: 1344px) {
   .user-style{
