@@ -1,19 +1,21 @@
 <template>
-  <div class="flex flex-col px-36 py-8">
 
+  <div class="items-center flex h-auto w-auto justify-center flex-col px-36 py-8">
     <div class="bg-background-dark my-10 pt-8 p-12 rounded-md">
         <div class="flex mb-2 items-center flex-wrap">
-              <div class="flex mb-7">
+              <div class="flex mb-7" >
                   <img class="rounded-full w-20" src="https://img.freepik.com/vetores-premium/perfil-de-avatar-de-homem-no-icone-redondo_24640-14044.jpg" alt="fotoPerfil">
                   <h1 class="ml-14 text-4xl text-primary font-bold"> {{ name }} </h1>
                   <h3 class="ml-96 text-2xl text-primary font-normal"> {{ user }} </h3>                  
               </div>
-            <span class="text-base text-white">{{ post.text }}</span>
+            <span class="text-base text-white">{{ description }}</span>
         </div>
     </div>
 
     <PostProfile 
-    :post="post"/>
+    v-for="post in posts"
+    :post="post"
+    :key="post" />
 
   </div>
 </template>
@@ -30,12 +32,22 @@ export default {
       user: '@Joaozinho',
       description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",  
 
-      post: 
-        {
-          title: "Lorem Ipsum",
-          authorName: "GatinhoFeliz123",
-          text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        },
+      posts:[
+          {
+            title: "Lorem Ipsum",
+            text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          },
+          {
+            title: "Lorem Ipsum",
+            text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          },
+
+          {
+            title: "Lorem Ipsum",
+            text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          },
+      ],
+
     };
   },
 };

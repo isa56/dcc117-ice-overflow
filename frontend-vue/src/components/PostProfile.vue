@@ -2,7 +2,7 @@
   <div class="bg-background-dark my-4 pt-8 p-12 rounded-md">
     <div class="mb-8">
       <div class="flex mb-2 items-center justify-start">
-        <h2 class="text-2xl text-primary font-bold">{{ post.title }}</h2>
+        <a href="" class="text-2xl text-primary font-bold underline underline-offset-1">{{ post.title }}</a>
       </div>
     </div>
 
