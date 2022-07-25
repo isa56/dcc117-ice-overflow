@@ -27,31 +27,36 @@
 
                         <div class="grid grid-cols-2 gap-1 mb-24">
                             
-                            <label 
-                                for="highlights"
-                                class="checkmark uppercase cursor-pointer send-button py-2 text-gray text-xs text-center bg-white"
-                            >
-                                Destaques
+                            <div class="checkbox-container">
                                 <input 
-                                    input="highlights"
+                                    id="highlights"
                                     name="highlights"
                                     type="checkbox"
-                                    class="hidden"
+                                    class="bg-white"
                                 />
-                            </label>
-
-                            <label 
-                                for="news"
-                                class="checkmark uppercase cursor-pointer send-button py-2 text-gray text-xs text-center bg-white"
-                            >
-                                Novidades
+                                <label 
+                                    for="highlights"
+                                    class="uppercase cursor-pointer text-gray text-xs text-center"
+                                >
+                                    Destaques
+                                </label>
+                            </div>
+                            <div class="checkbox-container">
                                 <input 
-                                    input="news"
+                                    id="news"
                                     name="news"
                                     type="checkbox"
-                                    class="hidden"
+                                    class="bg-white"
                                 />
-                            </label>
+                                <label 
+                                    for="news"
+                                    class="uppercase cursor-pointer text-gray text-xs text-center"
+                                >
+                                    Novidades
+                                </label>
+                            </div>
+
+                            
                         </div>
 
                         <div>
@@ -133,18 +138,41 @@ export default {
     transition: all 150ms ease-in 0s;
 }
 
-#sidebar .checkmark {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    height: 2rem;
+#sidebar .checkbox-container {
+    position: relative;
 }
 
-/* #sidebar input:checked ~ .checkmark {
-    background-color: red;
-} */
-</style>
+#sidebar .checkbox-container label {
+    position: absolute;
+    left: 1.5rem;
+    top: 0.7rem;
 
-                                <!-- class="input send-button py-2 text-gray text-xs text-center bg-white"  -->
+    pointer-events: none;
+}
+
+#sidebar .checkbox-container input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    width: 7.25rem;
+    height: 2.5rem;
+    cursor: pointer;
+    outline: none;
+    transition: 0.2s;
+}
+
+#sidebar .checkbox-container input:hover {
+    border: 1px solid #6BBBB5;
+}
+
+#sidebar .checkbox-container input:checked {
+    background-color: #6BBBB5;
+    border: 1px solid #5BA39D;
+    transition-duration: 0.2s;
+}
+
+#sidebar .checkbox-container input:checked ~ label {
+    color: #F2F7FB;
+    font-weight: bold;
+}
+</style>
