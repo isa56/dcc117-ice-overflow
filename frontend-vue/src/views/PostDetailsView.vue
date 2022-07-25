@@ -15,6 +15,7 @@
 <script>
 import PostDetails from "@/components/PostDetails.vue";
 import PostComment from "@/components/PostComment.vue";
+import PostService from "@/services/PostService";
 
 export default {
   components: { PostDetails, PostComment },
@@ -53,8 +54,12 @@ export default {
       },
     };
   },
-  created () {
-    // fetchPosts
+  created() {
+    PostService.fetchOne(this.$route.params.id)
+      .then((res) => (this.post = res))
+      .catch((err) => {
+        this.$vtoast.open(err.message);
+      });
   },
 };
 </script>

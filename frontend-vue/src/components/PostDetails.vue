@@ -6,12 +6,17 @@
   >
     <v-dialog
       v-model="shouldOpenModal"
-      @click:outside="shouldOpenModal=false"
+      @click:outside="closeModal"
       attach="#postDetailsContainer"
       max-width="800"
       overlay-color="bg-background-dark"
     >
       <form class="bg-background-dark p-8" @submit.prevent="submitComment">
+        <div class="flex justify-end">
+          <v-icon class="cursor-pointer" @click="closeModal" color="#5BA39D"
+            >close</v-icon
+          >
+        </div>
         <h1 class="font-bold text-xl pb-1">Comentar:</h1>
         <v-textarea
           solo
@@ -83,7 +88,6 @@
 
 <script>
 import ThemeSpan from "@/components/ThemeSpan";
-// import ModalComment from "@/components/ModalComment";
 import PostService from "@/services/PostService";
 
 export default {
@@ -97,7 +101,9 @@ export default {
     };
   },
   methods: {
-    votePost() {},
+    votePost() {
+      PostService.upvotePost(this.post.id);
+    },
     showModal() {
       this.shouldOpenModal = true;
     },

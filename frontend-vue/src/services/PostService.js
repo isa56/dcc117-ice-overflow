@@ -14,39 +14,15 @@ export default {
       formData.append("body", post.text);
     }
 
-    if (post.hasOwnProperty("archive")) {
-      formData.append("file", post.archive);
-    }
-
     formData.append("user_id", userId);
 
     return api
       .post("/api/posts", formData)
       .then(
-        (response) => {
-          return response.data;
-        },
-        (error) => {
-          if (error.message) {
-            this.$root.vtoast.show({
-              color: "danger",
-              message: error.message,
-              timeout: 5000,
-            });
-          }
-          return Promise.reject(error.message);
-        }
+        (response) => response.data,
+        (error) => Promise.reject(error.message)
       )
-      .catch((error) => {
-        if (error.message) {
-          this.$root.vtoast.show({
-            color: "danger",
-            message: error.message,
-            timeout: 5000,
-          });
-        }
-        return Promise.reject(error.message);
-      });
+      .catch((error) => Promise.reject(error.message));
   },
 
   async fetchAll() {
@@ -59,27 +35,9 @@ export default {
       .get(`/api/posts/${postId}`)
       .then(
         (response) => response.data,
-        (error) => {
-          if (error.message) {
-            this.$root.vtoast.show({
-              color: "danger",
-              message: error.message,
-              timeout: 5000,
-            });
-          }
-          return Promise.reject(error.message);
-        }
+        (error) => Promise.reject(error.message)
       )
-      .catch((error) => {
-        if (error.message) {
-          this.$root.vtoast.show({
-            color: "danger",
-            message: error.message,
-            timeout: 5000,
-          });
-        }
-        return Promise.reject(error.message);
-      });
+      .catch((error) => Promise.reject(error.message));
   },
 
   upvotePost(postId) {
@@ -87,27 +45,9 @@ export default {
       .patch(`/api/posts/${postId}`)
       .then(
         (response) => response.data,
-        (error) => {
-          if (error.message) {
-            this.$root.vtoast.show({
-              color: "danger",
-              message: error.message,
-              timeout: 5000,
-            });
-          }
-          return Promise.reject(error.message);
-        }
+        (error) => Promise.reject(error.message)
       )
-      .catch((error) => {
-        if (error.message) {
-          this.$root.vtoast.show({
-            color: "danger",
-            message: error.message,
-            timeout: 5000,
-          });
-        }
-        return Promise.reject(error.message);
-      });
+      .catch((error) => Promise.reject(error.message));
   },
 
   delete() {},
