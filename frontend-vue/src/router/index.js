@@ -5,6 +5,8 @@ import LoginView from '@/views/LoginView.vue'
 import CreateAccountView from '@/views/CreateAccountView.vue'
 import CreatePostView from '@/views/CreatePostView.vue'
 import PostDetailsView from '@/views/PostDetailsView.vue'
+import ProfileView from '@/views/ProfileView.vue'
+import PostsView from '@/views/PostsView.vue'
 
 
 Vue.use(VueRouter)
@@ -34,6 +36,16 @@ const routes = [
     path: '/post/:id',
     name: 'ver-post',
     component: PostDetailsView
+  },
+  {
+    path: '/perfil',
+    name: 'perfil',
+    component: ProfileView
+  },
+  {
+    path: '/posts',
+    name: 'posts',
+    component: PostsView
   },
 ]
 

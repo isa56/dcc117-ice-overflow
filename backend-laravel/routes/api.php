@@ -2,10 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\http\Controllers\UsersController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentsController;
-use App\http\Controllers\LoginController;
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,12 +23,12 @@ use App\http\Controllers\LoginController;
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    
+
     Route::patch('posts/{id}', [PostsController::class, 'vote']);
-    Route::apiResource('posts', PostsController::class);
+    Route::apiResource('posts', PostsController::class)->except('index');
 
     Route::apiResource('users', UsersController::class);
-    
+
     Route::patch('comments/{id}', [CommentsController::class, 'vote']);
     Route::patch('comments/{id}/bestAnswer', [CommentsController::class, 'bestAnswer']);
     Route::apiResource('comments', CommentsController::class);
@@ -40,6 +40,8 @@ Route::middleware('auth:sanctum')->group(function () {
 Rotas que estão dentro do middleware mas que você não quer que seja verificadas
 podem ser colocadas após ele
 */
+
+Route::get('posts', [PostsController::class, 'index']);
 
 Route::post('/users', [UsersController::class, 'store']);
 
