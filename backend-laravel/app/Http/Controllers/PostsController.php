@@ -30,9 +30,9 @@ class PostsController extends Controller
             $query->whereMateria($request->materia);
         }
         $request->titulo ? $query->where('title', 'LIKE', "%{$request->titulo}%") : '';
-        $request->reactions ? $query->orderBy('vote', 'desc') : '';
-        $request->recent ? $query->orderBy('created_at', 'desc') : '';
-        return $query->paginate(2);
+        $request->reactions === "true" ? $query->orderBy('vote', 'desc') : '';
+        $request->recent === "true" ? $query->orderBy('created_at', 'desc') : '';
+        return $query->paginate(10);
     }
 
     /**
@@ -100,7 +100,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function vote(int $id) 
+    public function vote(int $id)
     {
         $post = Post::find($id);
         if(!$post) {
