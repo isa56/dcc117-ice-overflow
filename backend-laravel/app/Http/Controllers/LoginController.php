@@ -14,7 +14,7 @@ class LoginController extends Controller
         $this->middleware('auth')->except(['login']);
     }
     */
-    
+
     /**
      * Login the user.
      * @param  \App\Http\Requests\LoginFormRequest
@@ -24,13 +24,13 @@ class LoginController extends Controller
     {
         $credentials = $request->only(['email', 'password']);
         if(!Auth::attempt($credentials)) {
-            return response()->json('Não autorizado', 401);
+            return response()->json('E-mail ou senha inválidos', 401);
         }
         $user = Auth::user();
         $user->tokens()->delete(); // revoga os tokens antigos do usuario
         $token = $user->createToken('token');
         return response()->json($token->plainTextToken);
-    }   
+    }
 
     public function logout()
     {

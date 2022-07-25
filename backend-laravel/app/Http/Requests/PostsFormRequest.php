@@ -31,7 +31,7 @@ class PostsFormRequest extends FormRequest
             'materia' => 'required|string|min:2',
             'vote' => 'nullable|integer',
             'finished' => 'nullable|integer',
-            'user_id' => 'exists:users,id',
+            'user_id' => 'required|exists:users,id',
         ];
     }
 
@@ -49,11 +49,11 @@ class PostsFormRequest extends FormRequest
             'materi.min' => "O campo materia precisa ter pelo menos :value caracteres",
             'vote.integeer' => "O campo voto precisa ser um inteiro",
             'finished.min' => "O campo finalizado precisa ser um inteiro",
-            'user_id.exists' => "O campo de usuario precisa ser um usuario valido ", 
+            'user_id.exists' => "O campo de usuario precisa ser um usuario valido ",
         ];
     }
 
-    protected function failedValidation(Validator $validator) { 
-        throw new HttpResponseException(response()->json($validator->errors()->all(), 422)); 
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json($validator->errors()->all(), 422));
     }
 }
