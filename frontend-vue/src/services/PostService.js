@@ -49,8 +49,16 @@ export default {
       });
   },
 
-  async fetchAll() {
-    const response = await Api().get("/api/posts");
+  async fetchAll(postTitle = "", subject = "", highlights = false, recent = false) {
+    const response = await Api().get("/api/posts", {
+      params: {
+        titulo: postTitle,
+        materia: subject,
+        reactions: highlights,
+        recent
+      }
+    });
+
     return response.data;
   },
 

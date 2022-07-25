@@ -14,15 +14,24 @@
 
                 <h1 class="text-center text-xl my-10 text-white">FILTRO</h1>
                 <div class="mx-5">
-                    <form>
+                    <form @submit.prevent="filter">
                         <input 
+                            id="search-title"
                             class="rounded my-3 w-full px-3 py-2 bg-white text-background-dark text-center"
                             type="search" 
                             placeholder="DCC117" 
+                            v-model="postTitleFilter"
                         />
 
-                        <div id="containerSelect" class="relative">
-                            <v-select attach="#containerSelect" :items="items" label="Tema" solo></v-select>
+                        <div id="containerSelect" class="relative max-w-[14.75rem]">
+                            <v-select 
+                                id="subject"
+                                attach="#containerSelect"
+                                :items="subjects"
+                                v-model="selectedSubjectFilter"
+                                label="Matéria"
+                                solo
+                            ></v-select>
                         </div>
 
                         <div class="grid grid-cols-2 gap-1 mb-24">
@@ -33,6 +42,7 @@
                                     name="highlights"
                                     type="checkbox"
                                     class="bg-white"
+                                    v-model="highlightsFilter"
                                 />
                                 <label 
                                     for="highlights"
@@ -43,20 +53,19 @@
                             </div>
                             <div class="checkbox-container">
                                 <input 
-                                    id="news"
-                                    name="news"
+                                    id="recent"
+                                    name="recent"
                                     type="checkbox"
                                     class="bg-white"
+                                    v-model="recentFilter"
                                 />
                                 <label 
-                                    for="news"
+                                    for="recent"
                                     class="uppercase cursor-pointer text-gray text-xs text-center"
                                 >
                                     Novidades
                                 </label>
                             </div>
-
-                            
                         </div>
 
                         <div>
@@ -78,11 +87,14 @@
                     </router-link>
                 </div>
 
-                <post-details-summary
-                    v-for="post in posts"
-                    :key="post.id"
-                    :post="post"
-                />
+                <div v-if="posts.length">
+                    <post-details-summary
+                        v-for="post in posts"
+                        :key="post.id"
+                        :post="post"
+                    />
+                </div>
+                <h1 class="text-center text-white text-2xl mt-12" v-else>Nenhuma pergunta encontrada :(</h1>
             </main>
         </div>
     </div>
@@ -99,8 +111,16 @@ export default {
     components: { PrimaryButton, PostDetailsSummary },
     data() {
         return {
-            items: ['DCC', 'MAT', 'EST', 'FIS', 'QUI'],
+            subjects: [
+                "Modelagem de sistemas",
+                "OO",
+                "Calculo 2"
+            ],
             posts: [],
+            selectedSubjectFilter: null,
+            postTitleFilter: null,
+            highlightsFilter: false,
+            recentFilter: false
         };
     },
     methods: {
@@ -112,8 +132,19 @@ export default {
             menuIcon.classList.toggle("hidden");
             closeIcon.classList.toggle("hidden");
         },
-        filter() {
+        async filter() {
+            try {
+                const { data: posts } = await PostService.fetchAll(
+                    this.postTitleFilter,
+                    this.selectedSubjectFilter,
+                    this.highlightsFilter,
+                    this.recentFilter
+                );
 
+                this.posts = posts;
+            } catch (error) {
+                toastShow(this.$root.vtoast, error.data);
+            }
         }
     },
     async created() {
