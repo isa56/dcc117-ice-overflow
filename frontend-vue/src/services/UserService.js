@@ -1,7 +1,5 @@
 /* eslint-disable no-prototype-builtins */
 import Api from "@/services/Api";
-import store from "@/store";
-import router from "@/router";
 
 export default {
   async login(email, password) {
