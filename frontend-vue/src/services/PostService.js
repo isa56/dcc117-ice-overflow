@@ -49,7 +49,10 @@ export default {
       });
   },
 
-  fetchAll() {},
+  async fetchAll() {
+    const response = await Api().get("/api/posts");
+    return response.data;
+  },
 
   fetchOne(postId) {
     return Api()

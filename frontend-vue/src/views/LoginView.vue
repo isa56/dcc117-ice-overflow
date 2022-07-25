@@ -6,16 +6,20 @@
       </h1>
 
       <form class="w-96" @submit.prevent="validateLogin">
-        <h5 class="my-2">E-Mail</h5>
+        <label for="email" class="my-2">E-Mail</label>
         <input
+          id="email"
+          name="email"
           class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
           type="email"
           required
           placeholder="nome@email.com"
           v-model="email"
         />
-        <h5 class="my-2">Senha</h5>
+        <label for="password" class="my-2">Senha</label>
         <input
+          id="password"
+          name="password"
           class="rounded mb-3 px-3 py-2 w-full bg-white text-background-dark"
           type="password"
           required
@@ -35,8 +39,8 @@
             >Cadastre-se!</router-link
           >
         </p>
-        <v-alert v-if="errorMessage" type="error"
-          >Por favor, preencha {{ errorMessage }}</v-alert
+        <v-alert v-if="errorMessage" type="error">
+          Por favor, preencha {{ errorMessage }}</v-alert
         >
       </form>
     </div>
@@ -45,6 +49,8 @@
 
 <script>
 import UserService from "@/services/UserService";
+import { toastShow } from '../utils/vtoast';
+import router from "@/router";
 
 export default {
   name: "LoginView",
@@ -56,7 +62,7 @@ export default {
     };
   },
   methods: {
-    validateLogin() {
+    async validateLogin() {
       let emailError;
       let passwordError;
       if (!this.email) emailError = "o campo de E-Mail";
@@ -69,11 +75,15 @@ export default {
       } else {
         this.errorMessage = "";
 
-        UserService.login(this.email, this.password);
-        // .then()
-        // .catch(() => {
-        //   this.errorMessage = "Este usuário não existe. Por favor, crie uma senha!";
-        // })
+        try {
+          const { data: token } = await UserService.login(this.email, this.password);
+          console.log(token);
+          
+          return router.push('/posts');
+
+        } catch (error) {
+          toastShow(this.$root.vtoast, error.data);
+        }
       }
     },
   },
