@@ -57,7 +57,7 @@ export default new Vuex.Store({
       state.user_type = data.user_type;
 
       localStorage.setItem("auth_token", data.auth_token);
-      localStorage.setItem("user_id", data.$user_email);
+      localStorage.setItem("user_id", data.user_id);
       localStorage.setItem("user_email", data.user_email);
       localStorage.setItem("user_type", data.user_type);
 
