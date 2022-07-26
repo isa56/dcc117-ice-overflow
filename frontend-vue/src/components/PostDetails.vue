@@ -20,19 +20,18 @@
     <div class="flex justify-between text-lg">
       <div class="items-center">
         <span @click="$emit('votePost', post.id)">
-          <v-icon class="ml-3 cursor-pointer" color="#F2F7FB">thumb_up</v-icon>
+          <v-icon class="ml-3 cursor-pointer" color="#F2F7FB">mdi-thumb-up</v-icon>
           {{ post.vote }}
         </span>
         <span>
-          <v-icon class="ml-3" color="#F2F7FB">forum</v-icon>
+          <v-icon class="ml-3" color="#F2F7FB">mdi-forum</v-icon>
           {{ post.comentarios }}
         </span>
       </div>
       <div>
         <button
           @click="$emit('showCommentModal')"
-          class="bg-primary text-background-dark font-extrabold p-2 rounded drop-shadow-md"
-        >
+          class="bg-primary text-background-dark font-bold p-2 rounded drop-shadow-md">
           Comentar
         </button>
       </div>

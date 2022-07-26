@@ -11,12 +11,12 @@
     </div>
     <div class="flex justify-end">
       <div v-if="!hasBestComment" class="mr-4">
-        <v-icon @click="$emit('set-best-comment', comment.id)" color="rgb(251 146 60)"
-          >star</v-icon
+        <v-icon @click="$emit('set-best-comment', comment.id)" :color="comment.best_answer === 1 ? 'rgb(251 146 60)' : '#F2F7FB'"
+          >mdi-star</v-icon
         >
       </div>
       <div v-if="((comment.user_id === $store.getters.getUserId) || ($store.getters.isModerator))">
-        <v-icon @click="$emit('deleteComment', comment.id)" color="rgb(248 113 113)">delete</v-icon>
+        <v-icon @click="$emit('deleteComment', comment.id)" color="rgb(248 113 113)">mdi-delete</v-icon>
       </div>
 
     </div>

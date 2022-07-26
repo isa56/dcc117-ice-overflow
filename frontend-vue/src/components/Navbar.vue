@@ -9,12 +9,12 @@
       <div class="items-center flex cursor-pointer" @click="redirectToProfile">
         Perfil
         <v-icon class="ml-3" color="#F2F7FB">{{
-          $store.getters.isAuthenticated ? "person" : "logout"
+          $store.getters.isAuthenticated ? 'mdi-account' : 'mdi-logout'
         }}</v-icon>
       </div>
       <div class="items-center flex cursor-pointer ml-8" v-if="$store.getters.isAuthenticated" @click="logout">
         Sair
-        <v-icon class="ml-3" color="#F2F7FB">logout</v-icon>
+        <v-icon class="ml-3" color="#F2F7FB">mdi-logout</v-icon>
       </div>
     </div>
   </nav>
