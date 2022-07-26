@@ -4,7 +4,7 @@
 
     <div>
       <post-comment
-        v-for="comment in post.postComments"
+        v-for="comment in comments"
         :key="comment.id"
         :comment="comment"
       />
@@ -24,13 +24,14 @@ export default {
   data() {
     return {
       post: {},
+      comments: [],
     };
   },
   created() {
     PostService.fetchOne(this.$route.params.id)
       .then((res) => {
-        console.log(res);
-        this.post = res;
+        this.post = res.post;
+        this.comments = res.postComments;
       })
       .catch((err) => {
         toastShow(this.$root.vtoast, err);
