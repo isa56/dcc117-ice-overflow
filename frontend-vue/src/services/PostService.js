@@ -54,8 +54,17 @@ export default {
 
   search() {},
 
-  submitComment(postId, comment) {
-    console.log(postId);
-    console.log(comment);
+  submitComment(userId, postId, comment) {
+    return Api()
+      .post(`/api/comments`, {
+        body: comment,
+        post_id: postId,
+        user_id: userId,
+      })
+      .then(
+        (response) => response.data,
+        (error) => Promise.reject(error.message)
+      )
+      .catch((error) => Promise.reject(error.message));
   },
 };
