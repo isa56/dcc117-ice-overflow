@@ -33,7 +33,11 @@
           </div>
         </form>
       </v-dialog>
-      <post-details :post="post" @showCommentModal="showModal" />
+      <post-details
+        :post="post"
+        @showCommentModal="showModal"
+        @votePost="votePost"
+      />
 
       <div>
         <post-comment
@@ -114,10 +118,13 @@ export default {
           this.comments = res.postComments;
           this.isLoading = false;
         })
-        .catch((err) => {
-          toastShow(this.$root.vtoast, err);
-          console.log(err);
-        });
+        .catch((err) => toastShow(this.$root.vtoast, err));
+    },
+    votePost(postId) {
+      this.isLoading = true;
+      PostService.upvotePost(postId)
+        .then(() => this.fetchPost())
+        .catch((err) => toastShow(this.$root.vtoast, err));
     },
   },
   created() {

@@ -19,7 +19,7 @@
 
     <div class="flex justify-between text-lg">
       <div class="items-center">
-        <span @click="votePost">
+        <span @click="$emit('votePost', post.id)">
           <v-icon class="ml-3 cursor-pointer" color="#F2F7FB">thumb_up</v-icon>
           {{ post.vote }}
         </span>
@@ -42,17 +42,11 @@
 
 <script>
 import ThemeSpan from "@/components/ThemeSpan";
-import PostService from "@/services/PostService";
 
 export default {
   name: "PostDetails",
   props: ["post"],
   components: { ThemeSpan },
-  methods: {
-    votePost() {
-      PostService.upvotePost(this.post.id);
-    },
-  },
 };
 </script>
 
