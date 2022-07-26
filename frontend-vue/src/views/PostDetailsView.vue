@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col px-36 py-8" v-if="post">
+  <div class="md:px-36 flex flex-col px-1 py-8" v-if="post">
     <post-details :post="post" />
 
     <div>

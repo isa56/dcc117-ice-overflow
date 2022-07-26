@@ -2,7 +2,7 @@
   <div
     id="postDetailsContainer"
     overlay-opacity="1"
-    class="bg-background-dark my-10 pt-8 p-12 rounded-md"
+    class="bg-background-dark md:p-12 my-10 pt-8 p-2 rounded-md"
   >
     <v-dialog
       v-model="shouldOpenModal"
