@@ -34,10 +34,13 @@ export default {
     return Api()
       .get(`/api/posts/${postId}`)
       .then(
-        (response) => response.data,
-        (error) => Promise.reject(error.message)
+        (response) => {
+          console.log(response);
+          return response.data;
+        },
+        (error) => Promise.reject(error)
       )
-      .catch((error) => Promise.reject(error.message));
+      .catch((error) => Promise.reject(error));
   },
 
   upvotePost(postId) {

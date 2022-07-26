@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "@/store";
 import { configApi } from "./config";
 
 export default () => {
@@ -7,22 +8,22 @@ export default () => {
   // https://medium.com/@yaob/how-to-globally-use-axios-instance-and-interceptors-e28f351bb794
   api.interceptors.request.use(
     (config) => {
-      // const token =
-      // if (token) {
-      // config.headers.Authorization = `Bearer ${token}`;
-      // }
+      const token = store.get("getAuthToken");
+      if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+      }
       return config;
     },
     (error) => {
       // let message;
-      if (!error.status) {
+      // if (!error.status) {
         // message = "Não é possível se conectar ao servidor";
         // this.$root.vtoast.show({
         //   color: "danger",
         //   message: message,
         //   timeout: 5000,
         // });
-      }
+      // }
       return Promise.reject(error);
     }
   );

@@ -51,27 +51,25 @@
       <div class="flex">
         <theme-span
           class="mr-2"
-          v-for="theme in post.themes"
-          :key="theme.id"
-          :theme="theme.name"
-          :color="theme.color"
+          :theme="post.materia"
+          color="#5BA39D"
         />
       </div>
     </div>
 
     <div class="my-8">
-      <p>{{ post.text }}</p>
+      <p>{{ post.body }}</p>
     </div>
 
     <div class="flex justify-between text-lg">
       <div class="items-center">
         <span @click="votePost">
           <v-icon class="ml-3 cursor-pointer" color="#F2F7FB">thumb_up</v-icon>
-          {{ post.upvotes }}
+          {{ post.vote }}
         </span>
         <span>
           <v-icon class="ml-3" color="#F2F7FB">forum</v-icon>
-          {{ post.comments.length }}
+          {{ post.comentarios }}
         </span>
       </div>
       <div>
