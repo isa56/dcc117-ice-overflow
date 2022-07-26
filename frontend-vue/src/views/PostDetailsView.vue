@@ -7,7 +7,9 @@
         v-for="comment in comments"
         :key="comment.id"
         :comment="comment"
+        :has-best-comment="post.finished"
         @set-best-comment="chooseBestComment"
+        @delete-comment="deleteComment"
       />
     </div>
   </div>
@@ -30,6 +32,9 @@ export default {
   },
   methods: {
     chooseBestComment(commentId) {
+      console.log(commentId);
+    },
+    deleteComment(commentId) {
       console.log(commentId);
     },
   },

@@ -1,5 +1,8 @@
 <template>
-  <div class="bg-background-dark mb-4 p-4 rounded-md" :class="comment.best_answer === 1 ? 'best-answer' : ''">
+  <div
+    class="bg-background-dark mb-4 p-4 rounded-md"
+    :class="comment.best_answer === 1 ? 'best-answer' : ''"
+  >
     <div class="mb-8">
       <div class="flex mb-2 items-center justify-start">
         <h2 class="text-lg text-primary mr-4">Autor {{ comment.author }}:</h2>
@@ -7,7 +10,15 @@
       </div>
     </div>
     <div class="flex justify-end">
-      <v-icon @click="$emit('set-best-comment', comment.id)" color="#F2F7FB">star</v-icon>
+      <div v-if="!hasBestComment" class="mr-4">
+        <v-icon @click="$emit('set-best-comment', comment.id)" color="rgb(251 146 60)"
+          >star</v-icon
+        >
+      </div>
+      <div v-if="((comment.user_id === $store.getters.getUserId) || ($store.getters.isModerator))">
+        <v-icon @click="$emit('deleteComment', comment.id)" color="rgb(248 113 113)">delete</v-icon>
+      </div>
+
     </div>
   </div>
 </template>
@@ -15,7 +26,7 @@
 <script>
 export default {
   name: "PostComment",
-  props: ["comment"],
+  props: ["comment", "hasBestComment"],
 };
 </script>
 
