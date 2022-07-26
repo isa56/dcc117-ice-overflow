@@ -1,59 +1,15 @@
 <template>
   <div
-    id="postDetailsContainer"
     overlay-opacity="1"
     class="bg-background-dark md:p-12 my-10 pt-8 p-2 rounded-md"
   >
-    <v-dialog
-      v-model="shouldOpenModal"
-      @click:outside="closeModal"
-      attach="#postDetailsContainer"
-      max-width="800"
-      overlay-color="bg-background-dark"
-    >
-      <form class="bg-background-dark p-8" @submit.prevent="submitComment">
-        <div class="flex justify-end">
-          <v-icon class="cursor-pointer" @click="closeModal" color="#5BA39D"
-            >close</v-icon
-          >
-        </div>
-        <h1 class="font-bold text-xl pb-1">Comentar:</h1>
-        <v-textarea
-          solo
-          name="input-7-4"
-          label="Comentário"
-          v-model="commentText"
-        ></v-textarea>
-        <span></span>
-        <div class="flex justify-center">
-          <input
-            class="input font-medium send-button px-12 py-2 w-50 h-18 mb-3 text-background-dark rounded bg-primary text-2xl mt-2"
-            type="submit"
-            value="Enviar"
-            @click="submitComment"
-          />
-          <br />
-        </div>
-      </form>
-    </v-dialog>
-    <div
-      class="mb-8"
-      :class="
-        shouldOpenModal
-          ? 'bg-background-dark backdrop-blur-md backdrop-opacity-75'
-          : ''
-      "
-    >
+    <div class="mb-8">
       <div class="flex mb-2 items-center justify-start">
         <h4 class="text-base text-white mr-4">Autor {{ post.authorName }}:</h4>
         <h2 class="text-2xl text-primary font-bold">{{ post.title }}</h2>
       </div>
       <div class="flex">
-        <theme-span
-          class="mr-2"
-          :theme="post.materia"
-          color="#5BA39D"
-        />
+        <theme-span class="mr-2" :theme="post.materia" color="#5BA39D" />
       </div>
     </div>
 
@@ -74,7 +30,7 @@
       </div>
       <div>
         <button
-          @click="showModal"
+          @click="$emit('showCommentModal')"
           class="bg-primary text-background-dark font-extrabold p-2 rounded drop-shadow-md"
         >
           Comentar
@@ -92,26 +48,9 @@ export default {
   name: "PostDetails",
   props: ["post"],
   components: { ThemeSpan },
-  data() {
-    return {
-      commentText: "",
-      shouldOpenModal: false,
-    };
-  },
   methods: {
     votePost() {
       PostService.upvotePost(this.post.id);
-    },
-    showModal() {
-      this.shouldOpenModal = true;
-    },
-    closeModal() {
-      this.shouldOpenModal = false;
-    },
-    submitComment() {
-      PostService.submitComment(this.post.id, this.commentText);
-      this.commentText = "";
-      this.closeModal();
     },
   },
 };
