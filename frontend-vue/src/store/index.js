@@ -62,9 +62,9 @@ export default new Vuex.Store({
 
     },
     logout(state) {
-      state.auth_token = null;
-      state.user_id = null;
-      state.user_type = null;
+      state.auth_token = "";
+      state.user_id = "";
+      state.user_type = "";
 
       delete axios.defaults.headers.common["Authorization"];
 
