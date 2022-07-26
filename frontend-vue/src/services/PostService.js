@@ -34,10 +34,7 @@ export default {
     return Api()
       .get(`/api/posts/${postId}`)
       .then(
-        (response) => {
-          console.log(response);
-          return response.data;
-        },
+        (response) => response.data,
         (error) => Promise.reject(error)
       )
       .catch((error) => Promise.reject(error));
