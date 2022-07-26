@@ -78,7 +78,7 @@ export default {
         try {
           const { data: token } = await UserService.login(this.email, this.password);
           console.log(token);
-          
+          this.$store.commit("login", token);
           return router.push('/posts');
 
         } catch (error) {
