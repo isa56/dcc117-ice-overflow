@@ -7,6 +7,7 @@
         v-for="comment in comments"
         :key="comment.id"
         :comment="comment"
+        @set-best-comment="chooseBestComment"
       />
     </div>
   </div>
@@ -26,6 +27,11 @@ export default {
       post: {},
       comments: [],
     };
+  },
+  methods: {
+    chooseBestComment(commentId) {
+      console.log(commentId);
+    },
   },
   created() {
     PostService.fetchOne(this.$route.params.id)
