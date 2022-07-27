@@ -19,19 +19,36 @@
 
     <div class="flex justify-between text-lg">
       <div class="items-center">
-        <span @click="$emit('votePost', post.id)">
-          <v-icon class="ml-3 cursor-pointer" color="#F2F7FB">mdi-thumb-up</v-icon>
-          {{ post.vote }}
+        <span @click="$emit('votePost', post.id)" id="votesNumberContainer">
+          <v-tooltip attach="#votesNumberContainer" top>
+            <template v-slot:activator="{ on, attrs }">
+              <span v-bind="attrs" v-on="on">
+                <v-icon class="ml-3 cursor-pointer" color="#F2F7FB"
+                  >mdi-thumb-up</v-icon
+                >
+                {{ post.vote }}
+              </span>
+            </template>
+            <span>Curtir</span>
+          </v-tooltip>
         </span>
-        <span>
-          <v-icon class="ml-3" color="#F2F7FB">mdi-forum</v-icon>
-          {{ post.comentarios }}
+        <span id="commentNumberContainer">
+          <v-tooltip attach="#commentNumberContainer" top>
+            <template v-slot:activator="{ on, attrs }">
+              <span v-bind="attrs" v-on="on">
+                <v-icon class="ml-3" color="#F2F7FB">mdi-forum</v-icon>
+                {{ post.comentarios }}
+              </span>
+            </template>
+            <span>Comentários</span>
+          </v-tooltip>
         </span>
       </div>
       <div>
         <button
           @click="$emit('showCommentModal')"
-          class="bg-primary text-background-dark font-bold p-2 rounded drop-shadow-md">
+          class="bg-primary text-background-dark font-bold p-2 rounded drop-shadow-md"
+        >
           Comentar
         </button>
       </div>

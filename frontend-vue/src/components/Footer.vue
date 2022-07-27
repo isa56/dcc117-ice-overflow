@@ -6,7 +6,14 @@
       Gonçalves e João Pedro Ferreira.
     </div>
     <a target="_blank" rel="noopener noreferrer" href="https://github.com/isa56/DCC117-2022.1-Trabalho-Mod-Sistemas" alt="Link para GitHub" class="no-underline">
-      <v-icon large>mdi-github</v-icon>
+      <span id="githubContainer">
+        <v-tooltip attach="#githubContainer" left>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon v-bind="attrs" v-on="on" large>mdi-github</v-icon>
+          </template>
+          <span>Veja o projeto no GitHub!</span>
+        </v-tooltip>
+      </span>
     </a>
   </footer>
 </template>
