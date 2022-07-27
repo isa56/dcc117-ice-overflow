@@ -32,7 +32,14 @@ class PostsController extends Controller
         $request->titulo ? $query->where('title', 'LIKE', "%{$request->titulo}%") : '';
         $request->reactions ? $query->orderBy('vote', 'desc') : '';
         $request->recent ? $query->orderBy('created_at', 'desc') : '';
-        return $query->paginate(2);
+        $posts_authors = [];
+        foreach($query->get() as $post) {
+            $posts_authors[] = $post->user->name;
+        }
+        return response()->json([
+            'posts' => $query->paginate(2),
+            'posts_authors' => $posts_authors,
+        ], 200);
     }
 
     /**
@@ -57,6 +64,7 @@ class PostsController extends Controller
     public function show(int $id)
     {
         $post = Post::find($id);
+        $post->user_name = $post->user->name;
         if($post) {
             $postComment = PostsComment::wherePost_id($post->id)->get();
             return response()->json(['post' => $post, 'postComments' => $postComment], 202);
