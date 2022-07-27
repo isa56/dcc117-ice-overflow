@@ -25,6 +25,7 @@
 <script>
 import PostProfile from "@/components/PostProfile.vue";
 import UserService from "@/services/UserService";
+import PostService from "@/services/PostService";
 import { toastShow } from "@/utils/vtoast";
 
 export default {
@@ -32,10 +33,10 @@ export default {
   name: "ProfileView",
   data() {
     return {
+      userId: null,
       name: 'Joãozinho da Silva',
       userName: '@Joaozinho',
       description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",  
-
       posts:[
           {
             title: "Lorem Ipsum",
@@ -58,10 +59,19 @@ export default {
   async created(userId) {
         try {
             const { data: user } = await UserService.fetchUserInfo(userId);
+            this.userId = user.id;
             this.name = user.name;
             this.userName = user.userName;
             this.description = user.description;
-            this.posts = user.posts;
+
+            const { data: posts } = await PostService.fetchAll();
+
+            for(var i = 0; i < posts.length; i++){
+              if(user.id == posts[i].user_id){
+                this.posts.push(posts[i]);
+              }
+            }
+            
         } catch (error) {
             toastShow(this.$root.vtoast, error.data);
         }
