@@ -45,8 +45,9 @@
           :key="comment.id"
           :comment="comment"
           :has-best-comment="post.finished"
+          :post-author="post.user_id"
           @set-best-comment="chooseBestComment"
-          @delete-comment="deleteComment"
+          @deleteComment="deleteComment"
         />
       </div>
     </div>
@@ -76,13 +77,15 @@ export default {
     };
   },
   methods: {
-    // chooseBestComment(commentId) {},
+    chooseBestComment(commentId) {
+      console.log(commentId);
+    },
     deleteComment(commentId) {
       PostService.deleteComment(commentId)
         .then(() => {
           toastShow(
             this.$root.vtoast,
-            "Comentário criado com sucesso!",
+            "Comentário deletado com sucesso!",
             "success"
           );
           this.fetchPost();

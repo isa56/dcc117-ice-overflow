@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="flex justify-end">
-      <div v-if="!hasBestComment" class="mr-4">
+      <div v-if="(!hasBestComment) && (postAuthor.user_id === $store.getters.getUserId)" class="mr-4">
         <v-icon @click="$emit('set-best-comment', comment.id)" :color="comment.best_answer === 1 ? 'rgb(251 146 60)' : '#F2F7FB'"
           >mdi-star</v-icon
         >
@@ -26,7 +26,7 @@
 <script>
 export default {
   name: "PostComment",
-  props: ["comment", "hasBestComment"],
+  props: ["comment", "hasBestComment", "postAuthor"],
 };
 </script>
 
