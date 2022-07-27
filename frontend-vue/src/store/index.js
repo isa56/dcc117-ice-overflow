@@ -10,7 +10,7 @@ export default new Vuex.Store({
   state: {
     auth_token: localStorage.getItem("auth_token") || "",
     user_id: localStorage.getItem("user_id") || "",
-    user_type: localStorage.getItem("user_type") || "",
+    is_admin: localStorage.getItem("is_admin") || "",
   },
   actions: {
     async login({ commit }, userData) {
@@ -44,19 +44,19 @@ export default new Vuex.Store({
       state.user_id = data;
     },
     setUserType(state, data) {
-      state.user_type = data;
+      state.is_admin = data;
     },
     login(state, data) {
-      state.auth_token = data;
-      // state.user_id = data.user_id;
-      // state.user_type = data.user_type;
+      state.auth_token = data.token;
+      state.user_id = data.id;
+      state.is_admin = data.admin ? true : false;
 
       localStorage.setItem("auth_token", data);
-      // localStorage.setItem("user_id", data.user_id);
-      // localStorage.setItem("user_type", data.user_type);
+      localStorage.setItem("user_id", data.user_id);
+      localStorage.setItem("is_admin", data.is_admin);
 
-      // Vue.prototype.$user_id = data.user_id;
-      // Vue.prototype.$user_type = data.user_type;
+      Vue.prototype.$user_id = data.user_id;
+      Vue.prototype.$is_admin = data.is_admin;
 
       axios.defaults.headers.common["Authorization"] = "Bearer " + state.auth_token;
 
@@ -64,16 +64,16 @@ export default new Vuex.Store({
     logout(state) {
       state.auth_token = "";
       state.user_id = "";
-      state.user_type = "";
+      state.is_admin = "";
 
       delete axios.defaults.headers.common["Authorization"];
 
       localStorage.removeItem("auth_token");
       localStorage.removeItem("user_id");
-      localStorage.removeItem("user_type");
+      localStorage.removeItem("is_admin");
 
       Vue.prototype.$user_id = null;
-      Vue.prototype.$user_type = null;
+      Vue.prototype.$is_admin = null;
 
       localStorage.clear();
     },
@@ -81,9 +81,8 @@ export default new Vuex.Store({
   getters: {
     getAuthToken: (state) => state.auth_token,
     getUserId: (state) => state.user_id,
-    getUserType: (state) => state.user_type,
 
     isAuthenticated: (state) => !!state.auth_token,
-    isModerator: (state) => state.user_type === "MODERATOR",
+    isModerator: (state) => state.is_admin,
   },
 });
