@@ -6,7 +6,7 @@
               <div class="user-desc-style flex mb-7" >
                   <img class="img-style rounded-full w-20" src="https://img.freepik.com/vetores-premium/perfil-de-avatar-de-homem-no-icone-redondo_24640-14044.jpg" alt="fotoPerfil">
                   <h1 class="name-style ml-14 text-4xl text-primary font-bold"> {{ name }} </h1>
-                  <h3 class="user-style ml-96 text-2xl text-primary font-normal"> {{ user }} </h3>                  
+                  <h3 class="user-style ml-96 text-2xl text-primary font-normal"> {{ userName }} </h3>                  
               </div>
             <span class="text-base text-white">{{ description }}</span>
         </div>
@@ -17,13 +17,15 @@
     <PostProfile 
     v-for="post in posts"
     :post="post"
-    :key="post" />
+    :key="post.id" />
 
   </div>
 </template>
 
 <script>
 import PostProfile from "@/components/PostProfile.vue";
+import UserService from "@/services/UserService";
+import { toastShow } from "@/utils/vtoast";
 
 export default {
   components: { PostProfile },
@@ -31,7 +33,7 @@ export default {
   data() {
     return {
       name: 'Joãozinho da Silva',
-      user: '@Joaozinho',
+      userName: '@Joaozinho',
       description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",  
 
       posts:[
@@ -52,6 +54,19 @@ export default {
 
     };
   },
+
+  async created(userId) {
+        try {
+            const { data: user } = await UserService.fetchUserInfo(userId);
+            this.name = user.name;
+            this.userName = user.userName;
+            this.description = user.description;
+            this.posts = user.posts;
+        } catch (error) {
+            toastShow(this.$root.vtoast, error.data);
+        }
+    },
+
 };
 </script>
 

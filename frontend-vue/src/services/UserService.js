@@ -21,7 +21,10 @@ export default {
     console.log(name, username, email, password);
   },
 
-  fetchUserInfo(userId) {
-    console.log(userId);
+  async fetchUserInfo(userId) {
+    const response = await Api().get(`/api/users/${userId}`);
+    return response.data;
   },
+
+
 };
