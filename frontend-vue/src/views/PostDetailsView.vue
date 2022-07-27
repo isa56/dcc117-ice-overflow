@@ -93,6 +93,21 @@ export default {
         })
         .catch((error) => toastShow(this.$root.vtoast, error));
     },
+    async deletePost(postId) {
+      try {
+          const { data: posts } = await PostService.deletePost(postId);
+          this.posts = posts;
+          toastShow(
+            this.$root.vtoast,
+            "Post deletado com sucesso!",
+            "#4CAF",
+            true
+          );
+          this.fetchPost();
+        }catch(error)  {
+          toastShow(this.$root.vtoast, error);
+        }
+    },
     showModal() {
       this.shouldOpenModal = true;
     },

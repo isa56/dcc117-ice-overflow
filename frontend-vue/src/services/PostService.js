@@ -50,7 +50,10 @@ export default {
       .catch((error) => Promise.reject(error.message));
   },
 
-  deletePost() {},
+  async deletePost(postId) {
+    const response = await Api().delete(`/api/posts/${postId}`);
+    return response.data;
+  },
 
   search() {},
 
