@@ -61,7 +61,7 @@ import PostDetails from "@/components/PostDetails.vue";
 import PostComment from "@/components/PostComment.vue";
 import PostService from "@/services/PostService";
 import Loading from "@/components/Loading";
-import { toastShow } from "../utils/vtoast";
+import { toastShow } from "@/utils/vtoast";
 
 export default {
   components: { PostDetails, PostComment, Loading },
