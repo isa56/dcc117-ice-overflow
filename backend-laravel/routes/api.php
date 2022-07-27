@@ -25,7 +25,7 @@ use App\Http\Controllers\LoginController;
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::patch('/posts/{id}', [PostsController::class, 'vote']);
-    Route::apiResource('/posts', PostsController::class)->except('index');
+    Route::apiResource('/posts', PostsController::class);
 
     Route::apiResource('/users', UsersController::class);
 
