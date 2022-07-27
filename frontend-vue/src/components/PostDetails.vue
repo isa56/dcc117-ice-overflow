@@ -5,7 +5,7 @@
   >
     <div class="mb-8">
       <div class="flex mb-2 items-center justify-start">
-        <h4 class="text-base text-white mr-4">Autor {{ post.authorName }}:</h4>
+        <h4 class="text-base text-white mr-4">Autor {{ post.user.name }}:</h4>
         <h2 class="text-2xl text-primary font-bold">{{ post.title }}</h2>
       </div>
       <div class="flex">
@@ -65,5 +65,3 @@ export default {
   components: { ThemeSpan },
 };
 </script>
-
-<style scoped></style>
