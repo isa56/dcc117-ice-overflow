@@ -24,14 +24,14 @@ use App\Http\Controllers\LoginController;
 
 Route::middleware('auth:sanctum')->group(function () {
 
-    Route::patch('posts/{id}', [PostsController::class, 'vote']);
-    Route::apiResource('posts', PostsController::class)->except('index');
+    Route::patch('/posts/{id}', [PostsController::class, 'vote']);
+    Route::apiResource('/posts', PostsController::class)->except('index');
 
-    Route::apiResource('users', UsersController::class);
+    Route::apiResource('/users', UsersController::class);
 
-    Route::patch('comments/{id}', [CommentsController::class, 'vote']);
-    Route::patch('comments/{id}/bestAnswer', [CommentsController::class, 'bestAnswer']);
-    Route::apiResource('comments', CommentsController::class);
+    Route::patch('/comments/{id}', [CommentsController::class, 'vote']);
+    Route::patch('/comments/{id}/bestAnswer', [CommentsController::class, 'bestAnswer']);
+    Route::apiResource('/comments', CommentsController::class);
 
     Route::post('/logout', [LoginController::class, 'logout']);
 });
@@ -41,7 +41,11 @@ Rotas que estão dentro do middleware mas que você não quer que seja verificad
 podem ser colocadas após ele
 */
 
-Route::get('posts', [PostsController::class, 'index']);
+Route::get('/subjects', function () {
+    return response()->json(App\Models\Subject::all(), 200);
+});
+
+Route::get('/posts', [PostsController::class, 'index']);
 
 Route::post('/users', [UsersController::class, 'store']);
 
