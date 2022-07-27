@@ -11,7 +11,8 @@
         <form class="bg-background-dark p-8" @submit.prevent="submitComment">
           <div class="flex justify-end">
             <v-icon class="cursor-pointer" @click="closeModal" color="#5BA39D"
-              >mdi-close</v-icon>
+              >mdi-close</v-icon
+            >
           </div>
           <h1 class="font-bold text-xl pb-1">Comentar:</h1>
           <v-textarea
@@ -75,11 +76,18 @@ export default {
     };
   },
   methods: {
-    chooseBestComment(commentId) {
-      console.log(commentId);
-    },
+    // chooseBestComment(commentId) {},
     deleteComment(commentId) {
-      console.log(commentId);
+      PostService.deleteComment(commentId)
+        .then(() => {
+          toastShow(
+            this.$root.vtoast,
+            "Comentário criado com sucesso!",
+            "success"
+          );
+          this.fetchPost();
+        })
+        .catch((error) => toastShow(this.$root.vtoast, error));
     },
     showModal() {
       this.shouldOpenModal = true;
