@@ -19,8 +19,11 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        //$comments = PostsComment::all();
-        return PostsComment::all();
+        $comments = PostsComment::all();
+        foreach($comments as $key => $comment) {
+            $comments[$key]->author_name = $comment->user()->get('name')[0]['name'];
+        }
+        return $comments;
     }
 
     /**
