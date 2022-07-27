@@ -51,9 +51,9 @@ export default new Vuex.Store({
       state.user_id = data.id;
       state.is_admin = data.admin ? true : false;
 
-      localStorage.setItem("auth_token", data);
-      localStorage.setItem("user_id", data.user_id);
-      localStorage.setItem("is_admin", data.is_admin);
+      localStorage.setItem("auth_token", data.token);
+      localStorage.setItem("user_id", data.id);
+      localStorage.setItem("is_admin", data.admin);
 
       Vue.prototype.$user_id = data.user_id;
       Vue.prototype.$is_admin = data.is_admin;
