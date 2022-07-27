@@ -25,7 +25,12 @@ export default {
   name: "NavBar",
   methods: {
     redirectToHome() {
-      this.$router.push({ name: "home" });
+      if (this.$store.getters.isAuthenticated) {
+        this.$router.push({ name: "posts" });
+      }
+      else {
+        this.$router.push({ name: "home" });
+      }
     },
     redirectToProfile() {
       if (this.$store.getters.isAuthenticated) {

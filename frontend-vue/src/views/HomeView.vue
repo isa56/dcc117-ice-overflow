@@ -10,7 +10,7 @@
             <p class="max-w-[15rem] text-center">Encontre as respostas para os seus problemas!</p>
           </div>
           <div class="flex flex-col items-center">
-            <router-link class="w-[14rem]" to="/login">
+            <router-link class="w-[14rem]" :to="$store.getters.isAuthenticated ? '/posts' : '/login'">
               <primarybutton content="Entrar"/>
             </router-link>
             <small class="text-center mt-1">
