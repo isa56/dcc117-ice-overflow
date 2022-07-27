@@ -16,16 +16,13 @@ export default new Vuex.Store({
   actions: {
     async login({ commit }, userData) {
       try {
-
         const user = await UserService.login({
           email: userData.email,
           password: userData.password,
         });
         commit("login", user);
-
       } catch (error) {
         toastShow(this.$root.vtoast, error.message);
-
       }
     },
   },
@@ -51,16 +48,12 @@ export default new Vuex.Store({
       Vue.prototype.$user_id = data.user_id;
       Vue.prototype.$is_admin = data.is_admin;
 
-      toastShow(
-        this.$root.vtoast,
-        "Usuário logado com sucesso!",
-        "#4CAF",
-        true
-      );
-      axios.defaults.headers.common["Authorization"] = "Bearer " + state.auth_token;
-
+      axios.defaults.headers.common["Authorization"] =
+        "Bearer " + state.auth_token;
     },
     logout(state) {
+      // UserService.logout()
+      //   .then(() => {
       state.auth_token = "";
       state.user_id = "";
       state.is_admin = "";
@@ -75,6 +68,8 @@ export default new Vuex.Store({
       Vue.prototype.$is_admin = null;
 
       localStorage.clear();
+      // })
+      // .catch((err) => Promise.reject(err));
     },
   },
   getters: {

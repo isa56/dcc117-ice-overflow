@@ -9,6 +9,14 @@ export default {
     });
   },
 
+  logout() {
+    Api().post("/logout").then(
+      (res) => res.data,
+      (err) => Promise.reject(err.message)
+    )
+    .catch((err) => Promise.reject(err.message));
+  },
+
   createAccount({ name, username, email, password }) {
     console.log(name, username, email, password);
   },

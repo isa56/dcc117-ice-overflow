@@ -13,8 +13,8 @@ Vue.config.productionTip = false;
 if (store.getters.isAuthenticated) {
   Vue.prototype.$auth_token = store.getters.getAuthToken;
   Vue.prototype.$user_id = store.getters.getUserId;
-  Vue.prototype.$user_email = store.getters.getUserEmail;
-  Vue.prototype.$user_type = store.getters.getUserType;
+  Vue.prototype.$is_authenticated = store.getters.isAuthenticated;
+  Vue.prototype.$is_moderator = store.getters.isModerator;
 
   axios.defaults.headers.common["Authorization"] =
     "Bearer " + store.getters.getAuthToken;

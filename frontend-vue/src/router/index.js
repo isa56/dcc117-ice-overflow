@@ -1,5 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "@/store";
+
 import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
 import CreateAccountView from "@/views/CreateAccountView.vue";
@@ -46,7 +48,8 @@ const routes = [
     name: "posts",
     component: PostsView,
   },
-  { // se a página não existe, redireciona para a home (deve ser o último)
+  {
+    // se a página não existe, redireciona para a home (deve ser o último)
     path: "/:pathMatch(.*)*",
     redirect: { name: "home" },
   },
@@ -56,6 +59,17 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (
+    !store.getters.isAuthenticated &&
+    !(to.name === "login" || to.name === "home" || to.name === "create-account")
+  ) {
+    next({ name: "login" });
+  } else {
+    next();
+  }
 });
 
 export default router;

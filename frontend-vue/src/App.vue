@@ -20,18 +20,6 @@ export default {
   },
   mounted() {
     this.$root["vtoast"] = this.$refs.vtoast;
-    this.$route.beforeEach((to, from, next) => {
-      if (
-        (to.name !== "login" ||
-          to.name !== "home" ||
-          to.name !== "create-account") &&
-        !this.$store.getters.isAuthenticated
-      ) {
-        next({ name: "login" });
-      } else {
-        next();
-      }
-    });
   },
 };
 </script>
