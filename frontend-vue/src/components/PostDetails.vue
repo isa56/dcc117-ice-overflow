@@ -1,41 +1,37 @@
 <template>
-  <div class="bg-background-dark my-10 pt-8 p-12 rounded-md">
+  <div
+    overlay-opacity="1"
+    class="bg-background-dark md:p-12 my-10 pt-8 p-2 rounded-md"
+  >
     <div class="mb-8">
       <div class="flex mb-2 items-center justify-start">
         <h4 class="text-base text-white mr-4">Autor {{ post.authorName }}:</h4>
         <h2 class="text-2xl text-primary font-bold">{{ post.title }}</h2>
       </div>
       <div class="flex">
-        <theme-span
-          class="mr-2"
-          v-for="theme in post.themes"
-          :key="theme.id"
-          :theme="theme.name"
-          :color="theme.color"
-        />
+        <theme-span class="mr-2" :theme="post.materia" color="#5BA39D" />
       </div>
     </div>
 
     <div class="my-8">
-      <p>{{ post.text }}</p>
+      <p>{{ post.body }}</p>
     </div>
 
     <div class="flex justify-between text-lg">
       <div class="items-center">
-        <span @click="votePost">
-          <v-icon class="ml-3 cursor-pointer" color="#F2F7FB">thumb_up</v-icon>
-          {{ post.upvotes }}
+        <span @click="$emit('votePost', post.id)">
+          <v-icon class="ml-3 cursor-pointer" color="#F2F7FB">mdi-thumb-up</v-icon>
+          {{ post.vote }}
         </span>
         <span>
-          <v-icon class="ml-3" color="#F2F7FB">forum</v-icon>
-          {{ post.comments.length }}
+          <v-icon class="ml-3" color="#F2F7FB">mdi-forum</v-icon>
+          {{ post.comentarios }}
         </span>
       </div>
       <div>
         <button
-          @click="openCommentModal"
-          class="bg-primary text-background-dark font-extrabold p-2 rounded drop-shadow-md"
-        >
+          @click="$emit('showCommentModal')"
+          class="bg-primary text-background-dark font-bold p-2 rounded drop-shadow-md">
           Comentar
         </button>
       </div>
@@ -50,13 +46,6 @@ export default {
   name: "PostDetails",
   props: ["post"],
   components: { ThemeSpan },
-  data() {
-    return {};
-  },
-  methods: {
-    votePost() {},
-    openCommentModal() {},
-  },
 };
 </script>
 

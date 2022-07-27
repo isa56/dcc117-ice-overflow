@@ -5,6 +5,5 @@ export const configApi = {
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    "X-Requested-With": "XMLHttpRequest",
   },
 };

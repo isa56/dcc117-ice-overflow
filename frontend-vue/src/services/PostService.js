@@ -14,39 +14,15 @@ export default {
       formData.append("body", post.text);
     }
 
-    if (post.hasOwnProperty("archive")) {
-      formData.append("file", post.archive);
-    }
-
     formData.append("user_id", userId);
 
     return api
       .post("/api/posts", formData)
       .then(
-        (response) => {
-          return response.data;
-        },
-        (error) => {
-          if (error.message) {
-            this.$root.vtoast.show({
-              color: "danger",
-              message: error.message,
-              timeout: 5000,
-            });
-          }
-          return Promise.reject(error.message);
-        }
+        (response) => response.data,
+        (error) => Promise.reject(error.message)
       )
-      .catch((error) => {
-        if (error.message) {
-          this.$root.vtoast.show({
-            color: "danger",
-            message: error.message,
-            timeout: 5000,
-          });
-        }
-        return Promise.reject(error.message);
-      });
+      .catch((error) => Promise.reject(error.message));
   },
 
   async fetchAll() {
@@ -59,27 +35,9 @@ export default {
       .get(`/api/posts/${postId}`)
       .then(
         (response) => response.data,
-        (error) => {
-          if (error.message) {
-            this.$root.vtoast.show({
-              color: "danger",
-              message: error.message,
-              timeout: 5000,
-            });
-          }
-          return Promise.reject(error.message);
-        }
+        (error) => Promise.reject(error)
       )
-      .catch((error) => {
-        if (error.message) {
-          this.$root.vtoast.show({
-            color: "danger",
-            message: error.message,
-            timeout: 5000,
-          });
-        }
-        return Promise.reject(error.message);
-      });
+      .catch((error) => Promise.reject(error));
   },
 
   upvotePost(postId) {
@@ -87,30 +45,38 @@ export default {
       .patch(`/api/posts/${postId}`)
       .then(
         (response) => response.data,
-        (error) => {
-          if (error.message) {
-            this.$root.vtoast.show({
-              color: "danger",
-              message: error.message,
-              timeout: 5000,
-            });
-          }
-          return Promise.reject(error.message);
-        }
+        (error) => Promise.reject(error.message)
       )
-      .catch((error) => {
-        if (error.message) {
-          this.$root.vtoast.show({
-            color: "danger",
-            message: error.message,
-            timeout: 5000,
-          });
-        }
-        return Promise.reject(error.message);
-      });
+      .catch((error) => Promise.reject(error.message));
   },
 
-  delete() {},
+  deletePost() {},
 
   search() {},
+
+  submitComment(userId, postId, comment) {
+    return Api()
+      .post(`/api/comments`, {
+        body: comment,
+        post_id: postId,
+        user_id: userId,
+      })
+      .then(
+        (response) => response.data,
+        (error) => Promise.reject(error.message)
+      )
+      .catch((error) => Promise.reject(error.message));
+  },
+
+  deleteComment(commentId) {
+    return Api()
+      .delete(`/api/comments/${commentId}`)
+      .then(
+        (res) => res.data,
+        (err) => Promise.reject(err.message)
+      )
+      .catch((err) => Promise.reject(err.message));
+  },
+
+  // chooseComment(commentId) {}
 };
