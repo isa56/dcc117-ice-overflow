@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 
 import UserService from "@/services/UserService";
+import { toastShow } from "@/utils/vtoast";
 
 Vue.use(Vuex);
 
@@ -23,15 +24,7 @@ export default new Vuex.Store({
         commit("login", user);
 
       } catch (error) {
-
-        console.log(error);
-        this.$root.vtoast.show({
-          color: "danger",
-          message: error.message
-            ? error.message
-            : "Ocorreu um erro ao acessar o servidor.",
-          timeout: 5000,
-        });
+        toastShow(this.$root.vtoast, error.message);
 
       }
     },
@@ -58,6 +51,12 @@ export default new Vuex.Store({
       Vue.prototype.$user_id = data.user_id;
       Vue.prototype.$is_admin = data.is_admin;
 
+      toastShow(
+        this.$root.vtoast,
+        "Usuário logado com sucesso!",
+        "#4CAF",
+        true
+      );
       axios.defaults.headers.common["Authorization"] = "Bearer " + state.auth_token;
 
     },

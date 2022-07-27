@@ -86,7 +86,8 @@ export default {
           toastShow(
             this.$root.vtoast,
             "Comentário deletado com sucesso!",
-            "success"
+            "#4CAF",
+            true
           );
           this.fetchPost();
         })
@@ -109,7 +110,8 @@ export default {
           toastShow(
             this.$root.vtoast,
             "Comentário criado com sucesso!",
-            "success"
+            "#4CAF",
+            true
           );
           this.fetchPost();
         })

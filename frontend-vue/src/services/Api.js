@@ -29,8 +29,6 @@ export default () => {
   api.interceptors.response.use(
     (response) => response,
     (error) => {
-      console.log(error);
-
       throw new Error(error);
     }
   );

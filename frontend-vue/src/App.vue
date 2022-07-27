@@ -27,8 +27,6 @@ export default {
           to.name !== "create-account") &&
         !this.$store.getters.isAuthenticated
       ) {
-        console.log("redirecionando...");
-        // toastShow(this.$root.vtoast, "Para acessar esse local você deve estar logado!");
         next({ name: "login" });
       } else {
         next();
