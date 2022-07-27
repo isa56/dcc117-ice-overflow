@@ -14,7 +14,7 @@
 
                 <h1 class="text-center text-xl my-10 text-white">FILTRO</h1>
                 <div class="mx-5">
-                    <form @submit.prevent="filter">
+                    <form @submit.prevent="fetchPosts">
                         <input 
                             id="search-title"
                             class="rounded my-3 w-full px-3 py-2 bg-white text-background-dark text-center"
@@ -95,6 +95,13 @@
                     />
                 </div>
                 <h1 class="text-center text-white text-2xl mt-12" v-else>Nenhuma pergunta encontrada :(</h1>
+            
+                <v-pagination
+                    v-model="page"
+                    class="my-4"
+                    :length="15"
+                    :total-visible="7"
+                ></v-pagination>
             </main>
         </div>
     </div>
@@ -120,7 +127,8 @@ export default {
             selectedSubjectFilter: null,
             postTitleFilter: null,
             highlightsFilter: false,
-            recentFilter: false
+            recentFilter: false,
+            page: 1
         };
     },
     methods: {
@@ -132,19 +140,26 @@ export default {
             menuIcon.classList.toggle("hidden");
             closeIcon.classList.toggle("hidden");
         },
-        async filter() {
+        async fetchPosts() {
             try {
                 const { data: posts } = await PostService.fetchAll(
                     this.postTitleFilter,
                     this.selectedSubjectFilter,
                     this.highlightsFilter,
-                    this.recentFilter
+                    this.recentFilter,
+                    this.page
                 );
 
                 this.posts = posts;
             } catch (error) {
                 toastShow(this.$root.vtoast, error.data);
             }
+        }
+    },
+    watch: {
+        page(oldPage, newPage) {
+            console.log(oldPage);
+            console.log(newPage);
         }
     },
     async created() {
@@ -205,5 +220,9 @@ export default {
 #sidebar .checkbox-container input:checked ~ label {
     color: #F2F7FB;
     font-weight: bold;
+}
+
+.theme--light.v-pagination .v-pagination__item--active.primary {
+    background-color: #6BBBB5 !important;
 }
 </style>
