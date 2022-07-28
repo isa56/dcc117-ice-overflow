@@ -33,8 +33,8 @@ class PostsController extends Controller
         }
 
         $request->titulo ? $query->where('title', 'LIKE', "%{$request->titulo}%") : '';
-        $request->reactions ? $query->orderBy('vote', 'desc') : '';
-        $request->recent ? $query->orderBy('created_at', 'desc') : '';
+        $request->reactions === 'true' ? $query->orderBy('vote', 'desc') : '';
+        $request->recent === 'true' ? $query->orderBy('created_at', 'desc') : '';
 
         $posts = $query->paginate(5);
 
