@@ -36,7 +36,7 @@ class PostsController extends Controller
         $request->reactions ? $query->orderBy('vote', 'desc') : '';
         $request->recent ? $query->orderBy('created_at', 'desc') : '';
 
-        $posts = $query->paginate(3);
+        $posts = $query->paginate(5);
 
         foreach ($posts as $post) {
             $post['author'] = $post->user()->get('name')[0]['name'];
