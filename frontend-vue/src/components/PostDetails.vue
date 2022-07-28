@@ -5,7 +5,7 @@
   >
     <div class="mb-8">
       <div class="flex mb-2 items-center justify-start">
-        <h4 class="text-base text-white mr-4">Autor {{ post.authorName }}:</h4>
+        <h4 class="text-base text-white mr-4">Autor {{ post.user.name }}:</h4>
         <h2 class="text-2xl text-primary font-bold">{{ post.title }}</h2>
       </div>
       <div class="flex">
@@ -19,19 +19,36 @@
 
     <div class="flex justify-between text-lg">
       <div class="items-center">
-        <span @click="$emit('votePost', post.id)">
-          <v-icon class="ml-3 cursor-pointer" color="#F2F7FB">mdi-thumb-up</v-icon>
-          {{ post.vote }}
+        <span @click="$emit('votePost', post.id)" id="votesNumberContainer">
+          <v-tooltip attach="#votesNumberContainer" top>
+            <template v-slot:activator="{ on, attrs }">
+              <span v-bind="attrs" v-on="on">
+                <v-icon class="ml-3 cursor-pointer" color="#F2F7FB"
+                  >mdi-thumb-up</v-icon
+                >
+                {{ post.vote }}
+              </span>
+            </template>
+            <span>Curtir</span>
+          </v-tooltip>
         </span>
-        <span>
-          <v-icon class="ml-3" color="#F2F7FB">mdi-forum</v-icon>
-          {{ post.comentarios }}
+        <span id="commentNumberContainer">
+          <v-tooltip attach="#commentNumberContainer" top>
+            <template v-slot:activator="{ on, attrs }">
+              <span v-bind="attrs" v-on="on">
+                <v-icon class="ml-3" color="#F2F7FB">mdi-forum</v-icon>
+                {{ post.comentarios }}
+              </span>
+            </template>
+            <span>Comentários</span>
+          </v-tooltip>
         </span>
       </div>
       <div>
         <button
           @click="$emit('showCommentModal')"
-          class="bg-primary text-background-dark font-bold p-2 rounded drop-shadow-md">
+          class="bg-primary text-background-dark font-bold p-2 rounded drop-shadow-md"
+        >
           Comentar
         </button>
       </div>
@@ -48,5 +65,3 @@ export default {
   components: { ThemeSpan },
 };
 </script>
-
-<style scoped></style>
