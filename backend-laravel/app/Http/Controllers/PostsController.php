@@ -23,16 +23,26 @@ class PostsController extends Controller
     public function index(Request $request)
     {
         $query = Post::query();
-        if($request->materia) {
-            if(!Subject::whereSubject($request->materia)->get()) {
+
+        if ($request->materia) {
+            if (!Subject::whereSubject($request->materia)->get()) {
                 return response()->json(['message' => 'Materia invalida'], 401);
             }
+
             $query->whereMateria($request->materia);
         }
+
         $request->titulo ? $query->where('title', 'LIKE', "%{$request->titulo}%") : '';
-        $request->reactions === "true" ? $query->orderBy('vote', 'desc') : '';
-        $request->recent === "true" ? $query->orderBy('created_at', 'desc') : '';
-        return $query->paginate(10);
+        $request->reactions ? $query->orderBy('vote', 'desc') : '';
+        $request->recent ? $query->orderBy('created_at', 'desc') : '';
+
+        $posts = $query->paginate(3);
+
+        foreach ($posts as $post) {
+            $post['author'] = $post->user()->get('name')[0]['name'];
+        }
+
+        return response()->json($posts, 200);
     }
 
     /**
