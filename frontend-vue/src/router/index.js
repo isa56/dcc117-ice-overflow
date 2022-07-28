@@ -39,7 +39,7 @@ const routes = [
     component: PostDetailsView,
   },
   {
-    path: "/perfil",
+    path: "/perfil/:id",
     name: "perfil",
     component: ProfileView,
   },
