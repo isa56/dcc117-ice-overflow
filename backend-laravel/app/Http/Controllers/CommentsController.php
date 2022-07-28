@@ -19,7 +19,11 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        return PostsComment::all();
+        $comments = PostsComment::all();
+        foreach($comments as $key => $comment) {
+            $comments[$key]->author_name = $comment->user()->get('name')[$key]['name'];
+        }
+        return $comments;
     }
 
     /**
@@ -32,6 +36,9 @@ class CommentsController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
+        $post = Post::find($data['post_id']);
+        $post->comentarios++;
+        $post->save();
         return response()->json(PostsComment::create($data), 202);
     }
 
@@ -75,6 +82,9 @@ class CommentsController extends Controller
     {
         $comment = PostsComment::find($id);
         if($comment && Auth::user()->id == $comment->user_id) {
+            $post = Post::find($comment->post_id);
+            $post->comentarios++;
+            $post->save();
             $comment->destroy($id);
             return response()->json(['message' => 'Comentario deletado com sucesso'], 202);
         }

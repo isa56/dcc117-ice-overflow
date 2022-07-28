@@ -5,6 +5,7 @@
     v-model="showSnackbar"
     top
     right
+    :outlined="outlined"
     >{{ message }}</v-snackbar
   >
 </template>
@@ -18,6 +19,7 @@ export default {
       message: "",
       color: "success",
       timeout: 3000,
+      outlined: false
     };
   },
   methods: {
@@ -25,6 +27,7 @@ export default {
       this.message = data.message || "Erro";
       this.color = data.color || "success";
       this.timer = data.timer || 3000;
+      this.outlined = data.outlined || false;
       this.showSnackbar = true;
     },
   },

@@ -29,7 +29,11 @@ class LoginController extends Controller
         $user = Auth::user();
         $user->tokens()->delete(); // revoga os tokens antigos do usuario
         $token = $user->createToken('token');
-        return response()->json($token->plainTextToken);
+        return response()->json([
+            'token' => $token->plainTextToken,
+            'admin' => $user->admin,
+            'id' => $user->id,
+        ]);
     }
 
     public function logout()

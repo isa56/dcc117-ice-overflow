@@ -67,6 +67,7 @@ class PostsController extends Controller
     public function show(int $id)
     {
         $post = Post::find($id);
+        $post->user_name = $post->user->name;
         if($post) {
             $postComment = PostsComment::wherePost_id($post->id)->get();
             return response()->json(['post' => $post, 'postComments' => $postComment], 202);

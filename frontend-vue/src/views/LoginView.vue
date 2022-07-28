@@ -49,8 +49,7 @@
 
 <script>
 import UserService from "@/services/UserService";
-import { toastShow } from '../utils/vtoast';
-import router from "@/router";
+import { toastShow } from "../utils/vtoast";
 
 export default {
   name: "LoginView",
@@ -76,11 +75,14 @@ export default {
         this.errorMessage = "";
 
         try {
-          const { data: token } = await UserService.login(this.email, this.password);
+          const { data: token } = await UserService.login(
+            this.email,
+            this.password
+          );
           console.log(token);
-          
-          return router.push('/posts');
+          this.$store.commit("login", token);
 
+          return this.$router.push("/posts");
         } catch (error) {
           toastShow(this.$root.vtoast, error.data);
         }

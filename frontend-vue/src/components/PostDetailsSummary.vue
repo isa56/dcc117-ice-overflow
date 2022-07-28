@@ -21,11 +21,11 @@
     <div class="flex justify-between text-md">
       <div class="items-center justify-start">
         <div class="mb-4">
-          <v-icon color="#F2F7FB">thumb_up</v-icon>
+          <v-icon color="#F2F7FB">mdi-thumb-up</v-icon>
           {{ post.vote }} Reações
         </div>
         <div>
-          <v-icon color="#F2F7FB">forum</v-icon>
+          <v-icon color="#F2F7FB">mdi-forum</v-icon>
           {{ post.comentarios }} Comentários
         </div>
       </div>
