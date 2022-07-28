@@ -29,7 +29,7 @@ export default () => {
   api.interceptors.response.use(
     (response) => response,
     (error) => {
-      throw new Error(error);
+      throw new Error(error.response.data);
     }
   );
 
