@@ -47,7 +47,12 @@ O Front End está disponível para acesso em [ice-overflow.netlify.app](ice-over
 2. Entre na pasta _backend-laravel_: `cd backend-laravel`;
 3. Atualize as dependências: `composer update`;
 4. Instale as dependências necessárias: `composer install`;
-5. Rode o comando: `php artisan serve`;
+5. Instale o npm com npm install e depois npm run dev;
+6. Crie uma key com php artisan key:generate. A key servira para as hashes;
+7. Crie um banco de dados com o nome de laravel;
+8. Rode o comendo php artisan migrate --seed para rodar as migrations e semear o banco;
+9. Rode o comando php artisan storage:link para linkar a pasta de storage com a pasta public;
+5. Rode o comando: `php artisan serve` para iniciar o servidor;
 
 ## Objetivos de Software
  O ICE Overflow é um sistema desenvolvido para criar um ambiente virtual onde é possível a comunicação entre os estudantes, monitores e professores do Instituto de Ciências Exatas, da Universidade Federal de Juiz de Fora. Isso ocorre através de perguntas e respostas em um sistema de fórum baseado no Stack Overflow, conhecido software da área de computação. Nessa plataforma, qualquer usuário cadastrado pode publicar uma dúvida para ser respondida pelos outros membros do site. As melhores respostas são votadas pela comunidade e exibidas com destaque na página da questão.
