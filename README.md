@@ -49,5 +49,16 @@ O Front End está disponível para acesso em [ice-overflow.netlify.app](ice-over
 4. Instale as dependências necessárias: `composer install`;
 5. Rode o comando: `php artisan serve`;
 
-## Como Utilizar o Sistema
+## Objetivos de Software
+ O ICE Overflow é um sistema desenvolvido para criar um ambiente virtual onde é possível a comunicação entre os estudantes, monitores e professores do Instituto de Ciências Exatas, da Universidade Federal de Juiz de Fora. Isso ocorre através de perguntas e respostas em um sistema de fórum baseado no Stack Overflow, conhecido software da área de computação. Nessa plataforma, qualquer usuário cadastrado pode publicar uma dúvida para ser respondida pelos outros membros do site. As melhores respostas são votadas pela comunidade e exibidas com destaque na página da questão.
+
+ ## Como Utilizar o Sistema
+Na página inicial do fórum é possível realizar login/cadastro no site ou apenas vizualizar os posts que já existem, existe a opção também de pesquisar por posts ou filtrar os posts por disciplinas. É necessário criar um conta de usuário no sistema para poder realizar as funcionalidades de interação no fórum. 
+Para o cadastro de usuário, será aberta uma página de cadastro com um formulário onde é necessário informar o nome, o nome de usuário, email e uma senha. Cada usuário possui uma página de perfil onde são exibidos seu nome, descrição e os posts que ele já criou no fórum. Um usuário pode criar posts no fórum, realizar comentários nos posts, marcar como melhor resposta um comentário que foi realizado em seu post e upvotes em comentários. Além disso, o usuário também tem a opção de apagar seus próprios posts e seus próprios comentários apenas. 
+Para realizar login no fórum, é aberta uma página de login onde é solicitado o email e a senha do usuário.
+Para a criação de um post é necessário que o usuário logado acesse a página de criar posts e digite o título e a descrição do post, podendo também selecionar em qual disciplina esse post se enquadra. 
+Para criar comentários ou realizar upvote é necessário que o usuário logado entre em um post específico e crie o comentário através de um modal existente nessa página e, para o upvote, basta clicar no ícone de curtida. 
+Para realizar a remoção de post basta que o usuário logado entre em seu próprio post que deseja apagar e clique no ícone de lixeira. 
+Para realizar a remoção de comentário basta que o usuário logado entre no post em que ele criou este comentário e clique no ícone de lixeira.
+No sistema também existe um usuário administrador que fará a moderação do fórum, este possui a permissão de apagar qualquer post e qualquer comentário, onde essas funcionalidades são aplicadas da mesma maneira que o usuário faz pra realizar a remoção de um post ou de um comentário.
 
