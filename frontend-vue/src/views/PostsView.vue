@@ -99,8 +99,8 @@
                 <v-pagination
                     v-model="page"
                     class="my-4"
-                    :length="15"
-                    :total-visible="7"
+                    :length="totalPages"
+                    total-visible="6"
                 ></v-pagination>
             </main>
         </div>
@@ -111,6 +111,7 @@
 import PrimaryButton from "@/components/PrimaryButton";
 import PostDetailsSummary from "@/components/PostDetailsSummary";
 import PostService from "@/services/PostService";
+// import SubjectService from "@/services/SubjectService";
 import { toastShow } from "@/utils/vtoast";
 
 export default {
@@ -118,17 +119,14 @@ export default {
     components: { PrimaryButton, PostDetailsSummary },
     data() {
         return {
-            subjects: [
-                "Modelagem de sistemas",
-                "OO",
-                "Calculo 2"
-            ],
             posts: [],
+            subjects: [],
             selectedSubjectFilter: null,
             postTitleFilter: null,
             highlightsFilter: false,
             recentFilter: false,
-            page: 1
+            page: 1,
+            totalPages: 1
         };
     },
     methods: {
@@ -142,14 +140,15 @@ export default {
         },
         async fetchPosts() {
             try {
-                const { data: posts } = await PostService.fetchAll(
+                const { data: posts, last_page } = await PostService.fetchAll(
                     this.postTitleFilter,
                     this.selectedSubjectFilter,
                     this.highlightsFilter,
                     this.recentFilter,
                     this.page
                 );
-
+                
+                this.totalPages = last_page;
                 this.posts = posts;
             } catch (error) {
                 toastShow(this.$root.vtoast, error.data);
@@ -157,15 +156,20 @@ export default {
         }
     },
     watch: {
-        page(oldPage, newPage) {
-            console.log(oldPage);
-            console.log(newPage);
+        async page() {
+            await this.fetchPosts();
         }
     },
     async created() {
         try {
-            const { data: posts } = await PostService.fetchAll();
+            const { data: posts, last_page } = await PostService.fetchAll();
+
+            this.totalPages = last_page;
             this.posts = posts;
+
+            // const { data: subjects } = await SubjectService.fetchAll();
+            
+            // this.subjects = subjects;
         } catch (error) {
             toastShow(this.$root.vtoast, error.data);
         }
