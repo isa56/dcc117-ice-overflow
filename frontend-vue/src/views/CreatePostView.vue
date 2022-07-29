@@ -20,7 +20,7 @@
         <div class="flex justify-center">
           <input
             class=" input font-medium send-button px-12 py-2 w-50 h-18 mb-3 text-background-dark rounded bg-primary text-2xl mt-2"
-            type="submit" value="ENVIAR" @click="checkForm" />
+            type="submit" value="ENVIAR" @click="createPost" />
           <br>
         </div>
 
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import PostService from "@/services/PostService";
+import { toastShow } from "@/utils/vtoast";
 export default {
   name: "CreatePost",
   components: {},
@@ -47,9 +49,7 @@ export default {
       title: null,
       text: null,
       subject: '',
-      subjects: [
-        ' ','Cálculo 1', 'Física 1', 'Algoritmos', 'Estrutura de Dados 1', 'Algoritmos' , 'Algoritmos', 'Algoritmos', 'Algoritmos', 'Algoritmos', 'Algoritmos', 'Algoritmos', 'Algoritmos', 'Algoritmos' 
-      ],
+      subjects: [],
     }
   },
 
@@ -83,6 +83,32 @@ export default {
       
       e.preventDefault();
     },
+
+    async createPost(){
+      let post = {
+          title: this.title,
+          text: this.text,
+          subject: this.subject
+        };
+        this.isLoading = true;
+        PostService.create(post, this.$store.getters.getUserId)
+        .then(()=>{
+          toastShow(
+            this.$root.vtoast,
+            "Post criado com sucesso!",
+            "#4CAF",
+            true
+          );
+          this.fetchPost();
+        })
+        .catch((error)=> toastShow(this.$root.vtoast, error))
+        .finally(()=>{
+          this.title = "",
+          this.text = "",
+          this.subject= ""
+          this.isLoading = false;
+        });
+    }
 
   },
 
