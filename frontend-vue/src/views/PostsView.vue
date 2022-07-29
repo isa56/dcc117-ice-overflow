@@ -114,7 +114,7 @@
 import PrimaryButton from "@/components/PrimaryButton";
 import PostDetailsSummary from "@/components/PostDetailsSummary";
 import PostService from "@/services/PostService";
-// import SubjectService from "@/services/SubjectService";
+import SubjectService from "@/services/SubjectService";
 import { toastShow } from "@/utils/vtoast";
 import Loading from '@/components/Loading.vue';
 
@@ -177,9 +177,9 @@ export default {
             this.totalPages = last_page;
             this.posts = posts;
 
-            // const { data: subjects } = await SubjectService.fetchAll();
+            const subjects = await SubjectService.fetchAll();
             
-            // this.subjects = subjects;
+            this.subjects = subjects;            
         } catch (error) {
             toastShow(this.$root.vtoast, error.data);
         } finally {
