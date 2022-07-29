@@ -87,7 +87,10 @@
                     </router-link>
                 </div>
 
-                <div v-if="posts.length">
+                <div v-if="isLoading">
+                    <loading/>
+                </div>
+                <div v-else-if="posts.length">
                     <post-details-summary
                         v-for="post in posts"
                         :key="post.id"
@@ -113,10 +116,11 @@ import PostDetailsSummary from "@/components/PostDetailsSummary";
 import PostService from "@/services/PostService";
 // import SubjectService from "@/services/SubjectService";
 import { toastShow } from "@/utils/vtoast";
+import Loading from '@/components/Loading.vue';
 
 export default {
     name: "PostsView",
-    components: { PrimaryButton, PostDetailsSummary },
+    components: { PrimaryButton, PostDetailsSummary, Loading },
     data() {
         return {
             posts: [],
@@ -126,7 +130,8 @@ export default {
             highlightsFilter: false,
             recentFilter: false,
             page: 1,
-            totalPages: 1
+            totalPages: 1,
+            isLoading: false
         };
     },
     methods: {
@@ -140,6 +145,8 @@ export default {
         },
         async fetchPosts() {
             try {
+                this.isLoading = true;
+
                 const { data: posts, last_page } = await PostService.fetchAll(
                     this.postTitleFilter,
                     this.selectedSubjectFilter,
@@ -152,6 +159,8 @@ export default {
                 this.posts = posts;
             } catch (error) {
                 toastShow(this.$root.vtoast, error.data);
+            } finally {
+                this.isLoading = false;
             }
         }
     },
@@ -162,6 +171,7 @@ export default {
     },
     async created() {
         try {
+            this.isLoading = true;
             const { data: posts, last_page } = await PostService.fetchAll();
 
             this.totalPages = last_page;
@@ -172,6 +182,8 @@ export default {
             // this.subjects = subjects;
         } catch (error) {
             toastShow(this.$root.vtoast, error.data);
+        } finally {
+            this.isLoading = false;
         }
     },
 
