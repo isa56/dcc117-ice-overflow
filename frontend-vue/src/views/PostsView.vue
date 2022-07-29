@@ -27,7 +27,7 @@
                             <v-select 
                                 id="subject"
                                 attach="#containerSelect"
-                                clearable="true"
+                                :clearable="true"
                                 :items="subjects"
                                 v-model="selectedSubjectFilter"
                                 label="Matéria"
