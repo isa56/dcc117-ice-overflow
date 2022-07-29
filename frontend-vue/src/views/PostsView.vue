@@ -102,6 +102,7 @@
                 <v-pagination
                     v-model="page"
                     class="my-4"
+                    color="#6BBBB5"
                     :length="totalPages"
                     total-visible="6"
                 ></v-pagination>
@@ -236,9 +237,5 @@ export default {
 #sidebar .checkbox-container input:checked ~ label {
     color: #F2F7FB;
     font-weight: bold;
-}
-
-.theme--light.v-pagination .v-pagination__item--active.primary {
-    background-color: #6BBBB5 !important;
 }
 </style>
