@@ -23,23 +23,26 @@ class PostsController extends Controller
     public function index(Request $request)
     {
         $query = Post::query();
-        if($request->materia) {
-            if(!Subject::whereSubject($request->materia)->get()) {
+
+        if ($request->materia) {
+            if (!Subject::whereSubject($request->materia)->get()) {
                 return response()->json(['message' => 'Materia invalida'], 401);
             }
+
             $query->whereMateria($request->materia);
         }
+
         $request->titulo ? $query->where('title', 'LIKE', "%{$request->titulo}%") : '';
-        $request->reactions ? $query->orderBy('vote', 'desc') : '';
-        $request->recent ? $query->orderBy('created_at', 'desc') : '';
-        $posts_authors = [];
-        foreach($query->get() as $post) {
-            $posts_authors[] = $post->user->name;
+        $request->reactions === 'true' ? $query->orderBy('vote', 'desc') : '';
+        $request->recent === 'true' ? $query->orderBy('created_at', 'desc') : '';
+
+        $posts = $query->paginate(5);
+
+        foreach ($posts as $post) {
+            $post['author'] = $post->user()->get('name')[0]['name'];
         }
-        return response()->json([
-            'posts' => $query->paginate(2),
-            'posts_authors' => $posts_authors,
-        ], 200);
+
+        return response()->json($posts, 200);
     }
 
     /**
@@ -108,7 +111,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function vote(int $id) 
+    public function vote(int $id)
     {
         $post = Post::find($id);
         if(!$post) {

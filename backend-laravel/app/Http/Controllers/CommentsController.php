@@ -21,7 +21,7 @@ class CommentsController extends Controller
     {
         $comments = PostsComment::all();
         foreach($comments as $key => $comment) {
-            $comments[$key]->author_name = $comment->user()->get('name')[0]['name'];
+            $comments[$key]->author_name = $comment->user()->get('name')[$key]['name'];
         }
         return $comments;
     }
