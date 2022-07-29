@@ -37,6 +37,7 @@
         :post="post"
         @showCommentModal="showModal"
         @votePost="votePost"
+        @deletePost="deletePost"
       />
 
       <div>
@@ -93,21 +94,23 @@ export default {
         })
         .catch((error) => toastShow(this.$root.vtoast, error));
     },
-    async deletePost(postId) {
-      try {
-          const { data: posts } = await PostService.deletePost(postId);
-          this.posts = posts;
+    deletePost(postId) {
+      console.log(postId);
+      PostService.deletePost(postId)
+        .then(() => {
           toastShow(
             this.$root.vtoast,
             "Post deletado com sucesso!",
             "#4CAF",
             true
           );
-          this.fetchPost();
-        }catch(error)  {
-          toastShow(this.$root.vtoast, error);
-        }
+          //this.fetchPost();
+          console.log('chegou aqui');
+          this.$router.push({ name: "home" });
+        })
+        .catch((error) => toastShow(this.$root.vtoast, error));
     },
+
     showModal() {
       this.shouldOpenModal = true;
     },

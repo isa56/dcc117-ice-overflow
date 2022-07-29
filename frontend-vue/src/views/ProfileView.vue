@@ -5,19 +5,17 @@
         <div class="flex mb-2 items-center flex-wrap">
               <div class="user-desc-style flex mb-7" >
                   <img class="img-style rounded-full w-20" src="https://img.freepik.com/vetores-premium/perfil-de-avatar-de-homem-no-icone-redondo_24640-14044.jpg" alt="fotoPerfil">
-                  <h1 class="name-style ml-14 text-4xl text-primary font-bold"> {{ name }} </h1>
-                  <h3 class="user-style ml-96 text-2xl text-primary font-normal"> {{ user }} </h3>                  
+                  <h1 class="name-style ml-14 text-4xl text-primary font-bold"> {{ name }} </h1>                
               </div>
-            <span class="text-base text-white">{{ description }}</span>
         </div>
     </div>
 
-    <h1 class="h-style bg-background-dark mt-20 text-2xl text-primary font-bold p-1">Meus Posts:</h1>
+    <h1 class="h-style bg-background-dark mt-20 text-3xl text-primary font-bold p-1">Meus Posts</h1>
 
     <PostProfile 
     v-for="post in posts"
     :post="post"
-    :key="post" />
+    :key="post.id" />
 
   </div>
 </template>
