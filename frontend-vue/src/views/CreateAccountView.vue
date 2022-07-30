@@ -55,6 +55,7 @@
                 class="input send-button px-3 py-2 w-full mb-5 text-bold  rounded text-white bg-primary text-lg w-56 h-12 mt-8"
                 type="submit"
                 value="Criar conta"
+                @click="createAccount"
               />
             
             <br />
@@ -70,6 +71,8 @@
 
 
 <script>
+import UserService from '@/services/UserService'
+
 
 export default {
   name: 'CreateAccountView',
@@ -86,7 +89,15 @@ export default {
   },
 
   methods: {
-  
+    createAccount(){
+      let user = {
+        name:  this.name,
+        username: this.user,
+        email: this.email, 
+        password: this.password
+      }
+      UserService.createAccount(user);
+    }
   },
 
 
