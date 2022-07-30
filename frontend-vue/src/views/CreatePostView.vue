@@ -38,6 +38,7 @@
 
 <script>
 import PostService from "@/services/PostService";
+import SubjectService from "@/services/SubjectService";
 import { toastShow } from "@/utils/vtoast";
 export default {
   name: "CreatePost",
@@ -83,7 +84,6 @@ export default {
       
       e.preventDefault();
     },
-
     async createPost(){
       let post = {
           title: this.title,
@@ -112,6 +112,17 @@ export default {
 
   },
 
+async created(){
+      try{
+        this.isLoading = true;
+        const subjects = await SubjectService.fetchAll();
+        this.subjects = subjects;
+      }catch(error){
+        toastShow(this.$root.vtoast, error.data);
+      }finally{
+        this.isLoading = false;
+      }
+    },
 
 }
 

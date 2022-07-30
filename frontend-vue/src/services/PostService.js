@@ -25,8 +25,17 @@ export default {
       .catch((error) => Promise.reject(error.message));
   },
 
-  async fetchAll() {
-    const response = await Api().get("/api/posts");
+  async fetchAll(postTitle = "", subject = "", highlights = false, recent = false, page = 1) {
+    const response = await Api().get("/api/posts", {
+      params: {
+        titulo: postTitle,
+        materia: subject,
+        reactions: highlights,
+        recent,
+        page
+      }
+    });
+
     return response.data;
   },
 

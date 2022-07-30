@@ -14,44 +14,59 @@
 
                 <h1 class="text-center text-xl my-10 text-white">FILTRO</h1>
                 <div class="mx-5">
-                    <form>
+                    <form @submit.prevent="fetchPosts">
                         <input 
+                            id="search-title"
                             class="rounded my-3 w-full px-3 py-2 bg-white text-background-dark text-center"
                             type="search" 
                             placeholder="DCC117" 
+                            v-model="postTitleFilter"
                         />
 
-                        <div id="containerSelect" class="relative">
-                            <v-select attach="#containerSelect" :items="items" label="Tema" solo></v-select>
+                        <div id="containerSelect" class="relative max-w-[14.75rem]">
+                            <v-select 
+                                id="subject"
+                                attach="#containerSelect"
+                                :clearable="true"
+                                :items="subjects"
+                                v-model="selectedSubjectFilter"
+                                label="Matéria"
+                                solo
+                            ></v-select>
                         </div>
 
                         <div class="grid grid-cols-2 gap-1 mb-24">
                             
-                            <label 
-                                for="highlights"
-                                class="checkmark uppercase cursor-pointer send-button py-2 text-gray text-xs text-center bg-white"
-                            >
-                                Destaques
+                            <div class="checkbox-container">
                                 <input 
-                                    input="highlights"
+                                    id="highlights"
                                     name="highlights"
                                     type="checkbox"
-                                    class="hidden"
+                                    class="bg-white"
+                                    v-model="highlightsFilter"
                                 />
-                            </label>
-
-                            <label 
-                                for="news"
-                                class="checkmark uppercase cursor-pointer send-button py-2 text-gray text-xs text-center bg-white"
-                            >
-                                Novidades
+                                <label 
+                                    for="highlights"
+                                    class="uppercase cursor-pointer text-gray text-xs text-center"
+                                >
+                                    Destaques
+                                </label>
+                            </div>
+                            <div class="checkbox-container">
                                 <input 
-                                    input="news"
-                                    name="news"
+                                    id="recent"
+                                    name="recent"
                                     type="checkbox"
-                                    class="hidden"
+                                    class="bg-white"
+                                    v-model="recentFilter"
                                 />
-                            </label>
+                                <label 
+                                    for="recent"
+                                    class="uppercase cursor-pointer text-gray text-xs text-center"
+                                >
+                                    Novidades
+                                </label>
+                            </div>
                         </div>
 
                         <div>
@@ -73,11 +88,25 @@
                     </router-link>
                 </div>
 
-                <post-details-summary
-                    v-for="post in posts"
-                    :key="post.id"
-                    :post="post"
-                />
+                <div v-if="isLoading">
+                    <loading/>
+                </div>
+                <div v-else-if="posts.length">
+                    <post-details-summary
+                        v-for="post in posts"
+                        :key="post.id"
+                        :post="post"
+                    />
+                </div>
+                <h1 class="text-center text-white text-2xl mt-12" v-else>Nenhuma pergunta encontrada :(</h1>
+            
+                <v-pagination
+                    v-model="page"
+                    class="my-4"
+                    color="#6BBBB5"
+                    :length="totalPages"
+                    total-visible="6"
+                ></v-pagination>
             </main>
         </div>
     </div>
@@ -87,15 +116,24 @@
 import PrimaryButton from "@/components/PrimaryButton";
 import PostDetailsSummary from "@/components/PostDetailsSummary";
 import PostService from "@/services/PostService";
+import SubjectService from "@/services/SubjectService";
 import { toastShow } from "@/utils/vtoast";
+import Loading from '@/components/Loading.vue';
 
 export default {
     name: "PostsView",
-    components: { PrimaryButton, PostDetailsSummary },
+    components: { PrimaryButton, PostDetailsSummary, Loading },
     data() {
         return {
-            items: ['DCC', 'MAT', 'EST', 'FIS', 'QUI'],
             posts: [],
+            subjects: [],
+            selectedSubjectFilter: null,
+            postTitleFilter: null,
+            highlightsFilter: false,
+            recentFilter: false,
+            page: 1,
+            totalPages: 1,
+            isLoading: false
         };
     },
     methods: {
@@ -107,16 +145,47 @@ export default {
             menuIcon.classList.toggle("hidden");
             closeIcon.classList.toggle("hidden");
         },
-        filter() {
+        async fetchPosts() {
+            try {
+                this.isLoading = true;
 
+                const { data: posts, last_page } = await PostService.fetchAll(
+                    this.postTitleFilter,
+                    this.selectedSubjectFilter,
+                    this.highlightsFilter,
+                    this.recentFilter,
+                    this.page
+                );
+                
+                this.totalPages = last_page;
+                this.posts = posts;
+            } catch (error) {
+                toastShow(this.$root.vtoast, error.data);
+            } finally {
+                this.isLoading = false;
+            }
+        }
+    },
+    watch: {
+        async page() {
+            await this.fetchPosts();
         }
     },
     async created() {
         try {
-            const { data: posts } = await PostService.fetchAll();
+            this.isLoading = true;
+            const { data: posts, last_page } = await PostService.fetchAll();
+
+            this.totalPages = last_page;
             this.posts = posts;
+
+            const subjects = await SubjectService.fetchAll();
+            
+            this.subjects = subjects;            
         } catch (error) {
             toastShow(this.$root.vtoast, error.data);
+        } finally {
+            this.isLoading = false;
         }
     },
 
@@ -133,18 +202,41 @@ export default {
     transition: all 150ms ease-in 0s;
 }
 
-#sidebar .checkmark {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    height: 2rem;
+#sidebar .checkbox-container {
+    position: relative;
 }
 
-/* #sidebar input:checked ~ .checkmark {
-    background-color: red;
-} */
-</style>
+#sidebar .checkbox-container label {
+    position: absolute;
+    left: 1.5rem;
+    top: 0.7rem;
 
-                                <!-- class="input send-button py-2 text-gray text-xs text-center bg-white"  -->
+    pointer-events: none;
+}
+
+#sidebar .checkbox-container input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    width: 7.25rem;
+    height: 2.5rem;
+    cursor: pointer;
+    outline: none;
+    transition: 0.2s;
+}
+
+#sidebar .checkbox-container input:hover {
+    border: 1px solid #6BBBB5;
+}
+
+#sidebar .checkbox-container input:checked {
+    background-color: #6BBBB5;
+    border: 1px solid #5BA39D;
+    transition-duration: 0.2s;
+}
+
+#sidebar .checkbox-container input:checked ~ label {
+    color: #F2F7FB;
+    font-weight: bold;
+}
+</style>

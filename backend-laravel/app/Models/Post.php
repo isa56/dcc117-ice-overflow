@@ -20,12 +20,12 @@ class Post extends Model
         'finished',
         'user_id',
     ];
-    
+
     protected $casts = [
         'finished' => 'boolean',
     ];
 
-    public function comments() 
+    public function comments()
     {
         return $this->hasMany(PostsComment::class);
     }
