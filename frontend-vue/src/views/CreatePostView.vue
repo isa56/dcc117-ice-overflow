@@ -2,25 +2,42 @@
   <div class="items-center bg-background flex justify-center">
     <div class="bloco-central bg-background-dark text-white rounded-lg px-36 py-12">
       <h1 class="text-style text-white font-bold text-4xl mb-8 text-center">
-        CRIAR UM NOVO POST
+        Criar um novo post
       </h1>
 
       <form class="form-style w-100" @submit.prevent="checkForm">
 
-        <input class="title-style rounded mb-3 px-2 py-3 w-full bg-white text-background-dark" type="text"
-          placeholder="Título" v-model="title" />
-        <textarea class="desc-style rounded mb-3 px-2 py-3 w-full bg-white text-background-dark" rows="5" cols="30"
-          type="text" placeholder="Descrição" v-model="text"></textarea>
+        <label for="title">Título</label>
+        <input 
+          id="title"
+          name="title"
+          class="title-style rounded mb-3 px-2 py-3 w-full bg-white text-background-dark"
+          type="text"
+          placeholder="Título" 
+          v-model="title"
+        />
+
+        <label for="content">Conteúdo</label>
+        <textarea
+          id="content"
+          name="content"
+          class="desc-style rounded mb-3 px-2 py-3 w-full bg-white text-background-dark"
+          rows="5"
+          cols="30"
+          type="text"
+          placeholder="Conteúdo"
+          v-model="text"></textarea>
         <br>
 
+        <label for="content">Disciplina</label>
         <div class="relative" id="selectContainer">
           <v-autocomplete class="w-56" solo attach="#selectContainer" :items="subjects" v-model="subject" label="Disciplina"> </v-autocomplete>
         </div>
 
         <div class="flex justify-center">
           <input
-            class=" input font-medium send-button px-12 py-2 w-50 h-18 mb-3 text-background-dark rounded bg-primary text-2xl mt-2"
-            type="submit" value="ENVIAR" @click="checkForm" />
+            class=" input font-medium send-button px-12 py-2 w-50 h-18 mb-3 text-background-dark rounded bg-primary text-xl mt-2"
+            type="submit" value="Enviar" @click="createPost" />
           <br>
         </div>
 
@@ -37,6 +54,9 @@
 </template>
 
 <script>
+import PostService from "@/services/PostService";
+import SubjectService from "@/services/SubjectService";
+import { toastShow } from "@/utils/vtoast";
 export default {
   name: "CreatePost",
   components: {},
@@ -47,9 +67,7 @@ export default {
       title: null,
       text: null,
       subject: '',
-      subjects: [
-        ' ','Cálculo 1', 'Física 1', 'Algoritmos', 'Estrutura de Dados 1', 'Algoritmos' , 'Algoritmos', 'Algoritmos', 'Algoritmos', 'Algoritmos', 'Algoritmos', 'Algoritmos', 'Algoritmos', 'Algoritmos' 
-      ],
+      subjects: [],
     }
   },
 
@@ -83,9 +101,47 @@ export default {
       
       e.preventDefault();
     },
+    async createPost() {
+      this.isLoading = true;
 
+      const post = {
+        title: this.title,
+        body: this.text,
+        materia: this.subject,
+        user_id: this.$store.getters.getUserId
+      };
+      
+      try {
+        await PostService.create(post);
+        
+        toastShow(
+          this.$root.vtoast,
+          "Post criado com sucesso!",
+          "#4CAF",
+          true
+        );
+      } catch (error) {
+        toastShow(this.$root.vtoast, error.message);
+      } finally {
+        this.title = "",
+        this.text = "",
+        this.subject= ""
+        this.isLoading = false;
+      }
+    }
   },
 
+async created(){
+      try {
+        this.isLoading = true;
+        const subjects = await SubjectService.fetchAll();
+        this.subjects = subjects;
+      } catch(error) {
+        toastShow(this.$root.vtoast, error.data);
+      } finally {
+        this.isLoading = false;
+      }
+    },
 
 }
 
