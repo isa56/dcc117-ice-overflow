@@ -95,7 +95,6 @@ export default {
         .catch((error) => toastShow(this.$root.vtoast, error));
     },
     deletePost(postId) {
-      console.log(postId);
       PostService.deletePost(postId)
         .then(() => {
           toastShow(
@@ -104,9 +103,7 @@ export default {
             "#4CAF",
             true
           );
-          //this.fetchPost();
-          console.log('chegou aqui');
-          this.$router.push({ name: "home" });
+          this.$router.push({ name: "posts" });
         })
         .catch((error) => toastShow(this.$root.vtoast, error));
     },
