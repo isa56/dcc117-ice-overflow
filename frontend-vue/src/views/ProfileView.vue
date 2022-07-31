@@ -19,7 +19,7 @@
       <loading />
     </div>
 
-    <PostProfile 
+    <PostDetailsSummary 
       v-else
       v-for="post in user.posts"
       :post="post"
@@ -30,13 +30,14 @@
 </template>
 
 <script>
-import PostProfile from "@/components/PostProfile.vue";
+//import PostProfile from "@/components/PostProfile.vue";
+import PostDetailsSummary from "@/components/PostDetailsSummary";
 import UserService from "@/services/UserService";
 import Loading from "@/components/Loading";
 import { toastShow } from "@/utils/vtoast";
 
 export default {
-  components: { PostProfile, Loading },
+  components: { PostDetailsSummary, Loading },
   name: "ProfileView",
   data() {
     return {
@@ -51,7 +52,6 @@ export default {
 
             const userId = this.$route.params.id;
             this.user = await UserService.fetchUserInfo(userId);
-            
         } catch (error) {
             toastShow(this.$root.vtoast, error.data);
         } finally {
