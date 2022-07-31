@@ -14,6 +14,9 @@ export default () => {
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
+      config.headers["Access-Control-Allow-Origin"] =
+      "https://ice-overflow.netlify.app/";
+      config.headers["Access-Control-Allow-Credentials"] = "true";
       return config;
     },
     (error) => {
