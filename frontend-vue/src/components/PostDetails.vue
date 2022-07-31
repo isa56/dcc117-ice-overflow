@@ -5,13 +5,12 @@
   >
     <div class="mb-8">
       <div class="flex items-center justify-between">
-
         <div class="flex mb-2 items-center justify-start">
           <h4 class="text-base text-white mr-4">Autor {{ post.user.name }}:</h4>
           <h2 class="text-2xl text-primary font-bold">{{ post.title }}</h2>
         </div>
 
-        <div class=""
+        <div
           id="deleteContainer"
           v-if="
             post.user_id === $store.getters.getUserId ||
@@ -31,7 +30,6 @@
             <span>Apagar Post</span>
           </v-tooltip>
         </div>
-
       </div>
 
       <div class="flex">
@@ -78,7 +76,6 @@
           Comentar
         </button>
       </div>
-
     </div>
   </div>
 </template>
@@ -90,5 +87,15 @@ export default {
   name: "PostDetails",
   props: ["post"],
   components: { ThemeSpan },
+  created() {
+    console.log(this.post.user_id);
+    console.log(this.$store.getters.getUserId);
+    console.log(this.post.user_id === this.$store.getters.getUserId);
+
+    console.log(this.$store.getters.isModerator);
+
+    console.log("Teste", this.post.user_id === this.$store.getters.getUserId || this.$store.getters.isModerator
+    );
+  },
 };
 </script>

@@ -43,10 +43,10 @@ export default new Vuex.Store({
 
       localStorage.setItem("auth_token", data.token);
       localStorage.setItem("user_id", data.id);
-      localStorage.setItem("is_admin", data.admin);
+      localStorage.setItem("is_admin", data.admin ? true : false);
 
       Vue.prototype.$user_id = data.user_id;
-      Vue.prototype.$is_admin = data.is_admin;
+      Vue.prototype.$is_admin = data.is_admin ? true : false;
 
       axios.defaults.headers.common["Authorization"] =
         "Bearer " + state.auth_token;
@@ -79,6 +79,6 @@ export default new Vuex.Store({
     getUserId: (state) => state.user_id,
 
     isAuthenticated: (state) => !!state.auth_token,
-    isModerator: (state) => state.is_admin,
+    isModerator: (state) => !!state.is_admin,
   },
 });
