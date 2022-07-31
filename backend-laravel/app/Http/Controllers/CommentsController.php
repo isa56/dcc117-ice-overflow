@@ -142,6 +142,9 @@ class CommentsController extends Controller
         $post->finished++;
         if($comment->best_answer > 1) {
             $comment->best_answer = 0;
+            //$post->finished = 0;
+        }
+        if($post->finished > 1) {
             $post->finished = 0;
         }
         $comment->save();
