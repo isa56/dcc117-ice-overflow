@@ -141,8 +141,11 @@ class CommentsController extends Controller
         $comment->best_answer++;
         if($comment->best_answer > 1) {
             $comment->best_answer = 0;
+            $post->finished = 0;
         }
         $comment->save();
+        $post->finished = 1;
+
         return response()->json(["message" => "Resposta marcada com sucesso"], 202);
     }
 }
