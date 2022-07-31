@@ -87,6 +87,7 @@ class CommentsController extends Controller
             $post->save();
             if($comment->bestAnswer) {
                 $post->finished = false;
+                $post->save();
             }
             $comment->destroy($id);
             return response()->json(['message' => 'Comentario deletado com sucesso'], 202);
