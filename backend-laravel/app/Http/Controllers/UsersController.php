@@ -57,6 +57,9 @@ class UsersController extends Controller
 
         if ($user) {
             $user['posts'] = $user->posts;
+            foreach($user['posts'] as $post) {
+                $post->author = $user->name;
+            }
             return response()->json($user, 201);
         }
 
