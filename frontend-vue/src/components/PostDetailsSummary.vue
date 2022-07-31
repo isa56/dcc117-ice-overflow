@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-background-dark w-full my-10 pt-8 p-6 md:p-12 rounded-md">
+  <div class="bg-background-dark w-full my-4 md:my-8 pt-8 p-6 md:p-12 rounded-md">
     <div class="mb-8">
       <div class="flex mb-2 items-baseline justify-start break-all">
         <h4 class="text-base text-white mr-4 break-all">{{ post.author }}:</h4>
