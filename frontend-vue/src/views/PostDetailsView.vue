@@ -80,12 +80,11 @@ export default {
   },
   methods: {
     chooseBestComment(commentId) {
-      console.log(commentId);
       PostService.chooseComment(commentId, this.post.id)
         .then(() => {
           toastShow(
             this.$root.vtoast,
-            "Comentário escolhid como melhor resposta!",
+            "Comentário marcado com sucesso!",
             "#4CAF",
             true
           );

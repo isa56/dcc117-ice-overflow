@@ -14,7 +14,7 @@
     <div class="flex justify-end">
       <div
         v-if="
-          (comment.best_answer) ||
+          comment.best_answer ||
           (!hasBestComment &&
             postAuthorId === parseInt($store.getters.getUserId))
         "
@@ -66,6 +66,9 @@
 export default {
   name: "PostComment",
   props: ["comment", "hasBestComment", "postAuthorId"],
+  created() {
+    console.log(this.hasBestComment);
+  },
 };
 </script>
 
