@@ -61,7 +61,7 @@
             <template v-slot:activator="{ on, attrs }">
               <span v-bind="attrs" v-on="on">
                 <v-icon class="ml-3" color="#F2F7FB">mdi-forum</v-icon>
-                {{ post.comentarios }}
+                {{ numberOfComments }}
               </span>
             </template>
             <span>Comentários</span>
@@ -85,7 +85,7 @@ import ThemeSpan from "@/components/ThemeSpan";
 
 export default {
   name: "PostDetails",
-  props: ["post"],
+  props: ["post", "numberOfComments"],
   components: { ThemeSpan },
 };
 </script>

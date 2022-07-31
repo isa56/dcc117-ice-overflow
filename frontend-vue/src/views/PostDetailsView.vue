@@ -35,6 +35,7 @@
       </v-dialog>
       <post-details
         :post="post"
+        :numberOfComments="comments.length"
         @showCommentModal="showModal"
         @votePost="votePost"
         @deletePost="deletePost"
