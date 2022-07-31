@@ -139,12 +139,13 @@ class CommentsController extends Controller
             return response()->json(["message" => "Erro ao marcar a resposta"], 404);
         }
         $comment->best_answer++;
+        $post->finished++;
         if($comment->best_answer > 1) {
             $comment->best_answer = 0;
             $post->finished = 0;
         }
         $comment->save();
-        $post->finished = 1;
+        $post->save();
 
         return response()->json(["message" => "Resposta marcada com sucesso"], 202);
     }
