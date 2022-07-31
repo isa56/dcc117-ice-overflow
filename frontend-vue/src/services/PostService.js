@@ -12,14 +12,19 @@ export default {
     subject = "",
     highlights = false,
     recent = false,
+    postStatus = "",
     page = 1
   ) {
+    let open = postStatus === "open";
+    let closed = postStatus === "closed";
     const response = await Api().get("/api/posts", {
       params: {
         titulo: postTitle,
         materia: subject,
         reactions: highlights,
         recent,
+        open: open,
+        finished: closed,
         page,
       },
     });

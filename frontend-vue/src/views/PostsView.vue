@@ -67,6 +67,54 @@
                                     Novidades
                                 </label>
                             </div>
+                            <div class="checkbox-container">
+                                <input 
+                                    id="closedPosts"
+                                    name="postStatus"
+                                    type="radio"
+                                    class="bg-white"
+                                    v-model="postStatus"
+                                    value="closed"
+                                />
+                                <label 
+                                    for="closedPosts"
+                                    class="uppercase cursor-pointer text-gray text-xs text-center break-words"
+                                >
+                                    Fechados
+                                </label>
+                            </div>
+                            <div class="checkbox-container">
+                                <input 
+                                    id="openPosts"
+                                    name="postStatus"
+                                    type="radio"
+                                    class="bg-white"
+                                    v-model="postStatus"
+                                    value="open"
+                                />
+                                <label 
+                                    for="openPosts"
+                                    class="uppercase cursor-pointer text-gray text-xs text-center break-words"
+                                >
+                                    Abertos
+                                </label>
+                            </div>
+                                                        <div class="checkbox-container">
+                                <input 
+                                    id="openPosts"
+                                    name="postStatus"
+                                    type="radio"
+                                    class="bg-white"
+                                    v-model="postStatus"
+                                    value=""
+                                />
+                                <label 
+                                    for="openPosts"
+                                    class="uppercase cursor-pointer text-gray text-xs text-center break-words"
+                                >
+                                    Todos
+                                </label>
+                            </div>
                         </div>
 
                         <div>
@@ -131,6 +179,7 @@ export default {
             postTitleFilter: null,
             highlightsFilter: false,
             recentFilter: false,
+            postStatus: "",
             page: 1,
             totalPages: 1,
             isLoading: false
@@ -149,20 +198,26 @@ export default {
             try {
                 this.isLoading = true;
 
-                if(this.postTitleFilter || this.selectedSubjectFilter || this.highlightsFilter || this.recentFilter) {
-                    this.page = 1;
-                }
+                // if(this.postTitleFilter || this.selectedSubjectFilter || this.highlightsFilter || this.recentFilter) {
+                //     this.page = 1;
+                // }
 
                 const { data: posts, last_page } = await PostService.fetchAll(
                     this.postTitleFilter,
                     this.selectedSubjectFilter,
                     this.highlightsFilter,
                     this.recentFilter,
+                    this.postStatus,
                     this.page
                 );
                 
                 this.totalPages = last_page;
                 this.posts = posts;
+
+                if(this.page > this.totalPages) {
+                    this.page = 1;
+                }
+
             } catch (error) {
                 toastShow(this.$root.vtoast, error.data);
             } finally {
@@ -214,14 +269,12 @@ export default {
     position: absolute;
     left: 1.5rem;
     top: 0.7rem;
-
     pointer-events: none;
 }
 
 #sidebar .checkbox-container input {
     -webkit-appearance: none;
     -moz-appearance: none;
-    
     width: 7.25rem;
     height: 2.5rem;
     cursor: pointer;
