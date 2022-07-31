@@ -37,6 +37,7 @@
         :post="post"
         @showCommentModal="showModal"
         @votePost="votePost"
+        @deletePost="deletePost"
       />
 
       <div>
@@ -93,6 +94,20 @@ export default {
         })
         .catch((error) => toastShow(this.$root.vtoast, error));
     },
+    deletePost(postId) {
+      PostService.deletePost(postId)
+        .then(() => {
+          toastShow(
+            this.$root.vtoast,
+            "Post deletado com sucesso!",
+            "#4CAF",
+            true
+          );
+          this.$router.push({ name: "posts" });
+        })
+        .catch((error) => toastShow(this.$root.vtoast, error));
+    },
+
     showModal() {
       this.shouldOpenModal = true;
     },

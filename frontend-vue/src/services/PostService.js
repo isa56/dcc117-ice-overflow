@@ -41,7 +41,6 @@ export default {
       .catch((error) => Promise.reject(error.message));
   },
 
-  deletePost() {},
 
   search() {},
 
@@ -62,6 +61,16 @@ export default {
   deleteComment(commentId) {
     return Api()
       .delete(`/api/comments/${commentId}`)
+      .then(
+        (res) => res.data,
+        (err) => Promise.reject(err.message)
+      )
+      .catch((err) => Promise.reject(err.message));
+  },
+
+  deletePost(postId) {
+    return Api()
+      .delete(`/api/posts/${postId}`)
       .then(
         (res) => res.data,
         (err) => Promise.reject(err.message)
