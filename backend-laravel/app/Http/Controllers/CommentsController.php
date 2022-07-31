@@ -138,15 +138,8 @@ class CommentsController extends Controller
         if(Auth::user()->id != $post->user_id) {
             return response()->json(["message" => "Erro ao marcar a resposta"], 404);
         }
-        $comment->best_answer++;
-        $post->finished++;
-        if($comment->best_answer > 1) {
-            $comment->best_answer = 0;
-            //$post->finished = 0;
-        }
-        if($post->finished > 1) {
-            $post->finished = 0;
-        }
+        $comment->best_answer = !$comment->best_answer;
+        $post->finished = !$post->finished;
         $comment->save();
         $post->save();
 
