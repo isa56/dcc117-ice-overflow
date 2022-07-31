@@ -81,7 +81,7 @@ class CommentsController extends Controller
     public function destroy($id)
     {
         $comment = PostsComment::find($id);
-        if($comment && Auth::user()->id == $comment->user_id) {
+        if($comment && (Auth::user()->id == $comment->user_id || Auth::user()->admin)) {
             $post = Post::find($comment->post_id);
             $post->comentarios--;
             $post->save();
