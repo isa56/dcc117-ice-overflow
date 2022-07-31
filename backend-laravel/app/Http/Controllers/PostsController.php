@@ -70,6 +70,9 @@ class PostsController extends Controller
         $post->user_name = $post->user->name;
         if($post) {
             $postComment = PostsComment::wherePost_id($post->id)->get();
+            foreach($postComment as $key => $comment) {
+                $postComment[$key]->author_name = $comment->user()->get('name')[$key]['name'];
+            }
             return response()->json(['post' => $post, 'postComments' => $postComment], 202);
         }
         return response()->json(['message' => 'Post não encontrado'], 404);
