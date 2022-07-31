@@ -6,8 +6,14 @@
     <div class="mb-8">
       <div class="flex items-center justify-between">
         <div class="flex mb-2 items-center justify-start">
-          <h4 class="text-base text-white mr-4">Autor {{ post.user_name }}:</h4>
-          <h2 class="text-2xl text-primary font-bold">{{ post.title }}</h2>
+          <router-link
+            class="text-base text-white mr-4 cursor-pointer underline break-words"
+            :to="{ name: 'perfil', params: { id: post.user_id } }"
+          >
+            {{ post.user_name }}:
+          </router-link>
+
+          <h2 class="text-2xl text-primary font-bold break-words">{{ post.title }}</h2>
         </div>
 
         <div
@@ -37,7 +43,7 @@
       </div>
     </div>
 
-    <div class="my-8">
+    <div class="my-8 break-words">
       <p>{{ post.body }}</p>
     </div>
 
