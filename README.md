@@ -48,11 +48,11 @@ O Front End está disponível para acesso em [https://ice-overflow.netlify.app](
 2. Entre na pasta _backend-laravel_: `cd backend-laravel`;
 3. Atualize as dependências: `composer update`;
 4. Instale as dependências necessárias: `composer install`;
-5. Instale o npm com npm install e depois npm run dev;
-6. Crie uma key com php artisan key:generate. A key servira para as hashes;
+5. Instale o npm com `npm install` e depois `npm run dev`;
+6. Crie uma key com `php artisan key:generate`. A key servira para as hashes;
 7. Crie um banco de dados com o nome de laravel;
-8. Rode o comendo php artisan migrate --seed para rodar as migrations e semear o banco;
-9. Rode o comando php artisan storage:link para linkar a pasta de storage com a pasta public;
+8. Rode o comendo `php artisan migrate --seed` para rodar as migrations e semear o banco;
+9. Rode o comando `php artisan storage:link` para linkar a pasta de storage com a pasta public;
 5. Rode o comando: `php artisan serve` para iniciar o servidor;
 
 ## Objetivos de Software
