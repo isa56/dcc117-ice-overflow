@@ -45,7 +45,7 @@ Route::get('/subjects', function () {
     return response()->json(App\Models\Subject::all(), 200);
 });
 
-Route::get('/posts', [PostsController::class, 'index']);
+//Route::get('/posts', [PostsController::class, 'index']);
 
 Route::post('/users', [UsersController::class, 'store']);
 
