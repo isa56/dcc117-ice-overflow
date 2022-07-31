@@ -1,6 +1,6 @@
 <template>
 
-  <div class="items-center flex h-auto w-auto justify-center flex-col px-36 py-8">
+  <div class="items-center flex h-auto w-auto justify-center flex-col px-2 md:px-36 py-8">
     <div class="bg-background-dark my-10 pt-8 p-12 rounded-md">
         <div class="flex mb-2 items-center flex-wrap">
               <div class="user-desc-style flex items-center justify-center" >

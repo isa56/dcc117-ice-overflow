@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-background-dark w-full my-10 pt-8 p-12 rounded-md">
+  <div class="bg-background-dark w-full my-10 pt-8 p-6 md:p-12 rounded-md">
     <div class="mb-8">
-      <div class="flex mb-2 items-baseline justify-start">
-        <h4 class="text-base text-white mr-4">{{ post.author }}:</h4>
-        <h2 class="text-3xl text-primary font-bold">{{ post.title }}</h2>
+      <div class="flex mb-2 items-baseline justify-start break-all">
+        <h4 class="text-base text-white mr-4 break-all">{{ post.author }}:</h4>
+        <h2 class="text-3xl text-primary font-bold break-all">{{ post.title }}</h2>
       </div>
       <div class="flex">
         <theme-span
@@ -56,6 +56,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-</style>

@@ -66,9 +66,6 @@
 export default {
   name: "PostComment",
   props: ["comment", "hasBestComment", "postAuthorId"],
-  created() {
-    console.log(this.hasBestComment);
-  },
 };
 </script>
 

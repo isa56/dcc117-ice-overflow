@@ -1,7 +1,7 @@
 <template>
-  <footer class="items-center bg-secondary bottom-0 text-background-dark flex justify-between left-0 mb-0 py-5 px-6">
-    <div class="text-white text-lg">ICE Overflow</div>
-    <div class="text-sm">
+  <footer class="items-center bg-secondary bottom-0 text-background-dark flex justify-between left-0 mb-0 py-5 px-2 md:px-6">
+    <div class="text-white md:text-start md:text-lg text-base text-center">ICE Overflow</div>
+    <div class="md:text-sm md:text-start text-center text-xs">
       Desenvolvido por Daniel Freitas, Gabriel Bahia, Gabriel Frasson, Isadora
       Gonçalves e João Pedro Ferreira.
     </div>
