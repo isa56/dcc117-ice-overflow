@@ -87,15 +87,5 @@ export default {
   name: "PostDetails",
   props: ["post"],
   components: { ThemeSpan },
-  created() {
-    console.log(this.post.user_id);
-    console.log(this.$store.getters.getUserId);
-    console.log(this.post.user_id === this.$store.getters.getUserId);
-
-    console.log(this.$store.getters.isModerator);
-
-    console.log("Teste", this.post.user_id === this.$store.getters.getUserId || this.$store.getters.isModerator
-    );
-  },
 };
 </script>
