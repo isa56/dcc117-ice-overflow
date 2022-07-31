@@ -22,7 +22,7 @@ use App\Http\Controllers\LoginController;
 });*/
 
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['cors', 'auth:sanctum'])->group(function () {
 
     Route::patch('/posts/{id}', [PostsController::class, 'vote']);
     Route::apiResource('/posts', PostsController::class);
