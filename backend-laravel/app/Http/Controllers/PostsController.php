@@ -35,7 +35,8 @@ class PostsController extends Controller
         $request->titulo ? $query->where('title', 'LIKE', "%{$request->titulo}%") : '';
         $request->reactions === 'true' ? $query->orderBy('vote', 'desc') : '';
         $request->recent === 'true' ? $query->orderBy('created_at', 'desc') : '';
-
+        $request->finished === 'true' ? $query->where('finished', '=', true) : '';
+        $request->open === 'true' ? $query->where('finished', '=', false) : '';
         $posts = $query->paginate(5);
 
         foreach ($posts as $post) {
