@@ -84,7 +84,7 @@ class CommentsController extends Controller
         if($comment && (Auth::user()->id == $comment->user_id || Auth::user()->admin)) {
             $post = Post::find($comment->post_id);
             $post->comentarios--;
-            if($comment->bestAnswer) {
+            if($comment->best_answer) {
                 $post->finished = false;
             }
             $post->save();
