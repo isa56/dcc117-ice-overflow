@@ -91,8 +91,8 @@
                 <div v-if="isLoading">
                     <loading/>
                 </div>
-                <div v-else-if="posts.length">
-                    <post-details-summary
+                <div class="w-full" v-else-if="posts.length">
+                    <post-details-summary 
                         v-for="post in posts"
                         :key="post.id"
                         :post="post"
