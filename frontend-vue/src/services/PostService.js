@@ -2,31 +2,22 @@
 import Api from "@/services/Api";
 
 export default {
-  create(post, userId) {
-    const api = Api();
-    let formData = new FormData();
-
-    if (post.hasOwnProperty("title")) {
-      formData.append("title", post.title);
-    }
-
-    if (post.hasOwnProperty("text")) {
-      formData.append("body", post.text);
-    }
-
-    formData.append("user_id", userId);
-
-    return api
-      .post("/api/posts", formData)
-      .then(
-        (response) => response.data,
-        (error) => Promise.reject(error.message)
-      )
-      .catch((error) => Promise.reject(error.message));
+  async create(post) {
+    const response = await Api().post("/api/posts", post)
+    return response.data;
   },
 
-  async fetchAll() {
-    const response = await Api().get("/api/posts");
+  async fetchAll(postTitle = "", subject = "", highlights = false, recent = false, page = 1) {
+    const response = await Api().get("/api/posts", {
+      params: {
+        titulo: postTitle,
+        materia: subject,
+        reactions: highlights,
+        recent,
+        page
+      }
+    });
+
     return response.data;
   },
 

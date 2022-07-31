@@ -79,12 +79,12 @@ export default {
             this.email,
             this.password
           );
-          console.log(token);
+
           this.$store.commit("login", token);
 
           return this.$router.push("/posts");
         } catch (error) {
-          toastShow(this.$root.vtoast, error.data);
+          toastShow(this.$root.vtoast, error.message);
         }
       }
     },

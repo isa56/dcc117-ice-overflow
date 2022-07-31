@@ -37,7 +37,12 @@ class UsersController extends Controller
         $user = User::create($data);
         Auth::login($user);
         $token = Auth::user()->createToken('token');
-        return response()->json(/*$user*/$token->plainTextToken, 200); // Não é necessario retornar um json pois o laravel já sabe transformar o retorno em um, porém para tornar mais claro isso é interessante usar essa função
+        return response()->json(
+            [
+                'token' => $token->plainTextToken,
+                'admin' => $user->admin,
+                'id' => $user->id,
+            ], 200); // Não é necessario retornar um json pois o laravel já sabe transformar o retorno em um, porém para tornar mais claro isso é interessante usar essa função
     }
 
     /**
