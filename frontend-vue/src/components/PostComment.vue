@@ -5,14 +5,18 @@
   >
     <div class="mb-8">
       <div class="flex mb-2 items-center justify-start">
-        <h2 class="text-lg text-primary mr-4">Autor {{ comment.author_name }}:</h2>
+        <h2 class="text-lg text-primary mr-4">
+          Autor {{ comment.author_name }}:
+        </h2>
         <span class="text-base text-white">{{ comment.body }}</span>
       </div>
     </div>
     <div class="flex justify-end">
       <div
         v-if="
-          postAuthorId === $store.getters.getUserId
+          (comment.best_answer) ||
+          (!hasBestComment &&
+            postAuthorId === parseInt($store.getters.getUserId))
         "
         class="mr-4"
         id="starContainer"

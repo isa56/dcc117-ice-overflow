@@ -81,6 +81,17 @@ export default {
   methods: {
     chooseBestComment(commentId) {
       console.log(commentId);
+      PostService.chooseComment(commentId, this.post.id)
+        .then(() => {
+          toastShow(
+            this.$root.vtoast,
+            "Comentário escolhid como melhor resposta!",
+            "#4CAF",
+            true
+          );
+          this.fetchPost();
+        })
+        .catch((error) => toastShow(this.$root.vtoast, error));
     },
     deleteComment(commentId) {
       PostService.deleteComment(commentId)
