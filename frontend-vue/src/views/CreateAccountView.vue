@@ -76,11 +76,8 @@ export default {
         email: this.email,
         password: this.password
       }
-      const token = await UserService.createAccount(user);
-      this.$store.commit("login", token);
-      console.log(this.$store.getters.getAuthToken)
-      console.log(this.$store.getters.isAuthenticated)
-      console.log(this.$store.getters.getUserId)
+      const data = await UserService.createAccount(user);
+      this.$store.commit("login", data);
       return this.$router.push("/posts");
     }
   },
