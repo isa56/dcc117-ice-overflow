@@ -1,11 +1,11 @@
 <template>
-  <div class="items-center bg-background flex h-full justify-center">
-    <div class="bg-background-dark text-white rounded-lg px-60 py-16">
+  <div class="items-center bg-background flex h-full justify-center px-2">
+    <div class="bg-background-dark text-white rounded-lg px-2 md:px-60 py-16">
       <h1 class="text-primary text-4xl mb-8 text-center">
         ICE <span class="text-secondary">Overflow</span>
       </h1>
 
-      <form class="w-96" @submit.prevent="validateLogin">
+      <form class="md:w-96" @submit.prevent="validateLogin">
         <label for="email" class="my-2">E-Mail</label>
         <input
           id="email"

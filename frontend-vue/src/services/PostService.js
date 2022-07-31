@@ -3,19 +3,25 @@ import Api from "@/services/Api";
 
 export default {
   async create(post) {
-    const response = await Api().post("/api/posts", post)
+    const response = await Api().post("/api/posts", post);
     return response.data;
   },
 
-  async fetchAll(postTitle = "", subject = "", highlights = false, recent = false, page = 1) {
+  async fetchAll(
+    postTitle = "",
+    subject = "",
+    highlights = false,
+    recent = false,
+    page = 1
+  ) {
     const response = await Api().get("/api/posts", {
       params: {
         titulo: postTitle,
         materia: subject,
         reactions: highlights,
         recent,
-        page
-      }
+        page,
+      },
     });
 
     return response.data;
@@ -40,9 +46,6 @@ export default {
       )
       .catch((error) => Promise.reject(error.message));
   },
-
-
-  search() {},
 
   submitComment(userId, postId, comment) {
     return Api()
@@ -78,5 +81,13 @@ export default {
       .catch((err) => Promise.reject(err.message));
   },
 
-  // chooseComment(commentId) {}
+  chooseComment(commentId, postId) {
+    return Api()
+      .patch(`/api/comments/${commentId}/bestAnswer`, {post_id: postId})
+      .then(
+        (res) => res.data,
+        (err) => Promise.reject(err.message)
+      )
+      .catch((err) => Promise.reject(err.message));
+  },
 };

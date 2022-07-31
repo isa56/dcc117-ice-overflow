@@ -47,7 +47,7 @@
           :key="comment.id"
           :comment="comment"
           :has-best-comment="post.finished"
-          :post-author="post.user_id"
+          :post-author-id="post.user_id"
           @set-best-comment="chooseBestComment"
           @deleteComment="deleteComment"
         />
@@ -80,7 +80,17 @@ export default {
   },
   methods: {
     chooseBestComment(commentId) {
-      console.log(commentId);
+      PostService.chooseComment(commentId, this.post.id)
+        .then(() => {
+          toastShow(
+            this.$root.vtoast,
+            "Comentário marcado com sucesso!",
+            "#4CAF",
+            true
+          );
+          this.fetchPost();
+        })
+        .catch((error) => toastShow(this.$root.vtoast, error));
     },
     deleteComment(commentId) {
       PostService.deleteComment(commentId)

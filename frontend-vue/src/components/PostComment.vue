@@ -5,14 +5,21 @@
   >
     <div class="mb-8">
       <div class="flex mb-2 items-center justify-start">
-        <h2 class="text-lg text-primary mr-4">Autor {{ comment.author_name }}:</h2>
-        <span class="text-base text-white">{{ comment.body }}</span>
+        <router-link
+          :to="{ name: 'perfil', params: { id: comment.user_id } }"
+          class="text-lg text-primary mr-4 cursor-pointer underline break-words"
+        >
+          {{ comment.author_name }}:
+        </router-link>
+        <span class="text-base text-white break-words">{{ comment.body }}</span>
       </div>
     </div>
     <div class="flex justify-end">
       <div
         v-if="
-          !hasBestComment && postAuthor.user_id === $store.getters.getUserId
+          comment.best_answer ||
+          (!hasBestComment &&
+            postAuthorId === parseInt($store.getters.getUserId))
         "
         class="mr-4"
         id="starContainer"
@@ -61,7 +68,7 @@
 <script>
 export default {
   name: "PostComment",
-  props: ["comment", "hasBestComment", "postAuthor"],
+  props: ["comment", "hasBestComment", "postAuthorId"],
 };
 </script>
 
