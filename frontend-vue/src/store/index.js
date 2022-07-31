@@ -52,24 +52,26 @@ export default new Vuex.Store({
         "Bearer " + state.auth_token;
     },
     logout(state) {
-      // UserService.logout()
-      //   .then(() => {
-      state.auth_token = "";
-      state.user_id = "";
-      state.is_admin = "";
+      try {
+        UserService.logout();
 
-      delete axios.defaults.headers.common["Authorization"];
+        state.auth_token = "";
+        state.user_id = "";
+        state.is_admin = "";
 
-      localStorage.removeItem("auth_token");
-      localStorage.removeItem("user_id");
-      localStorage.removeItem("is_admin");
+        localStorage.removeItem("auth_token");
+        localStorage.removeItem("user_id");
+        localStorage.removeItem("is_admin");
 
-      Vue.prototype.$user_id = null;
-      Vue.prototype.$is_admin = null;
+        delete axios.defaults.headers.common["Authorization"];
 
-      localStorage.clear();
-      // })
-      // .catch((err) => Promise.reject(err));
+        Vue.prototype.$user_id = null;
+        Vue.prototype.$is_admin = null;
+
+        localStorage.clear();
+      } catch (err) {
+        Promise.reject(err);
+      }
     },
   },
   getters: {

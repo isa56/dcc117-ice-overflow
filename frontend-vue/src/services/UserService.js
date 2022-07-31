@@ -10,7 +10,7 @@ export default {
   },
 
   logout() {
-    Api().post("/logout").then(
+    Api().post("/api/logout").then(
       (res) => res.data,
       (err) => Promise.reject(err.message)
     )

@@ -7,12 +7,16 @@
     </div>
     <div class="flex">
       <div class="items-center flex cursor-pointer" @click="redirectToProfile">
-        Perfil
+        {{ $store.getters.isAuthenticated ? "Perfil" : "Entrar" }}
         <v-icon class="ml-2" color="#F2F7FB" small>{{
-          $store.getters.isAuthenticated ? 'mdi-account' : 'mdi-logout'
+          $store.getters.isAuthenticated ? "mdi-account" : "mdi-logout"
         }}</v-icon>
       </div>
-      <div class="items-center flex cursor-pointer ml-8" v-if="$store.getters.isAuthenticated" @click="logout">
+      <div
+        class="items-center flex cursor-pointer ml-8"
+        v-if="$store.getters.isAuthenticated"
+        @click="logout"
+      >
         Sair
         <v-icon class="ml-2" color="#F2F7FB" small>mdi-logout</v-icon>
       </div>
@@ -26,23 +30,22 @@ export default {
   methods: {
     redirectToHome() {
       if (this.$store.getters.isAuthenticated) {
-        this.$router.push({ name: "posts" });
-      }
-      else {
-        this.$router.push({ name: "home" });
+        this.$router.push({ name: "posts" }).catch(() => {});
+      } else {
+        this.$router.push({ name: "home" }).catch(() => {});
       }
     },
     redirectToProfile() {
       if (this.$store.getters.isAuthenticated) {
-        this.$router.push({ name: "perfil" });
+        this.$router.push({ name: "perfil" }).catch(() => {});
       } else {
-        this.$router.push({ name: "login" });
+        this.$router.push({ name: "login" }).catch(() => {});
       }
     },
     logout() {
       this.$store.commit("logout");
-        this.$router.push({ name: "home" });
-    }
+      this.$router.push({ name: "home" }).catch(() => {});
+    },
   },
 };
 </script>
