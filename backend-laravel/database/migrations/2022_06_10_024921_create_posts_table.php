@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('vote')
                 ->default(0);
             $table->boolean('finished')
-                ->default(0);
+                ->default(false);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
