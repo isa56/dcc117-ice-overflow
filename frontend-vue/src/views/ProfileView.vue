@@ -5,7 +5,7 @@
         <div class="flex mb-2 items-center flex-wrap">
               <div class="user-desc-style flex items-center justify-center" >
                   <img class="img-style rounded-full w-20" src="https://img.freepik.com/vetores-premium/perfil-de-avatar-de-homem-no-icone-redondo_24640-14044.jpg" alt="fotoPerfil">
-                  <h1 class="name-style ml-14 text-4xl text-primary font-bold"> {{ user.name }} </h1>
+                  <h1 class="name-style ml-14 text-4xl text-primary font-bold text-center"> {{ user.name }} </h1>
               </div>
         </div>
     </div>
