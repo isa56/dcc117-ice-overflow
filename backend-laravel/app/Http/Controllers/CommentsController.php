@@ -83,7 +83,7 @@ class CommentsController extends Controller
         $comment = PostsComment::find($id);
         if($comment && Auth::user()->id == $comment->user_id) {
             $post = Post::find($comment->post_id);
-            $post->comentarios++;
+            $post->comentarios--;
             $post->save();
             $comment->destroy($id);
             return response()->json(['message' => 'Comentario deletado com sucesso'], 202);

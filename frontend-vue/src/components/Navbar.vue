@@ -34,7 +34,7 @@ export default {
     },
     redirectToProfile() {
       if (this.$store.getters.isAuthenticated) {
-        this.$router.push({ name: "perfil" });
+        this.$router.push({ name: "perfil", params: { id: this.$store.getters.getUserId } });
       } else {
         this.$router.push({ name: "login" });
       }

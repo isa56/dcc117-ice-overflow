@@ -17,11 +17,15 @@ export default {
     .catch((err) => Promise.reject(err.message));
   },
 
-  createAccount({ name, username, email, password }) {
-    console.log(name, username, email, password);
+  async createAccount(user) {
+    const response = await Api().post("/api/users", user)
+    return response.data;
   },
 
-  fetchUserInfo(userId) {
-    console.log(userId);
+  async fetchUserInfo(userId) {
+    const response = await Api().get(`/api/users/${userId}`);
+    return response.data;
   },
+
+
 };

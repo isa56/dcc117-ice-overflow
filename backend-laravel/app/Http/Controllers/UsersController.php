@@ -33,11 +33,16 @@ class UsersController extends Controller
         $data['password'] = Hash::make($data['password']);
         $data['profile_picture'] = $request->hasFile('profile_picture')?
                             $request->file('profile_picture')->store('users_profile_picture', 'public') :
-                            'users_profile_picture/defaultUser.jpg';                          
+                            'users_profile_picture/defaultUser.jpg';
         $user = User::create($data);
         Auth::login($user);
         $token = Auth::user()->createToken('token');
-        return response()->json(/*$user*/$token->plainTextToken, 200); // Não é necessario retornar um json pois o laravel já sabe transformar o retorno em um, porém para tornar mais claro isso é interessante usar essa função
+        return response()->json(
+            [
+                'token' => $token->plainTextToken,
+                'admin' => $user->admin,
+                'id' => $user->id,
+            ], 200); // Não é necessario retornar um json pois o laravel já sabe transformar o retorno em um, porém para tornar mais claro isso é interessante usar essa função
     }
 
     /**
@@ -47,11 +52,14 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(int $id)
-    {   
+    {
         $user = User::find($id);
-        if($user) {
+
+        if ($user) {
+            $user['posts'] = $user->posts;
             return response()->json($user, 201);
         }
+
         return response()->json(['message' => 'Não foi possível encontrar o usuário'], 404);
     }
 
