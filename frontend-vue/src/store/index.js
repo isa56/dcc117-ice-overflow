@@ -79,6 +79,6 @@ export default new Vuex.Store({
     getUserId: (state) => state.user_id,
 
     isAuthenticated: (state) => !!state.auth_token,
-    isModerator: (state) => !!state.is_admin,
+    isModerator: (state) => state.is_admin,
   },
 });
