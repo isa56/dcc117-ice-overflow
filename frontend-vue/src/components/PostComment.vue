@@ -12,7 +12,7 @@
     <div class="flex justify-end">
       <div
         v-if="
-          !hasBestComment && postAuthor.user_id === $store.getters.getUserId
+          postAuthorId === $store.getters.getUserId
         "
         class="mr-4"
         id="starContainer"
@@ -61,7 +61,7 @@
 <script>
 export default {
   name: "PostComment",
-  props: ["comment", "hasBestComment", "postAuthor"],
+  props: ["comment", "hasBestComment", "postAuthorId"],
 };
 </script>
 

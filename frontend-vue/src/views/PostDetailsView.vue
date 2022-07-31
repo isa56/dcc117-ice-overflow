@@ -47,7 +47,7 @@
           :key="comment.id"
           :comment="comment"
           :has-best-comment="post.finished"
-          :post-author="post.user_id"
+          :post-author-id="post.user_id"
           @set-best-comment="chooseBestComment"
           @deleteComment="deleteComment"
         />

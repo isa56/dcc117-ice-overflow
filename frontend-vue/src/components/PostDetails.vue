@@ -6,7 +6,7 @@
     <div class="mb-8">
       <div class="flex items-center justify-between">
         <div class="flex mb-2 items-center justify-start">
-          <h4 class="text-base text-white mr-4">Autor {{ post.user.name }}:</h4>
+          <h4 class="text-base text-white mr-4">Autor {{ post.user_name }}:</h4>
           <h2 class="text-2xl text-primary font-bold">{{ post.title }}</h2>
         </div>
 
