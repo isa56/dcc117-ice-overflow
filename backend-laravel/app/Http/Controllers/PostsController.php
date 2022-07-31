@@ -71,7 +71,7 @@ class PostsController extends Controller
         if($post) {
             $postComment = PostsComment::wherePost_id($post->id)->get();
             foreach($postComment as $key => $comment) {
-                $postComment[$key]->author_name = $comment->user()->get('name')[$key]['name'];
+                $postComment[$key]->author_name = $comment->user()->get('name')[0]['name'];
             }
             return response()->json(['post' => $post, 'postComments' => $postComment], 202);
         }
