@@ -112,14 +112,15 @@ export default {
       };
       
       try {
-        await PostService.create(post);
-        
+        const createdPost = await PostService.create(post);
+
         toastShow(
           this.$root.vtoast,
           "Post criado com sucesso!",
           "#4CAF",
           true
         );
+        return this.$router.push({ name: 'ver-post', params: { id: createdPost.id }})
       } catch (error) {
         toastShow(this.$root.vtoast, error.message);
       } finally {
