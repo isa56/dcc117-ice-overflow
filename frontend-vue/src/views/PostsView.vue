@@ -149,6 +149,10 @@ export default {
             try {
                 this.isLoading = true;
 
+                if(this.postTitleFilter || this.selectedSubjectFilter || this.highlightsFilter || this.recentFilter) {
+                    this.page = 1;
+                }
+
                 const { data: posts, last_page } = await PostService.fetchAll(
                     this.postTitleFilter,
                     this.selectedSubjectFilter,
