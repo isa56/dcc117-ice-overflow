@@ -37,7 +37,6 @@
 
 
 <script>
-import ThemeSpanVue from '@/components/ThemeSpan.vue';
 import UserService from '@/services/UserService'
 
 
@@ -71,6 +70,7 @@ export default {
       }
       if (this.password.length < 8) {
         this.errorMessage = "  Senha muito fraca!";
+        return false;
       }
       e.preventDefault();
     },
