@@ -37,6 +37,7 @@
 
 
 <script>
+import ThemeSpanVue from '@/components/ThemeSpan.vue';
 import UserService from '@/services/UserService'
 
 
@@ -56,6 +57,9 @@ export default {
   methods: {
 
     validateRegistration: function (e) {
+      if(this.name && this.email && this.password == this.cPassword && this.password.length >= 8) {
+        return true;
+      }
       if (!this.name) {
         this.errorMessage = "  Por favor, preencha o Nome"
       }
@@ -65,8 +69,9 @@ export default {
       if (this.password != this.cPassword) {
         this.errorMessage = "  As senhas devem ser iguais!"
       }
-      if (this.password.length < 8)
+      if (this.password.length < 8) {
         this.errorMessage = "  Senha muito fraca!";
+      }
       e.preventDefault();
     },
 
