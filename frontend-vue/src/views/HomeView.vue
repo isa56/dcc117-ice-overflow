@@ -13,7 +13,7 @@
             <router-link class="w-[14rem]" :to="$store.getters.isAuthenticated ? '/posts' : '/login'">
               <primarybutton content="Entrar"/>
             </router-link>
-            <small class="text-center mt-1">
+            <small class="text-center mt-1" v-if="!$store.getters.isAuthenticated">
               Não possui uma conta? <router-link class="text-primary" to="/criar-conta">Cadastre-se!</router-link>
             </small>
           </div>
